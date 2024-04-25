@@ -300,6 +300,7 @@ img {
         border-width: 0 1px 1px;
     }
 }
+
 /* --- Footer --- */
 
 footer {
@@ -886,4 +887,10 @@ pre {
 .highlight {
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+blockquote {
+    padding: 1rem;
+    background-color: #eeeeee;
+    border-left: #afafaf solid 2px;
 }
