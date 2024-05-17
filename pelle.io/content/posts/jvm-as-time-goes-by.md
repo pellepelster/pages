@@ -37,9 +37,10 @@ For example `java.time.Instant`
 
 ```kotlin
 class Instant : Parser {
-    override fun parse(now: String) = listOf(safeParse("java.time.Instant.parse") {
-        Instant.parse(now).epochSecond
-    })
+    override fun parse(timeFormat: TimeFormat) =
+        listOf(parseAndBenchmark("java.time.Instant.parse(String)", timeFormat) {
+            Instant.parse(timeFormat.now).epochSecond
+        })
 }
 ```
 
@@ -47,33 +48,33 @@ or the more interesting `java.time.format.DateTimeFormatter`
 
 ```kotlin
 class DateTimeFormatter : Parser {
-    override fun parse(now: String) = listOf(
-        "DateTimeFormatter.BASIC_ISO_DATE" to DateTimeFormatter.BASIC_ISO_DATE,
-        "DateTimeFormatter.ISO_LOCAL_DATE" to DateTimeFormatter.ISO_LOCAL_DATE,
-        "DateTimeFormatter.ISO_OFFSET_DATE" to DateTimeFormatter.ISO_OFFSET_DATE,
-        "DateTimeFormatter.ISO_DATE" to DateTimeFormatter.ISO_DATE,
-        "DateTimeFormatter.ISO_LOCAL_TIME" to DateTimeFormatter.ISO_LOCAL_TIME,
-        "DateTimeFormatter.ISO_OFFSET_TIME" to DateTimeFormatter.ISO_OFFSET_TIME,
-        "DateTimeFormatter.ISO_TIME" to DateTimeFormatter.ISO_TIME,
-        "DateTimeFormatter.ISO_LOCAL_DATE_TIME" to DateTimeFormatter.ISO_LOCAL_DATE_TIME,
-        "DateTimeFormatter.ISO_OFFSET_DATE_TIME" to DateTimeFormatter.ISO_OFFSET_DATE_TIME,
-        "DateTimeFormatter.ISO_ZONED_DATE_TIME" to DateTimeFormatter.ISO_ZONED_DATE_TIME,
-        "DateTimeFormatter.ISO_DATE_TIME" to DateTimeFormatter.ISO_DATE_TIME,
-        "DateTimeFormatter.ISO_ORDINAL_DATE" to DateTimeFormatter.ISO_ORDINAL_DATE,
-        "DateTimeFormatter.ISO_WEEK_DATE" to DateTimeFormatter.ISO_WEEK_DATE,
-        "DateTimeFormatter.ISO_INSTANT" to DateTimeFormatter.ISO_INSTANT,
-        "DateTimeFormatter.RFC_1123_DATE_TIME" to DateTimeFormatter.RFC_1123_DATE_TIME,
+    override fun parse(timeFormat: TimeFormat) = listOf(
+        "DateTimeFormatter.BASIC_ISO_DATE.parse(String)" to DateTimeFormatter.BASIC_ISO_DATE,
+        "DateTimeFormatter.ISO_LOCAL_DATE.parse(String)" to DateTimeFormatter.ISO_LOCAL_DATE,
+        "DateTimeFormatter.ISO_OFFSET_DATE.parse(String)" to DateTimeFormatter.ISO_OFFSET_DATE,
+        "DateTimeFormatter.ISO_DATE.parse(String)" to DateTimeFormatter.ISO_DATE,
+        "DateTimeFormatter.ISO_LOCAL_TIME.parse(String)" to DateTimeFormatter.ISO_LOCAL_TIME,
+        "DateTimeFormatter.ISO_OFFSET_TIME.parse(String)" to DateTimeFormatter.ISO_OFFSET_TIME,
+        "DateTimeFormatter.ISO_TIME.parse(String)" to DateTimeFormatter.ISO_TIME,
+        "DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(String)" to DateTimeFormatter.ISO_LOCAL_DATE_TIME,
+        "DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(String)" to DateTimeFormatter.ISO_OFFSET_DATE_TIME,
+        "DateTimeFormatter.ISO_ZONED_DATE_TIME.parse(String)" to DateTimeFormatter.ISO_ZONED_DATE_TIME,
+        "DateTimeFormatter.ISO_DATE_TIME.parse(String)" to DateTimeFormatter.ISO_DATE_TIME,
+        "DateTimeFormatter.ISO_ORDINAL_DATE.parse(String)" to DateTimeFormatter.ISO_ORDINAL_DATE,
+        "DateTimeFormatter.ISO_WEEK_DATE.parse(String)" to DateTimeFormatter.ISO_WEEK_DATE,
+        "DateTimeFormatter.ISO_INSTANT.parse(String)" to DateTimeFormatter.ISO_INSTANT,
+        "DateTimeFormatter.RFC_1123_DATE_TIME.parse(String)" to DateTimeFormatter.RFC_1123_DATE_TIME,
     ).map {
-        safeParse(it.first) {
-            Instant.from(it.second.parse(now)).epochSecond
+        parseAndBenchmark(it.first, timeFormat) {
+            Instant.from(it.second.parse(timeFormat.now)).epochSecond
         }
     }
 }
 ```
 
-after that we just need some glue code to gather the results and generate a nice overview page
+after that we just need some glue code to gather the results and generate a nice overview page. The `parseAndBenchmark` method also measure the execution time for each parse method with 100.000 iterations, and records an average in nanoseconds that is shown on the results page, and as a heatmap for each method. 
 
-![JVM as times goes by](/img/jvm_as_time_goes_by.png)
+![JVM as times goes by](/img/jvm_as_time_goes_by1.png)
 
 If you want to experiment on your own, as always the full source code is available [here](https://github.com/pellepelster/kitchen-sink/tree/master/jvm-time-parsing)
 
@@ -147,5 +148,17 @@ which also are able to parse the majority. Interestingly `org.joda.time.LocalDat
 * 2024-05-16T17:22
 * 2024-05-16T17:22,1 
 * 2024-05-16T17:22.1
+
+Performance wise `org.joda.time.LocalDateTime.parse(String)` and `java.time.LocalDateTime.parse(String)` are noticeably slower in the non-happy path
+
+![JVM as times goes by](/img/jvm_as_time_goes_by2.png)
+
+`DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(String)` and `DateTimeFormatter.ISO_DATE_TIME.parse(String)` have some heavy outliers for failed parse attempts.
+
+![JVM as times goes by](/img/jvm_as_time_goes_by3.png)
+
+In general for most parse attempts the worst case time is roughly double the parse time when the parse succeeds. 
+
+> The benchmark is not absolute because it depends on the machine where it was executed, but it should give a good indication of relative timings.
 
 Of course, you could just specify the format, and instruct the parser to parse it like this `DateTimeFormatter.ofPattern("%Y-%M-%Dt%h:%m:%sz").parse(String)` but apart from only being able to parse this single format, it's only half the fun and I would not be able to rant about JVM date parsing :-)  
