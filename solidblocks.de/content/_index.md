@@ -35,20 +35,45 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 
 <div class="feature-divider"></div>
 
+{{<feature-container title="Hosting">}}
+
+  {{<feature-row>}}
+
+    {{<feature title="Open Source" iconClasses="fa-brands fa-linux solidblocks-green">}}
+      Host open source solutions like Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault, and many more. Based on common and proven deployment patterns, custom open-source hosting on top of Solidblocks combines a stable hosting solution with the option to customize the solution to your specific needs.    
+    {{</feature>}}
+    
+    {{<feature title="Custom Applications" iconClasses="fa-industry solidblocks-orange">}}
+      From greenfield JVM or .NET Core projects, to Python and Ruby-based solutions, to matured and still useful PHP applications, its customizability and extendability make Solidblocks the perfect platform to host your custom business applications or give legacy applications a new life and a stable environment.
+    {{</feature>}}
+
+    {{<feature title="Maintenance & Overhaul" iconClasses="fa-screwdriver-wrench solidblocks-yellow">}}
+        Depending on the underlying ecosystem or framework of your appliction, Solidblocks components like Keycloak or OpenVPN can be retrofitted to strenghted security and secure your application gibing give it a longer lifetime. 
+    {{</feature>}}
+
+  {{</feature-row>}}
+{{</feature-container>}}
+
+<div class="feature-divider"></div>
 {{<feature-container title="Simplicity">}}
 
 {{<feature-row>}}
     {{<feature title="Your code" iconClasses="fa-code-branch solidblocks-orange">}}
-      You own the code for your solution, no proprietary components you can fork it anytime you want.
+      You own the code for your solution, no proprietary components you can fork it anytime you want. Depending on 
+      the scope and goal of the solution, pairing and/or co-creation on your code can help ensure that the knowledge
+      and the routines to operate your applications is distributed.
     {{</feature>}}
     
-    {{<feature title="Your Servers and Data" iconClasses="fa-cloud solidblocks-yellow">}}
-      For mananged solutions all resources can be hosted in you cloud projects so you have always access to all VMs and data.
+    {{<feature title="Your Servers & Data" iconClasses="fa-cloud solidblocks-yellow">}}
+      For mananged solutions all resources can be hosted in your cloud accounts so you have always access to all 
+      VMs and data. This applies for all services that are used to build your solution, AWS, Hetzner Cloud, Elastic.co
+      and more. You always own the accounts and can take over control at any time.
     {{</feature>}}
 
     {{<feature title="VMs and Servers" iconClasses="fa-server solidblocks-green">}}
       Although a fully blown container orchestration like Kubernetes has its benefits, sometimes a simple solution based 
-      on VMs or even bare metal can be more cost-effective and easier to handle, maintain and operate.
+      on VMs or even bare metal can be more cost-effective and easier to handle, maintain and operate. If available a 
+      deployment to on-premise hardware is also an option to better utilize already existing gear.
     {{</feature>}}
 
 
@@ -57,13 +82,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Infrastructure as Code" iconClasses="fa-code solidblocks-green">}}
-      All deployed infrastructure is described and deployed with infrastructure as code solutions like Terraform, OpenTofu,
-      Ansible and similar tools.   
+      All deployed infrastructure and applications are described and deployed with infrastructure as code 
+      solutions like Terraform, OpenTofu, Ansible and similar tools. For applications missing automation
+      frontends custom solutions can be implemented and integrated into the deployment lifecylce.
     {{</feature>}}
     
     {{<feature title="Developer experience" iconClasses="fa-play solidblocks-orange">}}
       The deployment process is designed to be easy to use on the developer machines, and also to integrate into common CI/CD
-      systems like Github, Gitlab, Jenkins and others.  
+      systems like Github, Gitlab, Jenkins and others. All solutions come with a developer friendly build system to deploy 
+      and interact witht the deployed resources.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -184,7 +211,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Playbooks" iconClasses="fa-list-ol solidblocks-green">}}
-      Playbooks provide detailed steps for important steps like disaster recovery or secret rotaion in case of emergencies.
+      Playbooks provide detailed steps for important steps like disaster recovery or secret rotation in case of emergencies.
     {{</feature>}}
 
     {{<feature title="Fire Drills" iconClasses="fa-fire-extinguisher solidblocks-orange">}}
