@@ -13,7 +13,7 @@ If you are looking for support with our infrastructure and software deployments,
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
             </span>
-            info@solidblocks
+            contact@solidblocks.de
         </a>
     </li>
     <li>
