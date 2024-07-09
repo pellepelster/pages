@@ -196,7 +196,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
     {{</feature>}}
 
     {{<feature title="Support" iconClasses="fa-phone solidblocks-yellow">}}
-      In the event of critical errors, such as system crashes or data loss, emergency support is available via email, phone, or chat.
+      In the event of critical errors, such as system crashes or data loss, German and English emergency support is available via email, phone, or chat.
     {{</feature>}}
 
   {{</feature-row>}}
