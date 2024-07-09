@@ -44,11 +44,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
     {{</feature>}}
     
     {{<feature title="Custom Applications" iconClasses="fa-industry solidblocks-orange">}}
-      From greenfield JVM or .NET Core projects, to Python and Ruby-based solutions, to matured and still useful PHP applications, its customizability and extendability make Solidblocks the perfect platform to host your custom business applications or give legacy applications a new life and a stable environment.
+      From greenfield JVM or .NET Core projects, to Python and Ruby-based solutions, to matured and still useful PHP applications. Its customizability and extendability make it the perfect platform to host your bespoke business applications, or give legacy applications a new life and a stable environment.
     {{</feature>}}
 
     {{<feature title="Maintenance & Overhaul" iconClasses="fa-screwdriver-wrench solidblocks-yellow">}}
-        Depending on the underlying ecosystem or framework of your appliction, Solidblocks components like Keycloak or OpenVPN can be retrofitted to strenghted security and secure your application gibing give it a longer lifetime. 
+        Depending on the underlying ecosystem or framework of your application, Solidblocks components, such as Keycloak or OpenVPN, can be retrofitted to strengthen the security of your application. This will secure your application, thereby extending its lifetime.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -59,21 +59,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 
 {{<feature-row>}}
     {{<feature title="Your code" iconClasses="fa-code-branch solidblocks-orange">}}
-      You own the code for your solution, no proprietary components you can fork it anytime you want. Depending on 
-      the scope and goal of the solution, pairing and/or co-creation on your code can help ensure that the knowledge
-      and the routines to operate your applications is distributed.
+      You have complete ownership of the code for your solution; there are no proprietary components, so you can fork it anytime you want. Depending on the scope and goal of the solution, pairing and/or co-creating on your code can ensure that the knowledge and the routines necessary for operating your applications are well distributed.
     {{</feature>}}
     
     {{<feature title="Your Servers & Data" iconClasses="fa-cloud solidblocks-yellow">}}
-      For mananged solutions all resources can be hosted in your cloud accounts so you have always access to all 
-      VMs and data. This applies for all services that are used to build your solution, AWS, Hetzner Cloud, Elastic.co
-      and more. You always own the accounts and can take over control at any time.
+      For managed solutions, all resources can be hosted in your cloud accounts, ensuring you always have access to all VMs and data. This applies to all services used to build your solution, such as AWS, Hetzner Cloud, Elastic.co, and more. Since you own the accounts, you can take over control at any time.
     {{</feature>}}
 
     {{<feature title="VMs and Servers" iconClasses="fa-server solidblocks-green">}}
-      Although a fully blown container orchestration like Kubernetes has its benefits, sometimes a simple solution based 
-      on VMs or even bare metal can be more cost-effective and easier to handle, maintain and operate. If available a 
-      deployment to on-premise hardware is also an option to better utilize already existing gear.
+      Although a full-fledged container orchestration system, such as Kubernetes, has its benefits, sometimes a simpler solution based on Virtual Machines (VMs) or even bare metal can be more cost-effective, and easier to handle, maintain, and operate. If available, deploying to on-premise hardware is also an option, as it better utilizes already existing gear.
     {{</feature>}}
 
 
@@ -82,15 +76,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Infrastructure as Code" iconClasses="fa-code solidblocks-green">}}
-      All deployed infrastructure and applications are described and deployed with infrastructure as code 
-      solutions like Terraform, OpenTofu, Ansible and similar tools. For applications missing automation
-      frontends custom solutions can be implemented and integrated into the deployment lifecylce.
+      All deployed resources are described and deployed with infrastructure-as-code solutions such as Terraform, OpenTofu, and Ansible. For applications lacking an automation front-end, custom solutions can be implemented and integrated into the deployment lifecycle.
     {{</feature>}}
     
     {{<feature title="Developer experience" iconClasses="fa-play solidblocks-orange">}}
-      The deployment process is designed to be easy to use on the developer machines, and also to integrate into common CI/CD
-      systems like Github, Gitlab, Jenkins and others. All solutions come with a developer friendly build system to deploy 
-      and interact witht the deployed resources.
+      The deployment process is designed for ease of use on developer machines and for integration into common CI/CD systems like GitHub, GitLab, Jenkins, and others. Each solution comes with a developer-friendly build system, facilitating the deployment and interaction with the deployed resources.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -102,18 +92,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
     
     {{<feature title="Updates" iconClasses="fa-arrows-rotate solidblocks-orange">}}
-      All components like operating systems and software packages are regularly updated. Where applicable tools like <a href="https://github.com/renovatebot/renovate">renovate</a>
-      are integrated into the deployment process to ensure everything is always up-to-date.  
+      All components like operating systems and software packages are regularly updated. Where applicable, tools like <a href="https://github.com/renovatebot/renovate">renovate</a> are integrated into the deployment process to ensure everything is always up-to-date.
     {{</feature>}}
     
     {{< feature title="Encryption" iconClasses="fa-lock solidblocks-green">}}
-      Data that is stored outside the cloud, like e.g. backups is encrypted by default to protect against accidental exposure of
-      sensitive information.
+      All data stored outside the cloud, such as backups, is encrypted by default to protect against accidental exposure of sensitive information.
     {{</feature>}}
     
     {{< feature title="Secret Rotation" iconClasses="fa-key solidblocks-yellow">}}
-      All secrets and user credentials can be rotated at anytime to mitigate the risk of long-lived credentials that may leak
-      over time.
+      All secrets and user credentials can be rotated at anytime to mitigate the risk of long-lived credentials that may leak over time. This also allows for a quick deprecation of existing secrets and credentials in case of a leak. 
     {{</feature>}}
     
   {{</feature-row>}}
@@ -121,12 +108,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{< feature title="Backups" iconClasses="fa-cloud-arrow-up solidblocks-yellow">}}
-      Encrypted data backups to other clouds like AWS or GCP provide an extra layer of security for your data and reduce the blast 
-      radius in case of accidental deletion or configuration mistakes. 
+      Encrypted data backups to other clouds like AWS or GCP provide an extra layer of security for your data and reduce the blast radius in case of accidental deletion or configuration mistakes. 
     {{</feature>}}
 
     {{< feature title="CVE Scanning" iconClasses="fa-magnifying-glass solidblocks-green">}}
-      Automated CVE scans and an always up to date SBOM make it easy to discover security critical bugs and mitgitate them.
+      Automated CVE scans, coupled with an always up-to-date SBOM, make it easy to discover security-critical bugs early on and mitigate them.
     {{</feature>}}
 
     {{< feature title="IDP/IAM" iconClasses="fa-id-card solidblocks-orange">}}
@@ -144,19 +130,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Environments" iconClasses="fa-layer-group solidblocks-yellow">}}
-      Mutli-environment support is a first class citizen and can be used to support your application lifecycle and to provide
-      different test environments.
+      Multi-environment support is a first-class citizen. It can be used to support your application lifecycle and to provide different test environments.
     {{< /feature>}}
     
     {{<feature title="Bootstrapping" iconClasses="fa-terminal solidblocks-orange">}}
-      Deletion and bootstrapping of environments from zero is tested on a regular basis to ensure that no cyclic dependencies
-      are hidden in the infrastructure setup and that the code that is only executed during initial setup still works.
+      Deletion and bootstrapping of environments is systematically tested to ensure there are no hidden cyclic dependencies in the infrastructure setup. This method also confirms that the code which is only executed during the initial setup continues to function correctly.
     {{</feature>}}
     
     {{<feature title="Disaster Recovery" iconClasses="fa-fire solidblocks-green">}}
-      Bootstrapping environments from backup is tested on a regular basis and part of
-      the playbooks and developer briefings. 
-      All components are designed so that the whole environment can be destroyed at anytime and be fully rebuilt from backups.
+      Restoring environments from backups is tested regularly and is included in both the playbooks and developer briefings. All components are designed such that the entire environment can be destroyed at any time, and then fully rebuilt from the backups.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -168,18 +150,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Logs" iconClasses="fa-server solidblocks-green">}}
-      Logging platforms like Elasticsearch can be used to ingest all application and VM logs and help
-      to resolve errors and debug application state and health.
+      Logging platforms like Elastic.co can be used to ingest all application and VM logs and help to resolve errors and debug application state and health.
     {{</feature>}}
 
     {{<feature title="Metrics" iconClasses="fa-chart-line solidblocks-orange">}}
-      Application as well as VM metrics can be gathered on analytics platforms like Grafana or Elasticsearch, to detect and
-      and visualized application usage, performance and longtime trends and help with sizing decisions.
+      Application and VM metrics can be gathered on analytics platforms, such as Grafana or Elastic.co. These platforms are useful for detecting and visualizing application usage, performance, long-term trends, and aiding in sizing decisions.
     {{</feature>}}
 
     {{<feature title="Tagging" iconClasses="fa-tag solidblocks-yellow">}}
-      Logs and metrics are tagged with information about environment, service, version etc. and enriched with events like
-      deployments, making it easy to correlate issues and bugs caused by different application versions and bugs.
+      Logs and metrics are tagged with information about the environment, service, version, etc., and are enriched with events such as deployments. This makes it easy to correlate issues and bugs with different application versions and deployments.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -192,13 +171,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Deployment" iconClasses="fa-infinity solidblocks-yellow">}}
-      The deployment can easily be integrated into all major CI/CD systems or into already existing application build
-      pipelines.
+      The deployment can easily be integrated into all major CI/CD systems or into already existing application build pipelines.
     {{</feature>}}
 
     {{< feature title="Testing" iconClasses="fa-crow solidblocks-green">}}
-      Infrastructure integration tests in the deployment process ensure, that the deployment is successful, and
-      also serve as canary to warn when parts of the infrastructure or application are broken or in a degraded state.
+      Infrastructure integration tests in the deployment process ensure that the deployment is successful. They also serve as a canary to warn when parts of the infrastructure or application are broken or in a degraded state.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -211,15 +188,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Playbooks" iconClasses="fa-list-ol solidblocks-green">}}
-      Playbooks provide detailed steps for important steps like disaster recovery or secret rotation in case of emergencies.
+      Playbooks provide detailed procedures for scenarios like disaster recovery or secret rotation during emergencies.
     {{</feature>}}
 
     {{<feature title="Fire Drills" iconClasses="fa-fire-extinguisher solidblocks-orange">}}
-      Regular exercises ensure that important steps that are seldom used still work and that developers are comfortable with executing them.
+      Regular exercises ensure that crucial steps that are seldom used still work as intended, and that developers are comfortable with executing them.
     {{</feature>}}
 
     {{<feature title="Support" iconClasses="fa-phone solidblocks-yellow">}}
-      In case of critical errors emergency support is also available via email, phone or chat.
+      In the event of critical errors, such as system crashes or data loss, emergency support is available via email, phone, or chat.
     {{</feature>}}
 
   {{</feature-row>}}
