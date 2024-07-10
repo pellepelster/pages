@@ -1,5 +1,5 @@
 baseURL = "https://solidblocks.de/"
-languageCode = "en-us"
+languageCode = "en"
 title = "solidblocks.de"
 theme = "pelle.io"
 
@@ -17,3 +17,13 @@ phone = "+49 176 238 170 01"
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[languages]
+
+[languages.en]
+languageName = "English"
+weight = 1
+
+[languages.de]
+languageName = "Deutsch"
+weight = 2

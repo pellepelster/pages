@@ -35,14 +35,13 @@
           </li>
           {{ end }}
 
-
           <li>
-            <a href="/imprint" title="Imprint">
+            <a href="{{ "legal-notice" | absLangURL }}" title="{{ i18n "legalNotice" }}">
             <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-section fa-stack-1x fa-inverse"></i>
               </span>
-            Imprint
+              {{ i18n "legalNotice" }}
             </a>
           </li>
 

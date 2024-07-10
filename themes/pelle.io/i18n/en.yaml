@@ -25,6 +25,8 @@
   translation: "minutes"
 - id: words
   translation: "words"
+- id: legalNotice
+  translation: "Legal Notice"
 
 
 # 404 page
