@@ -42,28 +42,9 @@
             {{ i18n "legalNotice" }}
           </a>
         </div>
-
       {{ end }}
     </div>
   </div>
-  <div>
-    <div class="row justify-content-center mt-4">
-      {{ if .Site.Params.author.name }}
-      {{ if .Site.Params.author.website }}
-      <a href="{{ .Site.Params.author.website }}">{{ .Site.Params.author.name }}</a>
-      {{ else }}
-      {{ .Site.Params.author.name }}
-      {{ end }}
-      {{ end }}
-      &nbsp;&bull;&nbsp;&copy;
-      {{ if .Site.Params.since }}
-      {{ .Site.Params.since }} - {{ .Site.Lastmod.Format "2006" }}
-      {{ else }}
-      {{ .Site.Lastmod.Format "2006" }}
-      {{ end }}
-    </div>
-  </div>
-
 </footer>
 
 <script src="{{ "js/jquery.min.js" | absURL }}"></script>
