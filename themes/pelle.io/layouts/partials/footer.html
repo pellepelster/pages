@@ -5,68 +5,63 @@
 {{ end }}
 
 <footer>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 col-md-10 justify-content-center">
-        {{ if not .Params.hideSocial }}
-        <ul class="list-group text-center footer-links list-no-style list-group-horizontal justify-content-center gap-3">
-          {{ range .Site.Data.social.social_icons }}
-            {{- if isset $.Site.Params.author .id }}
-              <li>
-                <a class="small" href="{{ printf .url (index $.Site.Params.author .id) | safeURL }}" title="{{ .title }}">
-                  <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="{{ .icon }} fa-stack-1x fa-inverse"></i>
-                  </span>
-                  {{ printf .text (index $.Site.Params.author .id) | safeURL }}
-                </a>
-              </li>
-            {{- end -}}
-          {{ end }}
-          {{ if .Site.Params.rss }}
-          <li>
-            <a href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" title="RSS">
-              <span class="fa-stack fa-lg">
-                <i class="fas fa-circle fa-stack-2x"></i>
-                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-              RSS
-            </a>
-          </li>
-          {{ end }}
-
-          <li>
-            <a href="{{ "legal-notice" | absLangURL }}" title="{{ i18n "legalNotice" }}">
-            <span class="fa-stack fa-lg">
-                <i class="fas fa-circle fa-stack-2x"></i>
-                <i class="fas fa-section fa-stack-1x fa-inverse"></i>
-              </span>
-              {{ i18n "legalNotice" }}
-            </a>
-          </li>
-
-        </ul>
+  <div class="container w-50">
+    <div class="row g-2 justify-content-center">
+      {{ if not .Params.hideSocial }}
+        {{ range .Site.Data.social.social_icons }}
+          {{- if isset $.Site.Params.author .id }}
+            <div class="col-lg">
+              <a class="small text-nowrap" href="{{ printf .url (index $.Site.Params.author .id) | safeURL }}" title="{{ .title }}">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas {{ .icon }} fa-stack-1x fa-inverse"></i>
+                </span>
+                {{ printf .text (index $.Site.Params.author .id) | safeURL }}
+              </a>
+            </div>
+          {{- end -}}
         {{ end }}
-        <p class="pt-3 credits copyright text-muted">
-          {{ if .Site.Params.author.name }}
-            {{ if .Site.Params.author.website }}
-              <a href="{{ .Site.Params.author.website }}">{{ .Site.Params.author.name }}</a>
-            {{ else }}
-              {{ .Site.Params.author.name }}
-            {{ end }}
-          {{ end }}
-          &nbsp;&bull;&nbsp;&copy;
-          {{ if .Site.Params.since }}
-            {{ .Site.Params.since }} - {{ .Site.Lastmod.Format "2006" }}
-          {{ else }}
-            {{ .Site.Lastmod.Format "2006" }}
-          {{ end }}
-        </p>
-      </div>
+        {{ if .Site.Params.rss }}
+        <div class="col-lg">
+          <a class="small text-nowrap" href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" title="RSS">
+            <span class="fa-stack fa-lg">
+              <i class="fas fa-circle fa-stack-2x"></i>
+              <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+            </span>
+            RSS
+          </a>
+        </div>
+        {{ end }}
+
+        <div class="col-lg">
+          <a class="small text-nowrap" href="{{ "legal-notice" | absLangURL }}" title="{{ i18n "legalNotice" }}">
+           <span class="fa-stack fa-lg">
+              <i class="fas fa-circle fa-stack-2x"></i>
+              <i class="fas fa-section fa-stack-1x fa-inverse"></i>
+            </span>
+            {{ i18n "legalNotice" }}
+          </a>
+        </div>
+
+      {{ end }}
+    </div>
+    <div class="row justify-content-center mt-5">
+      {{ if .Site.Params.author.name }}
+      {{ if .Site.Params.author.website }}
+      <a href="{{ .Site.Params.author.website }}">{{ .Site.Params.author.name }}</a>
+      {{ else }}
+      {{ .Site.Params.author.name }}
+      {{ end }}
+      {{ end }}
+      &nbsp;&bull;&nbsp;&copy;
+      {{ if .Site.Params.since }}
+      {{ .Site.Params.since }} - {{ .Site.Lastmod.Format "2006" }}
+      {{ else }}
+      {{ .Site.Lastmod.Format "2006" }}
+      {{ end }}
     </div>
   </div>
 </footer>
-
 
 <script src="{{ "js/jquery.min.js" | absURL }}"></script>
 <script src="{{ "js/bootstrap.min.js" | absURL }}"></script>
