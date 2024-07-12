@@ -2,6 +2,7 @@ baseURL = "https://solidblocks.de/"
 languageCode = "en"
 title = "solidblocks.de"
 theme = "pelle.io"
+defaultContentLanguageInSubdir = true
 
 [Params]
 selfHosted = true

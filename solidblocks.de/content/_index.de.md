@@ -5,29 +5,18 @@ date: 2024-02-20T22:00:00+01:00
 draft: false
 ---
 
-<script>var LHC_API = LHC_API||{};
-LHC_API.args = {mode:'widget',lhc_base_url:'https://solidblocks.livehelperchat.com/',wheight:450,wwidth:350,pheight:520,pwidth:500,domain:'solidblocks.de',fresh:true,leaveamessage:true,department:["1"],check_messages:false,proactive:false,lang:'eng/'};
-(function() {
-var po = document.createElement('script'); po.type = 'text/javascript'; po.setAttribute('crossorigin','anonymous'); po.async = true;
-var date = new Date();po.src = 'https://solidblocks.livehelperchat.com/design/defaulttheme/js/widgetv2/index.js?'+(""+date.getFullYear() + date.getMonth() + date.getDate());
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-})();
-</script>
+{{<livehelperchat_widget lang="ger">}}
 
 <div class="container">
-  
-  Solidblocks is a collection of components, patterns and best practices around infrastructure and application deployments.
-  With a focus on the [Hetzner Cloud](https://cloud.hetzner.com) as a deployment target it leans towards simple and easy
-  to maintain architectures based on battle-tested open source components.
 
-  Many components are already available as [open source](https://github.com/pellepelster/solidblocks) components, and as an
-  infrastructure specialist I am happy to provide you with hands on help and support for your application deployment
-  needs, ranging from turnkey ready-to-use solutions to partially or fully managed environments for your applications.
-  
+Solidblocks ist eine Sammlung von Komponenten und bewährten Verfahren rund um die Bereitstellung und den Betrieb von Cloud-Infrastrukturen und Anwendungen. Mit Fokus auf der [Hetzner Cloud](https://cloud.hetzner.com) als Infrastrukur-Provider, aufbauend auf bewährten Open-Source-Komponenten stehen einfache gut zu wartende Architekturen im Vordergrund.
+
+Viele Komponenten sind bereits als [Open-Source](https://github.com/pellepelster/solidblocks) verfügbar und als Infrastruktur-Spezialist stehe ich mit Rat und Tat bei der Umsetzung Ihrer Cloud-Infrastrukturen zur Verfügung. Von der schlüsselfertigen Komplett-Lösungen bis hin zu teilweise oder vollständig verwalteten Umgebungen für Ihre Anwendungen.
+
   <div class="container d-flex justify-content-center py-4">
       <a href="contact" class="btn btn-lg col-4 my-3 btn-primary align-self-center">
           <i class="fas fa-mail-bulk"></i>
-          Contact
+          Kontakt
       </a>
   </div>
 
@@ -40,34 +29,34 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Open Source" iconClasses="fa-brands fa-linux solidblocks-green">}}
-      Host open source solutions like Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault, and many more. Based on common and proven deployment patterns, custom open-source hosting on top of Solidblocks combines a stable hosting solution with the option to customize the solution to your specific needs.    
-    {{</feature>}}
+        Fertige Lösungen für den Betrieb von Open-Source-Lösungen wie z.B.Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault und viele mehr. Open-Source-Hosting auf Solidblocks verbindet bewährten  und stabile Bausteine mit der Möglichkeit, die Lösung an Ihre speziellen Anforderungen anzupassen.
+{{</feature>}}
     
-    {{<feature title="Custom Applications" iconClasses="fa-industry solidblocks-orange">}}
-      From greenfield JVM or .NET Core projects, to Python and Ruby-based solutions, to matured and still useful PHP applications. Its customizability and extendability make it the perfect platform to host your bespoke business applications, or give legacy applications a new life and a stable environment.
+    {{<feature title="Kundenspezifische Anwendungen" iconClasses="fa-industry solidblocks-orange">}}
+        Von greenfield JVM oder .NET Core Projekten, über Python und Ruby-basierte Lösungen, bis hin zu brownfield PHP-Anwendungen. Die Erweiterbarkeit von Solidblocks macht es zur perfekten Plattform, um Ihre maßgeschneiderten Geschäftsanwendungen zu hosten, oder um älteren Anwendungen ein neues Leben und eine stabile Umgebung zu geben.
     {{</feature>}}
 
-    {{<feature title="Maintenance & Overhaul" iconClasses="fa-screwdriver-wrench solidblocks-yellow">}}
-        Depending on the underlying ecosystem or framework of your application, Solidblocks components, such as Keycloak or OpenVPN, can be retrofitted to strengthen the security of your application. This will secure your application, thereby extending its lifetime.
+    {{<feature title="Wartung & Instandsetzung" iconClasses="fa-screwdriver-wrench solidblocks-yellow">}}
+        Abhängig von der Implementierung und zugrunde liegenden Framework Ihrer Anwendung können Solidblocks-Komponenten, wie Keycloak oder OpenVPN helfen, die Sicherheit Ihrer Anwendung zu verbessern und die Lebensdauer verlängern.
     {{</feature>}}
 
   {{</feature-row>}}
 {{</feature-container>}}
 
 <div class="feature-divider"></div>
-{{<feature-container title="Simplicity">}}
+{{<feature-container title="Unkompliziert & Pragmatisch">}}
 
 {{<feature-row>}}
-    {{<feature title="Your code" iconClasses="fa-code-branch solidblocks-orange">}}
-      You have complete ownership of the code for your solution; there are no proprietary components, so you can fork it anytime you want. Depending on the scope and goal of the solution, pairing and/or co-creating on your code can ensure that the knowledge and the routines necessary for operating your applications are well distributed.
+    {{<feature title="Ihr Code" iconClasses="fa-code-branch solidblocks-orange">}}
+        Sie haben jederzeit vollen Zugriff auf den Sourcecode Ihrer Lösung; es gibt keine proprietären Komponenten, Sie können den Code jederzeit forken, falls nötig. Je nach Umfang der Lösung können Pairing und/oder das gemeinsame Arbeiten am Code gewährleisten, dass das Wissen und die Abläufe, die zur Wartung und zum Betrieb Ihrer Anwendungen erforderlich sind, gut verteilt sind.
     {{</feature>}}
     
-    {{<feature title="Your Servers & Data" iconClasses="fa-cloud solidblocks-yellow">}}
-      For managed solutions, all resources can be hosted in your cloud accounts, ensuring you always have access to all VMs and data. This applies to all services used to build your solution, such as AWS, Hetzner Cloud, Elastic.co, and more. Since you own the accounts, you can take over control at any time.
+    {{<feature title="Ihre Server, Ihre Daten" iconClasses="fa-cloud solidblocks-yellow">}}
+        Ale Ressourcen für Ihre Lösungen können in Ihren eigenen Cloud-Accounts gehostet werden, um sicherzustellen, dass Sie jederzeit Zugang zu allen VMs und Daten haben. Dies gilt für alle Services, die für Ihre Lösung nötig sind, wie z. B. AWS, Hetzner Cloud, Elastic.co und mehr, so dass Sie jederzeit die Kontrolle übernehmen können.
     {{</feature>}}
 
-    {{<feature title="VMs and Servers" iconClasses="fa-server solidblocks-green">}}
-      Although a full-fledged container orchestration system, such as Kubernetes, has its benefits, sometimes a simpler solution based on Virtual Machines (VMs) or even bare metal can be more cost-effective, and easier to handle, maintain, and operate. If available, deploying to on-premise hardware is also an option, as it better utilizes already existing gear.
+    {{<feature title="Virtuelle Maschinen und Server" iconClasses="fa-server solidblocks-green">}}
+        Obwohl eine ausgereifte Container-Orchestrierung wie z.B. Kubernetes ihre Vorteile hat, kann manchmal eine einfachere Lösung auf Basis von Virtuellen Maschinen (VMs) oder Bare-Metal Servern kosteneffektiver, einfacher zu handhaben, zu warten und zu betreiben sein. Falls möglich, ist auch der Einsatz auf vorhandener Hardware eine Option, um bereits vorhandene Maschinen besser zu nutzen.
     {{</feature>}}
 
 
@@ -76,11 +65,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Infrastructure as Code" iconClasses="fa-code solidblocks-green">}}
-      All deployed resources are described and deployed with infrastructure-as-code solutions such as Terraform, OpenTofu, and Ansible. For applications lacking an automation front-end, custom solutions can be implemented and integrated into the deployment lifecycle.
+        Alle deployten Ressourcen werden mit Infrastructure-as-Code-Lösungen wie Terraform, OpenTofu und Ansible entwickelt und deployt. Für Anwendungen, die keine Automatisierung bereitstellen, können spezielle Lösungen implementiert und in den deployment lifecycle integriert werden.
     {{</feature>}}
     
-    {{<feature title="Developer experience" iconClasses="fa-play solidblocks-orange">}}
-      The deployment process is designed for ease of use on developer machines and for integration into common CI/CD systems like GitHub, GitLab, Jenkins, and others. Each solution comes with a developer-friendly build system, facilitating the deployment and interaction with the deployed resources.
+    {{<feature title="Developer Experience" iconClasses="fa-play solidblocks-orange">}}
+        Der deployment cycle ist so konzipiert, dass er auf Entwicklermaschinen einfach zu verwenden ist und in gängige CI/CD-Systeme wie GitHub, GitLab, Jenkins und andere integriert werden kann. Jede Lösung wird mit einem entwicklerfreundlichen build system geliefert, das deployment und Interaktion mit den bereitgestellten Ressourcen erleichtert.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -88,19 +77,19 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 
 <div class="feature-divider"></div>
 
-{{<feature-container title="Security & Data Safety">}}
+{{<feature-container title="Sicherheit & Daten">}}
   {{<feature-row>}}
     
     {{<feature title="Updates" iconClasses="fa-arrows-rotate solidblocks-orange">}}
-      All components like operating systems and software packages are regularly updated. Where applicable, tools like <a href="https://github.com/renovatebot/renovate">renovate</a> are integrated into the deployment process to ensure everything is always up-to-date.
+        Alle Komponenten wie Betriebssysteme und Softwarepakete werden regelmäßig aktualisiert. Wenn möglich, sind Tools wie <a href="https://github.com/renovatebot/renovate">renovate</a> in den deployment Prozess integriert, um sicherzustellen, dass alles immer auf dem neuesten Stand ist.
     {{</feature>}}
     
-    {{< feature title="Encryption" iconClasses="fa-lock solidblocks-green">}}
-      All data stored outside the cloud, such as backups, is encrypted by default to protect against accidental exposure of sensitive information.
+    {{< feature title="Verschlüsselung" iconClasses="fa-lock solidblocks-green">}}
+        Alle außerhalb der Cloud gespeicherten Daten, wie z.B. Backups, sind standardmäßig verschlüsselt, um sicherzustellen das sensible Daten nicht in die falschen Hände gelangen können.
     {{</feature>}}
     
-    {{< feature title="Secret Rotation" iconClasses="fa-key solidblocks-yellow">}}
-      All secrets and user credentials can be rotated at anytime to mitigate the risk of long-lived credentials that may leak over time. This also allows for a quick deprecation of existing secrets and credentials in case of a leak. 
+    {{< feature title="Passworte" iconClasses="fa-key solidblocks-yellow">}}
+        Alle Passworte und sonstige sensible Daten können jederzeit neu generiert und rotiert werden, um das Risiko von langlebigen Passworten, die im Laufe der Zeit verloren gehen könnten, zu mindern. Dies ermöglicht auch bestehende Passworte im Falle eines Lecks schnell zu deaktivieren.
     {{</feature>}}
     
   {{</feature-row>}}
@@ -108,17 +97,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{< feature title="Backups" iconClasses="fa-cloud-arrow-up solidblocks-yellow">}}
-      Encrypted data backups to other clouds like AWS or GCP provide an extra layer of security for your data and reduce the blast radius in case of accidental deletion or configuration mistakes. 
+        Verschlüsselte Datenbackups auf Clouds wie AWS oder GCP bieten eine zusätzliche Sicherheitsebene für Ihre Daten und reduzieren den Schaden im Falle von versehentlichem Löschen von Daten oder Konfigurationsfehlern.
     {{</feature>}}
 
     {{< feature title="CVE Scanning" iconClasses="fa-magnifying-glass solidblocks-green">}}
-      Automated CVE scans, coupled with an always up-to-date SBOM, make it easy to discover security-critical bugs early on and mitigate them.
+      Automatisierte CVE-Scans, zusammen mit einem stets aktuellen SBOM, erleichtern es sicherheitskritische Bugs frühzeitig zu entdecken und zu beheben.
     {{</feature>}}
 
     {{< feature title="IDP/IAM" iconClasses="fa-id-card solidblocks-orange">}}
-      IDM solutions like <a href="https://www.keycloak.org">Keycloak</a> can easily be integrated to secure your application or, 
-      in combination with <a href="https://www.vaultproject.io">Hashicorp Vault</a>, to secure SSH access to your VMs with 
-      short-lived secrets.
+        IDM-Lösungen wie <a href="https://www.keycloak.org">Keycloak</a> können leicht integriert werden, um Ihre Anwendung abzusichern oder in Verbindung mit <a href="https://www.vaultproject.io">Hashicorp Vault</a>, um den SSH-Zugriff auf Ihre VMs mit kurzlebigen credentials abzusichern.
     {{</feature>}}
     
   {{</feature-row>}}
@@ -126,19 +113,19 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 
 <div class="feature-divider"></div>
 
-{{<feature-container title="Deployment lifecycle" >}}
+{{<feature-container title="Deployment Lifecycle" >}}
   {{<feature-row>}}
 
-    {{<feature title="Environments" iconClasses="fa-layer-group solidblocks-yellow">}}
-      Multi-environment support is a first-class citizen. It can be used to support your application lifecycle and to provide different test environments.
+    {{<feature title="Umgebungen" iconClasses="fa-layer-group solidblocks-yellow">}}
+        Alle Lösungen untersützen von Haus aus das mehrere Umgebungen. Diese können verwendet werden, um Ihren Anwendungslebenszyklus abzubilden, oder um verschiedene Testumgebungen bereitzustellen.
     {{< /feature>}}
     
     {{<feature title="Bootstrapping" iconClasses="fa-terminal solidblocks-orange">}}
-      Deletion and bootstrapping of environments is systematically tested to ensure there are no hidden cyclic dependencies in the infrastructure setup. This method also confirms that the code which is only executed during the initial setup continues to function correctly.
+        Das Löschen und Neu-Aufbaue von Umgebungen wird systematisch getestet, um sicherzustellen, dass es keine versteckten zyklischen Abhängigkeiten in der Infrastruktur gibt. Die stellt auch sicher, dass der Code der nur während des Bootstrapping ausgeführt wird, weiterhin korrekt funktioniert.
     {{</feature>}}
     
     {{<feature title="Disaster Recovery" iconClasses="fa-fire solidblocks-green">}}
-      Restoring environments from backups is tested regularly and is included in both the playbooks and developer briefings. All components are designed such that the entire environment can be destroyed at any time, and then fully rebuilt from the backups.
+        Die Wiederherstellung von Umgebungen aus Backups wird regelmäßig getestet und ist sowohl in den Playbooks als auch in den Entwicklerbriefings enthalten. Alle Komponenten sind so desingt, dass die gesamte Umgebung jederzeit gelöscht und dann vollständig aus den Backups wieder aufgebaut werden kann.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -146,19 +133,19 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 
 <div class="feature-divider"></div>
 
-{{<feature-container title="Logging and Monitoring" >}}
+{{<feature-container title="Logging & Monitoring" >}}
   {{<feature-row>}}
 
     {{<feature title="Logs" iconClasses="fa-server solidblocks-green">}}
-      Logging platforms like Elastic.co can be used to ingest all application and VM logs and help to resolve errors and debug application state and health.
+        Logging-Plattformen wie Elastic.co können benutzt werden, um alle Anwendungs- und VM-Logs zentral zu speichern, und helfen Fehler frühzeitig zu erkennen und zu beheben. Darüber hinaus erleichtern sie das debuggen von Fehlern.
     {{</feature>}}
 
-    {{<feature title="Metrics" iconClasses="fa-chart-line solidblocks-orange">}}
-      Application and VM metrics can be gathered on analytics platforms, such as Grafana or Elastic.co. These platforms are useful for detecting and visualizing application usage, performance, long-term trends, and aiding in sizing decisions.
+    {{<feature title="Metriken" iconClasses="fa-chart-line solidblocks-orange">}}
+        Anwendungs- und VM-Metriken können auf Analyseplattformen, wie Grafana oder Elastic.co, gesammelt werden. Zentrale Metriken helfen bei der Erkennung und Visualisierung von Anwendungsnutzung, Leistung, langfristigen Trends und können darüber hinaus Hinweise für Sizing-Entscheidungen geben.
     {{</feature>}}
 
     {{<feature title="Tagging" iconClasses="fa-tag solidblocks-yellow">}}
-      Logs and metrics are tagged with information about the environment, service, version, etc., and are enriched with events such as deployments. This makes it easy to correlate issues and bugs with different application versions and deployments.
+        Alle Logs  und Metriken werden mit Informationen über die Umgebung, den Service, die Version usw. getagged und mit Ereignissen wie z.B. deployments angereichert. Dies erleichtert die Korrelation von Problemen und Bugs mit verschiedenen Versionen und Bereitstellungen.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -171,11 +158,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   {{<feature-row>}}
 
     {{<feature title="Deployment" iconClasses="fa-infinity solidblocks-yellow">}}
-      The deployment can easily be integrated into all major CI/CD systems or into already existing application build pipelines.
+        Die deployment Prozess kann leicht in alle CI/CD-Systeme oder in bereits bestehende Pipelines integriert werden.
     {{</feature>}}
 
-    {{< feature title="Testing" iconClasses="fa-crow solidblocks-green">}}
-      Infrastructure integration tests in the deployment process ensure that the deployment is successful. They also serve as a canary to warn when parts of the infrastructure or application are broken or in a degraded state.
+    {{< feature title="Tests" iconClasses="fa-crow solidblocks-green">}}
+        Integrationstests im deployment Prozess stellen sicher, dass das deployment erfolgreich ist. Sie dienen auch als Canary, um zu alarmieren wenn Teile der Infrastruktur oder Anwendung defekt sind, oder die Performance eingeschränkt ist.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -183,20 +170,20 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
 
 <div class="feature-divider"></div>
 
-{{<feature-container title="Documentation & Support" >}}
+{{<feature-container title="Dokumentation & Support" >}}
 
   {{<feature-row>}}
 
     {{<feature title="Playbooks" iconClasses="fa-list-ol solidblocks-green">}}
-      Playbooks provide detailed procedures for scenarios like disaster recovery or secret rotation during emergencies.
+        Playbooks sind ein fester Bestandteil jeder Lösung, und beschreiben detaillierte Verfahren für Szenarien wie die Wiederherstellung von Umgebungen oder die Rotation von credentials in Notfällen. Sie enhalten auch Informationen für den allgemeinen Betrieb und die Wartung.
     {{</feature>}}
 
-    {{<feature title="Fire Drills" iconClasses="fa-fire-extinguisher solidblocks-orange">}}
-      Regular exercises ensure that crucial steps that are seldom used still work as intended, and that developers are comfortable with executing them.
+    {{<feature title="Übungen" iconClasses="fa-fire-extinguisher solidblocks-orange">}}
+        Regelmäßige Übungen stellen sicher, dass wichtige Schritte, die selten genutzt werden nach wie vor funktionieren, und dass sich die Entwickler mit ihrer Durchführung sicher fühlen.
     {{</feature>}}
 
     {{<feature title="Support" iconClasses="fa-phone solidblocks-yellow">}}
-      In the event of critical errors, such as system crashes or data loss, German and English emergency support is available via email, phone, or chat.
+        Im Falle kritischer Fehler, wie Systemabstürzen oder Datenverlust, ist deutsch- und englischsprachiger Notfallsupport per E-Mail, Telefon oder Chat verfügbar.
     {{</feature>}}
 
   {{</feature-row>}}
