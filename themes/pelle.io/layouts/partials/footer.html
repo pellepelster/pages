@@ -11,14 +11,14 @@
         {{ if not .Params.hideSocial }}
         <ul class="list-group text-center footer-links list-no-style list-group-horizontal justify-content-center gap-3">
           {{ range .Site.Data.social.social_icons }}
-            {{- if isset $.Site.Author .id }}
+            {{- if isset $.Site.Params.author .id }}
               <li>
-                <a class="small" href="{{ printf .url (index $.Site.Author .id) | safeURL }}" title="{{ .title }}">
+                <a class="small" href="{{ printf .url (index $.Site.Params.author .id) | safeURL }}" title="{{ .title }}">
                   <span class="fa-stack fa-lg">
                     <i class="fas fa-circle fa-stack-2x"></i>
                     <i class="{{ .icon }} fa-stack-1x fa-inverse"></i>
                   </span>
-                  {{ printf .text (index $.Site.Author .id) | safeURL }}
+                  {{ printf .text (index $.Site.Params.author .id) | safeURL }}
                 </a>
               </li>
             {{- end -}}
@@ -48,11 +48,11 @@
         </ul>
         {{ end }}
         <p class="pt-3 credits copyright text-muted">
-          {{ if .Site.Author.name }}
-            {{ if .Site.Author.website }}
-              <a href="{{ .Site.Author.website }}">{{ .Site.Author.name }}</a>
+          {{ if .Site.Params.author.name }}
+            {{ if .Site.Params.author.website }}
+              <a href="{{ .Site.Params.author.website }}">{{ .Site.Params.author.name }}</a>
             {{ else }}
-              {{ .Site.Author.name }}
+              {{ .Site.Params.author.name }}
             {{ end }}
           {{ end }}
           &nbsp;&bull;&nbsp;&copy;

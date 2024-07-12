@@ -9,8 +9,8 @@ selfHosted = true
 homeTitle = "solidblocks"
 customCss = "solidblocks.css"
 
-[Author]
-name = "pelle"
+[Params.author]
+name = "Christian 'Pelle' Pelster"
 email = "contact@solidblocks.de"
 github = "pellepelster/solidblocks"
 phone = "+49 176 238 170 01"

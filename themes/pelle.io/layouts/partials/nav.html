@@ -28,13 +28,14 @@
             {{ end }}
 
             {{ if .Site.IsMultiLingual }}
+
               {{ if ge (len .Site.Languages) 3 }}
                 <li class="navlinks-container">
                   <a class="navlinks-parent">{{ i18n "languageSwitcherLabel" }}</a>
                   <div class="navlinks-children">
                     {{ range .Site.Languages }}
                       {{ if not (eq .Lang $.Site.Language.Lang) }}
-                      <a href="/{{ .Lang }}" lang="{{ .Lang }}">{{ default .Lang .LanguageName }}</a>
+                      <a href="/{{ .Lang }}" lang="{{ .Lang }}"><img alt="{{ default .Lang .LanguageName }}" width="24" height="24" src="/img/{{ .Lang }}.svg"></a>
                       {{ end }}
                     {{ end }}
                   </div>
@@ -43,7 +44,7 @@
                 <li>
                   {{ range .Site.Languages }}
                     {{ if not (eq .Lang $.Site.Language.Lang) }}
-                      <a href="/{{ .Lang }}" lang="{{ .Lang }}">{{ default .Lang .LanguageName }}</a>
+                    <a href="/{{ .Lang }}" lang="{{ .Lang }}"><img alt="{{ default .Lang .LanguageName }}" width="24" height="24" src="/img/{{ .Lang }}.svg"></a>
                     {{ end }}
                   {{ end }}
                 </li>
