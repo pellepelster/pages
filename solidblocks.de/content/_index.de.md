@@ -25,7 +25,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po
   needs, ranging from turnkey ready-to-use solutions to partially or fully managed environments for your applications.
   
   <div class="container d-flex justify-content-center py-4">
-      <a href="/contact/" class="btn btn-lg col-4 my-3 btn-primary align-self-center">
+      <a href="contact" class="btn btn-lg col-4 my-3 btn-primary align-self-center">
           <i class="fas fa-mail-bulk"></i>
           Contact
       </a>

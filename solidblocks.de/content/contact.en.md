@@ -45,7 +45,7 @@ You can also reach out to directly via chat
 <div id="lhc_status_container_page" class="pt-5 bg-light" ></div>
 
 <script>var LHC_API = LHC_API||{};
-LHC_API.args = {mode:'embed',lhc_base_url:'https://solidblocks.livehelperchat.com/',wheight:450,wwidth:350,pheight:520,pwidth:500,domain:'solidblocks.de',leaveamessage:true,department:["1"],check_messages:false,lang:'eng/'};
+LHC_API.args = {mode:'embed',lhc_base_url:'https://solidblocks.livehelperchat.com/',wheight:450,wwidth:350,pheight:520,pwidth:500,domain:'solidblocks.de',leaveamessage:true,department:["1"],check_messages:false,lang:'eng'};
 (function() {
 var po = document.createElement('script'); po.type = 'text/javascript'; po.setAttribute('crossorigin','anonymous'); po.async = true;
 var date = new Date();po.src = 'https://solidblocks.livehelperchat.com/design/defaulttheme/js/widgetv2/index.js?'+(""+date.getFullYear() + date.getMonth() + date.getDate());

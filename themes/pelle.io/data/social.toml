@@ -20,6 +20,14 @@ title = "GitHub"
 icon = "fab fa-github"
 
 [[social_icons]]
+id = "linkedin"
+url = "https://linkedin.com/in/%s"
+text = "linkedin.com/%s"
+title = "LinkedIn"
+icon = "fab fa-linkedin"
+
+
+[[social_icons]]
 id = "gitlab"
 url = "https://gitlab.com/%s"
 title = "GitLab"
@@ -36,12 +44,6 @@ id = "reddit"
 url = "https://reddit.com/u/%s"
 title = "Reddit"
 icon = "fab fa-reddit-alien"
-
-[[social_icons]]
-id = "linkedin"
-url = "https://linkedin.com/in/%s"
-title = "LinkedIn"
-icon = "fab fa-linkedin"
 
 [[social_icons]]
 id = "xing"

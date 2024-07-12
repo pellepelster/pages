@@ -5,12 +5,12 @@
 {{ end }}
 
 <footer>
-  <div class="container w-50">
-    <div class="row g-2 justify-content-center">
+  <div class="container d-flex justify-content-center">
+    <div class="row g-2">
       {{ if not .Params.hideSocial }}
         {{ range .Site.Data.social.social_icons }}
           {{- if isset $.Site.Params.author .id }}
-            <div class="col-lg">
+            <div class="col-lg flex-grow-0">
               <a class="small text-nowrap" href="{{ printf .url (index $.Site.Params.author .id) | safeURL }}" title="{{ .title }}">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
@@ -45,7 +45,9 @@
 
       {{ end }}
     </div>
-    <div class="row justify-content-center mt-5">
+  </div>
+  <div>
+    <div class="row justify-content-center mt-4">
       {{ if .Site.Params.author.name }}
       {{ if .Site.Params.author.website }}
       <a href="{{ .Site.Params.author.website }}">{{ .Site.Params.author.name }}</a>
@@ -61,6 +63,7 @@
       {{ end }}
     </div>
   </div>
+
 </footer>
 
 <script src="{{ "js/jquery.min.js" | absURL }}"></script>

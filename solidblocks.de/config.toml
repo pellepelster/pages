@@ -4,8 +4,8 @@ title = "solidblocks.de"
 theme = "pelle.io"
 
 [Params]
-logo = "img/logo.png"
 selfHosted = true
+logo = "img/logo.png"
 homeTitle = "solidblocks"
 customCss = "solidblocks.css"
 
@@ -13,6 +13,7 @@ customCss = "solidblocks.css"
 name = "Christian 'Pelle' Pelster"
 email = "contact@solidblocks.de"
 github = "pellepelster/solidblocks"
+linkedin = "christian-pelster-017907133"
 phone = "+49 176 238 170 01"
 
 [markup.goldmark.renderer]
