@@ -94,13 +94,13 @@ DevOps, Infrastructure as Code, Clean Code
 
 ## Let's work together
 
-If you are looking for a Freelance Software Developer or Infrastructure specialist, give me a call or write me an E-Mail.
+If you are looking for a freelance software Developer or infrastructure specialist, give me a call or write me an E-Mail.
 
 <br />
 
 <ul class="list-group list-no-style list-group-horizontal justify-content-center gap-3">
     <li>
-        <a href="mailto:pelle@pelle.io" title="Email me">
+        <a class="text-nowrap" href="mailto:pelle@pelle.io" title="Email me">
             <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
@@ -109,7 +109,7 @@ If you are looking for a Freelance Software Developer or Infrastructure speciali
         </a>
     </li>
     <li>
-        <a href="tel:+49%20176%20238%20170%2001" title="Call me">
+        <a class="text-nowrap" href="tel:+49%20176%20238%20170%2001" title="Call me">
             <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-phone fa-stack-1x fa-inverse"></i>

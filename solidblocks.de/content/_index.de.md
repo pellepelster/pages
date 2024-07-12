@@ -30,7 +30,7 @@ Viele Komponenten sind bereits als [Open-Source](https://github.com/pellepelster
 
     {{<feature title="Open Source" iconClasses="fa-brands fa-linux solidblocks-green">}}
         Fertige Lösungen für den Betrieb von Open-Source-Lösungen wie z.B.Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault und viele mehr. Open-Source-Hosting auf Solidblocks verbindet bewährten  und stabile Bausteine mit der Möglichkeit, die Lösung an Ihre speziellen Anforderungen anzupassen.
-{{</feature>}}
+    {{</feature>}}
     
     {{<feature title="Kundenspezifische Anwendungen" iconClasses="fa-industry solidblocks-orange">}}
         Von greenfield JVM oder .NET Core Projekten, über Python und Ruby-basierte Lösungen, bis hin zu brownfield PHP-Anwendungen. Die Erweiterbarkeit von Solidblocks macht es zur perfekten Plattform, um Ihre maßgeschneiderten Geschäftsanwendungen zu hosten, oder um älteren Anwendungen ein neues Leben und eine stabile Umgebung zu geben.
