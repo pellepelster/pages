@@ -121,7 +121,7 @@ Viele Komponenten sind bereits als [Open-Source](https://github.com/pellepelster
     {{< /feature>}}
     
     {{<feature title="Bootstrapping" iconClasses="fa-terminal solidblocks-orange">}}
-        Das Löschen und Neu-Aufbaue von Umgebungen wird systematisch getestet, um sicherzustellen, dass es keine versteckten zyklischen Abhängigkeiten in der Infrastruktur gibt. Die stellt auch sicher, dass der Code der nur während des Bootstrapping ausgeführt wird, weiterhin korrekt funktioniert.
+        Das Löschen und Bootstrappen von Umgebungen wird ständig getestet, um sicherzustellen, dass es keine versteckten zyklischen Abhängigkeiten in der Infrastruktur gibt. Die stellt auch sicher, dass der Code der nur während des Bootstrapping ausgeführt wird, weiterhin korrekt funktioniert.
     {{</feature>}}
     
     {{<feature title="Disaster Recovery" iconClasses="fa-fire solidblocks-green">}}
