@@ -36,11 +36,3 @@ If you are looking for support with our infrastructure and software deployments,
         </div>
     </div>
 </div>
-
-## Chat
-
-You can also reach out to directly via chat.
-
-<div id="lhc_status_container_page" class="pt-5 bg-light" ></div>
-
-{{<livehelperchat_chat lang="eng">}}

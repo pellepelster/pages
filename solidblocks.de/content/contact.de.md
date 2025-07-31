@@ -36,11 +36,3 @@ Wenn Sie Unterstützung für Ihre Cloud Infrastruktur oder Applikations-Deployme
         </div>
     </div>
 </div>
-
-## Chat
-
-Sie können mich auch direkt hier per Chat kontaktieren.
-
-<div id="lhc_status_container_page" class="pt-5 bg-light" ></div>
-
-{{<livehelperchat_chat lang="ger">}}

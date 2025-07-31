@@ -5,8 +5,6 @@ date: 2024-02-20T22:00:00+01:00
 draft: false
 ---
 
-{{<livehelperchat_widget lang="eng">}}
-
 <div class="container">
 
 Solidblocks is a collection of components, patterns and best practices to deliver cloud infrastructures and application deployments. With a focus on the [Hetzner Cloud](https://cloud.hetzner.com) as deployment target it leans towards simple and easy to maintain architectures based on battle-tested open source components.
