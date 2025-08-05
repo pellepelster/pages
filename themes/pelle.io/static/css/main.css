@@ -895,3 +895,23 @@ blockquote {
     border-left: #afafaf solid 2px;
 }
 
+.carousel {
+    overflow: hidden;
+    padding-bottom: 4rem;
+}
+
+.carousel-caption {
+    top: 100%;
+}
+
+.carousel-inner {
+    overflow: visible;
+}
+
+.carousel-control-next, .carousel-control-prev, .carousel-indicators {
+    bottom: 4rem;
+}
+
+.carousel-indicators {
+    margin-bottom: -1.5rem;
+}

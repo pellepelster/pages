@@ -3,13 +3,27 @@ title: "Solidblocks"
 subtitle: Bespoke Application Hosting
 date: 2024-02-20T22:00:00+01:00
 draft: false
+carousel:
+  - src: "/features/do_file1.png"
+    alt: "Developer Tooling"
+    caption: "Developer tooling für Provisionierung, Tests und Wartung"
+    url: "developer-experience"
+  - src: "/features/runbook1.png"
+    alt: "Runbooks"
+    caption: "Detaillierte Runbooks for tägliche Aufgaben"
+  - src: "/features/rds_cluster1.png"
+    alt: "Blueprint RDS"
+    caption: "Solide PostgreSQL Lösung mit integriertem Backup"
+  - src: "/features/k3s_blueprint.png"
+    alt: "Blueprint K3S"
+    caption: "Getestete Blueprints für gängige Infrastruktur-Setups"
 ---
 
 <div class="container">
 
 Solidblocks ist eine Sammlung von Komponenten und bewährten Verfahren rund um die Bereitstellung und den Betrieb von Cloud-Infrastrukturen und Anwendungen. Mit Fokus auf der [Hetzner Cloud](https://cloud.hetzner.com) als Infrastrukur-Provider, aufbauend auf bewährten Open-Source-Komponenten stehen einfache gut zu wartende Architekturen im Vordergrund.
 
-Viele Komponenten sind bereits als [Open-Source](https://github.com/pellepelster/solidblocks) verfügbar und als Infrastruktur-Spezialist stehe ich mit Rat und Tat bei der Umsetzung Ihrer Cloud-Infrastrukturen zur Verfügung. Von der schlüsselfertigen Komplett-Lösungen bis hin zu teilweise oder vollständig verwalteten Umgebungen für Ihre Anwendungen.
+Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/solidblocks/) verfügbar und als Infrastruktur-Spezialist stehe ich mit Rat und Tat bei der Umsetzung Ihrer Cloud-Infrastrukturen zur Verfügung. Von der schlüsselfertigen Komplett-Lösunge bis hin zu teilweise oder vollständig verwalteten Umgebungen für Ihre Anwendungen.
 
   <div class="container d-flex justify-content-center py-4">
       <a href="contact" class="btn btn-lg col-4 my-3 btn-primary align-self-center">
@@ -18,6 +32,13 @@ Viele Komponenten sind bereits als [Open-Source](https://github.com/pellepelster
       </a>
   </div>
 
+</div>
+
+<div class="feature-divider"></div>
+
+<div class="container py-5">
+    <h2 class="pb-2 border-bottom">Features</h2>
+    {{< feature-carousel >}}
 </div>
 
 <div class="feature-divider"></div>
@@ -35,7 +56,7 @@ Viele Komponenten sind bereits als [Open-Source](https://github.com/pellepelster
     {{</feature>}}
 
     {{<feature title="Wartung & Instandsetzung" iconClasses="fa-screwdriver-wrench solidblocks-yellow">}}
-        Abhängig von der Implementierung und zugrunde liegenden Framework Ihrer Anwendung können Solidblocks-Komponenten, wie Keycloak oder OpenVPN helfen, die Sicherheit Ihrer Anwendung zu verbessern und die Lebensdauer verlängern.
+        Abhängig von der Implementierung und zugrunde liegenden Framework Ihrer Anwendung können Solidblocks-Komponenten, wie Keycloak oder Wireguard helfen, die Sicherheit Ihrer Anwendung zu verbessern und die Lebensdauer verlängern.
     {{</feature>}}
 
   {{</feature-row>}}

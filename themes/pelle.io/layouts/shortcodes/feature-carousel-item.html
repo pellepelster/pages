@@ -1,0 +1,10 @@
+{{/* layouts/shortcodes/carousel_item.html */}}
+
+{{ $item := dict
+"src" (.Get "src")
+"alt" (.Get "alt" | default "")
+"caption" (.Inner | markdownify)
+}}
+
+{{/* Add the item to the parent's scratch */}}
+{{ .Parent.Scratch.Add "items" (slice $item) }}
