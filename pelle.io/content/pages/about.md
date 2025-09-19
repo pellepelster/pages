@@ -6,21 +6,21 @@ hideAboutMe: true
 hideSocial: true
 ---
 
-I am a Freelance Software Developer and Infrastructure Specialist. 
+I am a Freelance **Software** Developer and **Infrastructure** specialist with a strong background in system administration and software development. Having experienced the shift from operating infrastructure in on‑site data centers towards cloud based offerings, helps me to pick the
+right technologies for the problem at hand. I have written operated and maintained software in a broad range of languages and technologies.
 
-I can help you to continuously deliver software to the cloud or on-premise, using test-first methodologies. With my experience from the transition of on-premise datacenters to cloud based solutions I can help you to migrate existing products and services to the cloud, or back.
+I enjoy designing **simple scalable** systems that can easily be adapted to changing requirements. I regularly operate services and third party applications 24/7 **on premise** and in the **cloud**. Due to my experience in system operation 
 
-My operational background helps me to develop systems that are easy to operate, monitor and debug. I strongly believe in test driven development, both for software and infrastructure code.
-
-I enjoy diving into existing systems and to stabilize and overhaul the software, or it's infrastructure. 
+I design software with a strong focus on long term maintainability and ease of operation. I strongly believe in test‑first methodologies and continuous delivery to create short and valuable **feedback** cycles. I
+love taming the complexity of distributed systems with a big emphasis on creating a smooth **developer experience**.
+**Security** is an integral and continuous part of my software development and operations approach.
 
 {{<icon-header-paragraph Ecosystems fa-leaf>}}
-Java (Spring Boot, Dropwizard), Kotlin, Python, JavaScript, Go, Typescript
+Java (Spring Boot, Dropwizard), Kotlin, Bash Python, JavaScript, PHP, Go, JavaScript, Typescript
 {{</icon-header-paragraph>}}
 
 {{<icon-header-paragraph "Technologies" fa-microchip>}}
-Linux, Ansible, Salt, Terraform, git, subversion, HiveMQ, VerneMQ, Helm, Consul, Vault, Nomad, Docker, Vagrant, Kibana, Grafana,
-ELK, GoCD, Jenkins, Gitlab, Github Actions, Concourse, PostgreSQL, Mysql, MariaDB, Keycloak
+Linux, Kubernetes, K3S, Ansible, Salt, Terraform/ToFu, git, subversion, HiveMQ, VerneMQ, Helm, Consul, Vault, Nomad, Docker, Vagrant, Kibana, Grafana, ELK, GoCD, Jenkins, TeamCity Gitlab, Github Actions, Concourse, PostgreSQL, Mysql, MariaDB, Keycloak, DataDog 
 {{</icon-header-paragraph>}}
 
 {{<icon-header-paragraph "Networking & Protocols" fa-network-wired >}}
@@ -37,6 +37,21 @@ DevOps, Infrastructure as Code, Clean Code
 {{</icon-header-paragraph>}}
 
 {{<icon-header-paragraph "Project History" fa-clock-rotate-left >}}
+
+
+### Hetzner infrastructure
+* Initial assessment and planing of cloud implementation
+* Implement and test disaster recovery processes
+* Development of ansible roles and developer tooling
+* Migration of databases to Hetzner cloud servers
+
+### Migration from Google Cloud to Hetzner
+* Initial assessment and planing of cloud migration
+* Capacity planing and testing
+* Planing and implementation of a cloud‑agnostic Kubernetes cloud platform on Hetzner cloud
+* Technology workshops and knowledge transfer for Kubernetes and Helm
+* Implement and test disaster recovery processes
+* Migration of databases to dedicated Hetzner server database cluster
 
 ### Cloud migration AWS to Azure
 
