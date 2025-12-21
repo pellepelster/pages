@@ -5,8 +5,6 @@ set -eu -o pipefail
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 SITES="pelle.io solidblocks.de"
-SOLIDBLOCKS_SHELL_VERSION="v0.2.5"
-SOLIDBLOCKS_SHELL_CHECKSUM="d07eb3250f83ae545236fdd915feca602bdb9b683140f2db8782eab29c9b2c48"
 TEMP_DIR="${DIR}/.temp"
 
 mkdir -p "${TEMP_DIR}"
@@ -17,6 +15,10 @@ function clean_temp_dir {
 
 trap clean_temp_dir EXIT
 
+
+SOLIDBLOCKS_SHELL_VERSION="v0.4.9"
+SOLIDBLOCKS_SHELL_CHECKSUM="be51e59e8b46351fc9c7993bbf11f4e660d71f905a3330bafd491a71079bb64f"
+
 # self contained function for initial Solidblocks bootstrapping
 function bootstrap_solidblocks() {
   local default_dir="$(cd "$(dirname "$0")" ; pwd -P)"
@@ -24,7 +26,7 @@ function bootstrap_solidblocks() {
 
   local temp_file="$(mktemp)"
 
-  curl -v -L "${SOLIDBLOCKS_BASE_URL:-https://github.com}/pellepelster/solidblocks/releases/download/${SOLIDBLOCKS_SHELL_VERSION}/solidblocks-shell-${SOLIDBLOCKS_SHELL_VERSION}.zip" > "${temp_file}"
+  curl -L "${SOLIDBLOCKS_BASE_URL:-https://github.com}/pellepelster/solidblocks/releases/download/${SOLIDBLOCKS_SHELL_VERSION}/blcks-shell-${SOLIDBLOCKS_SHELL_VERSION}.zip" > "${temp_file}"
   echo "${SOLIDBLOCKS_SHELL_CHECKSUM}  ${temp_file}" | sha256sum -c
 
   mkdir -p "${install_dir}" || true
@@ -47,6 +49,7 @@ function ensure_environment() {
   source "${DIR}/.solidblocks-shell/pass.sh"
   source "${DIR}/.solidblocks-shell/text.sh"
   source "${DIR}/.solidblocks-shell/software.sh"
+  source "${DIR}/.solidblocks-shell/python.sh"
 
   software_set_export_path
 }
@@ -54,8 +57,8 @@ function ensure_environment() {
 function task_bootstrap() {
   bootstrap_solidblocks
   ensure_environment
-
   software_ensure_hugo "0.123.8" "3e628b6ba89fef2976640af2eb7724babbf7839c0b97d04d2b6958d35027c88d"
+  software_ensure_s3cmd
 }
 
 function hugo_wrapper {
@@ -67,23 +70,9 @@ function hugo_wrapper {
   )
 }
 
-function task_deploy {
-  install -m 600 /dev/null "${TEMP_DIR}/deploy_ssh"
-  echo "${DEPLOY_SSH_KEY}" > "${TEMP_DIR}/deploy_ssh"
-
-  install -m 600 /dev/null "${TEMP_DIR}/deploy_batch"
-  for site in ${SITES}; do
-    echo "put -R ${DIR}/output/* public_html/" >> "${TEMP_DIR}/deploy_batch"
-  done
-  echo "exit" >> "${TEMP_DIR}/deploy_batch"
-
-  sftp -o StrictHostKeyChecking=no -b "${TEMP_DIR}/deploy_batch" -i "${TEMP_DIR}/deploy_ssh" deploy@pelle.io
-}
- 
-function task_build_all {
+function task_build {
   for site in ${SITES}; do
     hugo_wrapper "${site}"
-    cp -v "${DIR}/.htaccess" "${DIR}/output/${site}"
   done
 }
 
@@ -99,6 +88,13 @@ function task_usage {
   exit 1
 }
 
+function task_deploy {
+  s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
+    --access_key ${PELLE_IO_ACCESS_KEY} \
+    --secret_key ${PELLE_IO_SECRET_KEY} \
+      sync --no-mime-magic --guess-mime-type ${DIR}/output/pelle.io/* "s3://pelle.io"
+}
+
 ARG=${1:-}
 shift || true
 
@@ -109,7 +105,7 @@ esac
 
 case ${ARG} in
   bootstrap) task_bootstrap "$@" ;;
-  build-all) task_build_all ;;
+  build) task_build ;;
   hugo) hugo_wrapper $@ ;;
   serve) task_serve $@ ;;
   deploy) task_deploy ;;
