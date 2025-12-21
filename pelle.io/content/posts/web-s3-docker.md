@@ -43,4 +43,4 @@ export SECRET_KEY=$(terraform output -raw s3_host | jq '.[0].owner_secret_key')
 s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} --access_key ${ACCESS_KEY} --secret_key ${SECRET_KEY} put test.txt s3://bucket1
 ```
 
-For a full usage example, as well as more documentation and an example on how to use the Docker registry please have a look [here](https://pellepelster.github.io/solidblocks/hetzner/web-s3-docker/index.html).
+For a full usage example, as well as an example on how to use the Docker registry please have a look at the [documentation](https://pellepelster.github.io/solidblocks/hetzner/web-s3-docker/index.html).
