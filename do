@@ -93,6 +93,11 @@ function task_deploy {
     --access_key ${PELLE_IO_ACCESS_KEY} \
     --secret_key ${PELLE_IO_SECRET_KEY} \
       sync --no-mime-magic --guess-mime-type ${DIR}/output/pelle.io/* "s3://pelle.io"
+
+  s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
+    --access_key ${SOLIDBLOCKS_DE_ACCESS_KEY} \
+    --secret_key ${SOLIDBLOCKS_DE_SECRET_KEY} \
+      sync --no-mime-magic --guess-mime-type ${DIR}/output/solidblocks.de/* "s3://solidblocks.de"
 }
 
 ARG=${1:-}

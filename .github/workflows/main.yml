@@ -27,4 +27,6 @@ jobs:
         S3_HOST: ${{ secrets.S3_HOST }}
         PELLE_IO_ACCESS_KEY: ${{ secrets.PELLE_IO_ACCESS_KEY }}
         PELLE_IO_SECRET_KEY: ${{ secrets.PELLE_IO_SECRET_KEY }}
+        SOLIDBLOCKS_DE_ACCESS_KEY: ${{ secrets.SOLIDBLOCKS_DE_ACCESS_KEY }}
+        SOLIDBLOCKS_DE_SECRET_KEY: ${{ secrets.SOLIDBLOCKS_DE_SECRET_KEY }}
       run: ./do deploy
