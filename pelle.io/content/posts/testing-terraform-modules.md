@@ -6,7 +6,7 @@ tags: [ "solidblocks", "test" ]
 
 As the number of ready-to-use Terraform modules included in my open source [infrastructure components](https://pellepelster.github.io/solidblocks/#components) suite slowly grows, ensuring quality has been a constant topic during development. I wrote in [this](/posts/solidblocks-infra-test/) post about the challenges of testing infrastructure.
 
-Dog-feeding the [infra-test](https://pellepelster.github.io/solidblocks/test/index.html) library I wrote back then to test my newly released [web-s3-docker](/posts/web-s3-docker/) module has lead to some major improvements around integration-testing Terraform modules that will be the main topic of this post.
+Dogfooding the [infra-test](https://pellepelster.github.io/solidblocks/test/index.html) library I wrote back then to test my newly released [web-s3-docker](/posts/web-s3-docker/) module has led to some major improvements around integration-testing Terraform modules that will be the main topic of this post.
 
 The [infra-test](https://pellepelster.github.io/solidblocks/test/index.html) library is published to Maven central, and can be included like described [here](https://pellepelster.github.io/solidblocks/test/index.html#usage).
 
@@ -30,9 +30,9 @@ public class ReleaseTest {
 The Terraform wrapper (➊) created for the module in the folder `snippets/web-s3-docker-kitchen-sink` is configured by setting Terraform
 (➋) as well as environment variables (➌).
 
-The wrapper not only offers the typical terraform deployment cycle of `init` (➍) and `apply` (➎) but also allows to directly (and type safe) access the output produced by the Terraform module under test. In this case the module exposes the ip address of a created cloud VM (➌) as well as the private SSH key needed to access it.
+The wrapper not only offers the typical terraform deployment cycle of `init` (➍) and `apply` (➎) but also allows to directly (and type safely) access the output produced by the Terraform module under test. In this case the module exposes the IP address of a created cloud VM (➌) as well as the private SSH key needed to access it.
 
-When executed the wrapper makes sure the correct Terraform version for your operating and architecture is downloaded and executed.
+When executed the wrapper makes sure the correct Terraform version for your operating system and architecture is downloaded and executed.
 
 ```kotlin
 @ExtendWith(SolidblocksTest::class)
@@ -42,7 +42,7 @@ public class ReleaseTest {
     fun testSnippets(context: SolidblocksTestContext) {
         val terraform = context.terraform(Path.of("").resolve("snippets/web-s3-docker-kitchen-sink")) // ➊
 
-        terraform.addVaribale("var1", "foo-bar") // ➋
+        terraform.addVariable("var1", "foo-bar") // ➋
         terraform.addEnvironmentVariable("HCLOUD_TOKEN", System.getenv("HCLOUD_TOKEN")) // ➌
 
         terraform.init() // ➍
@@ -57,7 +57,7 @@ public class ReleaseTest {
 
 ## Cloud-init
 
-When the module is successfully applied, the cloud-init allows assertions to be made on the result of the cloud-init run that was used to provision the cloud VM. Using the address and credentials from the previous step, a cloud-init test context can be created (➊) that lets us wait for the provisioning to finish (➋) and if finished to make sure that it was successful (➌). In case those assertions fail, setting the flag `printOutputLogOnTestFailure` (➍) prints the cloud-init log to `stdout` to help with debugging the issue.
+When the module is successfully applied, the cloud-init context allows assertions to be made on the result of the cloud-init run that was used to provision the cloud VM. Using the address and credentials from the previous step, a cloud-init test context can be created (➊) that lets us wait for the provisioning to finish (➋) and if finished to make sure that it was successful (➌). In case those assertions fail, setting the flag `printOutputLogOnTestFailure` (➍) prints the cloud-init log to `stdout` to help with debugging the issue.
 
 ```kotlin
 @ExtendWith(SolidblocksTest::class)
