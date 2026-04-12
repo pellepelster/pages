@@ -3,20 +3,6 @@ title: "Solidblocks"
 subtitle: Bespoke Application Hosting
 date: 2024-02-20T22:00:00+01:00
 draft: false
-carousel:
-  - src: "/features/do_file1.png"
-    alt: "Developer Tooling"
-    caption: "Developer tooling für Provisionierung, Tests und Wartung"
-    url: "developer-experience"
-  - src: "/features/runbook1.png"
-    alt: "Runbooks"
-    caption: "Detaillierte Runbooks for tägliche Aufgaben"
-  - src: "/features/rds_cluster1.png"
-    alt: "Blueprint RDS"
-    caption: "Solide PostgreSQL Lösung mit integriertem Backup"
-  - src: "/features/k3s_blueprint.png"
-    alt: "Blueprint K3S"
-    caption: "Getestete Blueprints für gängige Infrastruktur-Setups"
 ---
 
 <div class="container">
@@ -32,13 +18,6 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
       </a>
   </div>
 
-</div>
-
-<div class="feature-divider"></div>
-
-<div class="container py-5">
-    <h2 class="pb-2 border-bottom">Features</h2>
-    {{< feature-carousel >}}
 </div>
 
 <div class="feature-divider"></div>

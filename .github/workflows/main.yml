@@ -16,11 +16,11 @@ jobs:
       with:
         submodules: true
 
-    - name: bootstrap
-      run: ./do bootstrap
+    - name: install s3cmd
+      run: sudo apt-get install -y s3cmd
 
     - name: build
-      run: ./do build
+      run: mise build
 
     - name: deploy
       env:
@@ -29,4 +29,4 @@ jobs:
         PELLE_IO_SECRET_KEY: ${{ secrets.PELLE_IO_SECRET_KEY }}
         SOLIDBLOCKS_DE_ACCESS_KEY: ${{ secrets.SOLIDBLOCKS_DE_ACCESS_KEY }}
         SOLIDBLOCKS_DE_SECRET_KEY: ${{ secrets.SOLIDBLOCKS_DE_SECRET_KEY }}
-      run: ./do deploy
+      run: mise deploy

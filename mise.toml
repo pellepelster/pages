@@ -1,0 +1,70 @@
+[tools]
+hugo = "0.123.8"
+github-cli = "2.89.0"
+
+[env]
+SITES="pelle.io solidblocks.de"
+
+[tasks.build]
+description = "Build all sites"
+run = """
+#!/bin/env bash
+
+for site in ${SITES}; do
+  (
+    cd "${site}"
+    hugo --themesDir "{{config_root}}/themes" --destination "{{config_root}}/output/${site}"
+  )
+done
+"""
+
+[tasks.serve]
+description = "Serve a site locally"
+usage = """
+arg "<site>"
+"""
+run = """
+#!/bin/env bash
+
+site="${usage_site}"
+(
+    cd "${site}"
+    hugo --themesDir "{{config_root}}/themes" --destination "{{config_root}}/output/${site}" serve --buildDrafts --verbose --disableFastRender
+)
+"""
+
+[tasks.deploy]
+description = "Deploy all sites to S3"
+run = """
+#!/bin/env bash
+export S3_HOST="${S3_HOST:-$(pass pelle/default/public/endpoints/s3_host)}"
+
+export PELLE_IO_ACCESS_KEY="${PELLE_IO_ACCESS_KEY:-$(pass pelle/default/public/pelle.io/admin/access_key)}"
+export PELLE_IO_SECRET_KEY="${PELLE_IO_SECRET_KEY:-$(pass pelle/default/public/pelle.io/admin/secret_key)}"
+
+export SOLIDBLOCKS_DE_ACCESS_KEY="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass pelle/default/public/solidblocks.de/admin/access_key)}"
+export SOLIDBLOCKS_DE_SECRET_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass pelle/default/public/solidblocks.de/admin/secret_key)}"
+
+s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
+  --access_key ${PELLE_IO_ACCESS_KEY} \
+  --secret_key ${PELLE_IO_SECRET_KEY} \
+  sync --no-mime-magic --guess-mime-type output/pelle.io/* "s3://pelle.io"
+
+s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
+  --access_key ${SOLIDBLOCKS_DE_ACCESS_KEY} \
+  --secret_key ${SOLIDBLOCKS_DE_SECRET_KEY} \
+  sync --no-mime-magic --guess-mime-type output/solidblocks.de/* "s3://solidblocks.de"
+"""
+
+[tasks.github-update-secrets]
+run = """
+#!/bin/env bash
+
+export GITHUB_TOKEN="${GITHUB_TOKEN:-$(pass github/pellepelster/pat/admin)}"
+
+gh secret set PELLE_IO_ACCESS_KEY --body "$(pass pelle/default/public/pelle.io/admin/access_key)" --repo pellepelster/pages
+gh secret set PELLE_IO_SECRET_KEY --body "$(pass pelle/default/public/pelle.io/admin/secret_key)" --repo pellepelster/pages
+gh secret set SOLIDBLOCKS_DE_ACCESS_KEY --body "$(pass pelle/default/public/solidblocks.de/admin/access_key)" --repo pellepelster/pages
+gh secret set SOLIDBLOCKS_DE_SECRET_KEY --body "$(pass pelle/default/public/solidblocks.de/admin/secret_key)" --repo pellepelster/pages
+gh secret set S3_HOST --body "$(pass pelle/default/public/endpoints/s3_host)" --repo pellepelster/pages
+"""

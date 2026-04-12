@@ -3,20 +3,6 @@ title: "Solidblocks"
 subtitle: Bespoke Application Hosting
 date: 2024-02-20T22:00:00+01:00
 draft: false
-carousel:
-  - src: "/features/do_file1.png"
-    alt: "Developer Tooling"
-    caption: "Extensive developer tooling for provisioning, testing and maintenance"
-    url: "developer-experience"
-  - src: "/features/runbook1.png"
-    alt: "Runbooks"
-    caption: "Detailed runbooks for day-to-day operations"
-  - src: "/features/rds_cluster1.png"
-    alt: "Blueprint RDS"
-    caption: "Battle proven PostgreSQL solutions with integrated backups"
-  - src: "/features/k3s_blueprint.png"
-    alt: "Blueprint K3S"
-    caption: "Tested blueprints for common infrastructure setups"
 ---
 
 <div class="container">
@@ -32,13 +18,6 @@ Solidblocks is a collection of components, patterns and best practices to delive
       </a>
   </div>
 
-</div>
-
-<div class="feature-divider"></div>
-
-<div class="container py-5">
-    <h2 class="pb-2 border-bottom">Features</h2>
-    {{< feature-carousel >}}
 </div>
 
 <div class="feature-divider"></div>
