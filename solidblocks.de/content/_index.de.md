@@ -21,9 +21,9 @@ carousel:
 
 <div class="container">
 
-Solidblocks ist eine Sammlung von Komponenten und bewährten Verfahren rund um die Bereitstellung und den Betrieb von Cloud-Infrastrukturen und Anwendungen. Mit Fokus auf der [Hetzner Cloud](https://cloud.hetzner.com) als Infrastrukur-Provider, aufbauend auf bewährten Open-Source-Komponenten stehen einfache gut zu wartende Architekturen im Vordergrund.
+Solidblocks ist eine Sammlung von Komponenten und bewährten Verfahren rund um die Bereitstellung und den Betrieb von Cloud-Infrastrukturen und Anwendungen. Mit Fokus auf der [Hetzner Cloud](https://cloud.hetzner.com) als Infrastruktur-Provider, aufbauend auf bewährten Open-Source-Komponenten stehen einfache gut zu wartende Architekturen im Vordergrund.
 
-Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/solidblocks/) verfügbar und als Infrastruktur-Spezialist stehe ich mit Rat und Tat bei der Umsetzung Ihrer Cloud-Infrastrukturen zur Verfügung. Von der schlüsselfertigen Komplett-Lösunge bis hin zu teilweise oder vollständig verwalteten Umgebungen für Ihre Anwendungen.
+Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/solidblocks/) verfügbar und als Infrastruktur-Spezialist stehe ich mit Rat und Tat bei der Umsetzung Ihrer Cloud-Infrastrukturen zur Verfügung. Von der schlüsselfertigen Komplett-Lösung bis hin zu teilweise oder vollständig verwalteten Umgebungen für Ihre Anwendungen.
 
   <div class="container d-flex justify-content-center py-4">
       <a href="contact" class="btn btn-lg col-4 my-3 btn-primary align-self-center">
@@ -48,7 +48,7 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
   {{<feature-row>}}
 
     {{<feature title="Open Source" iconClasses="fa-brands fa-linux solidblocks-green">}}
-        Fertige Lösungen für den Betrieb von Open-Source-Lösungen wie z.B.Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault und viele mehr. Open-Source-Hosting auf Solidblocks verbindet bewährten  und stabile Bausteine mit der Möglichkeit, die Lösung an Ihre speziellen Anforderungen anzupassen.
+        Fertige Lösungen für den Betrieb von Open-Source-Lösungen wie z.B. Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault und viele mehr. Open-Source-Hosting auf Solidblocks verbindet bewährte und stabile Bausteine mit der Möglichkeit, die Lösung an Ihre speziellen Anforderungen anzupassen.
     {{</feature>}}
     
     {{<feature title="Kundenspezifische Anwendungen" iconClasses="fa-industry solidblocks-orange">}}
@@ -71,7 +71,7 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
     {{</feature>}}
     
     {{<feature title="Ihre Server, Ihre Daten" iconClasses="fa-cloud solidblocks-yellow">}}
-        Ale Ressourcen für Ihre Lösungen können in Ihren eigenen Cloud-Accounts gehostet werden, um sicherzustellen, dass Sie jederzeit Zugang zu allen VMs und Daten haben. Dies gilt für alle Services, die für Ihre Lösung nötig sind, wie z. B. AWS, Hetzner Cloud, Elastic.co und mehr, so dass Sie jederzeit die Kontrolle übernehmen können.
+        Alle Ressourcen für Ihre Lösungen können in Ihren eigenen Cloud-Accounts gehostet werden, um sicherzustellen, dass Sie jederzeit Zugang zu allen VMs und Daten haben. Dies gilt für alle Services, die für Ihre Lösung nötig sind, wie z. B. AWS, Hetzner Cloud, Elastic.co und mehr, so dass Sie jederzeit die Kontrolle übernehmen können.
     {{</feature>}}
 
     {{<feature title="Virtuelle Maschinen und Server" iconClasses="fa-server solidblocks-green">}}
@@ -104,7 +104,7 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
     {{</feature>}}
     
     {{< feature title="Verschlüsselung" iconClasses="fa-lock solidblocks-green">}}
-        Alle außerhalb der Cloud gespeicherten Daten, wie z.B. Backups, sind standardmäßig verschlüsselt, um sicherzustellen das sensible Daten nicht in die falschen Hände gelangen können.
+        Alle außerhalb der Cloud gespeicherten Daten, wie z.B. Backups, sind standardmäßig verschlüsselt, um sicherzustellen, dass sensible Daten nicht in die falschen Hände gelangen können.
     {{</feature>}}
     
     {{< feature title="Passworte" iconClasses="fa-key solidblocks-yellow">}}
@@ -136,15 +136,15 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
   {{<feature-row>}}
 
     {{<feature title="Umgebungen" iconClasses="fa-layer-group solidblocks-yellow">}}
-        Alle Lösungen untersützen von Haus aus das mehrere Umgebungen. Diese können verwendet werden, um Ihren Anwendungslebenszyklus abzubilden, oder um verschiedene Testumgebungen bereitzustellen.
+        Alle Lösungen unterstützen von Haus aus mehrere Umgebungen. Diese können verwendet werden, um Ihren Anwendungslebenszyklus abzubilden, oder um verschiedene Testumgebungen bereitzustellen.
     {{< /feature>}}
     
     {{<feature title="Bootstrapping" iconClasses="fa-terminal solidblocks-orange">}}
-        Das Löschen und Bootstrappen von Umgebungen wird ständig getestet, um sicherzustellen, dass es keine versteckten zyklischen Abhängigkeiten in der Infrastruktur gibt. Die stellt auch sicher, dass der Code der nur während des Bootstrapping ausgeführt wird, weiterhin korrekt funktioniert.
+        Das Löschen und Bootstrappen von Umgebungen wird ständig getestet, um sicherzustellen, dass es keine versteckten zyklischen Abhängigkeiten in der Infrastruktur gibt. Dies stellt auch sicher, dass der Code, der nur während des Bootstrapping ausgeführt wird, weiterhin korrekt funktioniert.
     {{</feature>}}
     
     {{<feature title="Disaster Recovery" iconClasses="fa-fire solidblocks-green">}}
-        Die Wiederherstellung von Umgebungen aus Backups wird regelmäßig getestet und ist sowohl in den Playbooks als auch in den Entwicklerbriefings enthalten. Alle Komponenten sind so desingt, dass die gesamte Umgebung jederzeit gelöscht und dann vollständig aus den Backups wieder aufgebaut werden kann.
+        Die Wiederherstellung von Umgebungen aus Backups wird regelmäßig getestet und ist sowohl in den Playbooks als auch in den Entwicklerbriefings enthalten. Alle Komponenten sind so designt, dass die gesamte Umgebung jederzeit gelöscht und dann vollständig aus den Backups wieder aufgebaut werden kann.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -177,7 +177,7 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
   {{<feature-row>}}
 
     {{<feature title="Deployment" iconClasses="fa-infinity solidblocks-yellow">}}
-        Die deployment Prozess kann leicht in alle CI/CD-Systeme oder in bereits bestehende Pipelines integriert werden.
+        Der Deployment-Prozess kann leicht in alle CI/CD-Systeme oder in bereits bestehende Pipelines integriert werden.
     {{</feature>}}
 
     {{< feature title="Tests" iconClasses="fa-crow solidblocks-green">}}
@@ -194,7 +194,7 @@ Viele Komponenten sind bereits als [Open-Source](https://pellepelster.github.io/
   {{<feature-row>}}
 
     {{<feature title="Playbooks" iconClasses="fa-list-ol solidblocks-green">}}
-        Playbooks sind ein fester Bestandteil jeder Lösung, und beschreiben detaillierte Verfahren für Szenarien wie die Wiederherstellung von Umgebungen oder die Rotation von credentials in Notfällen. Sie enhalten auch Informationen für den allgemeinen Betrieb und die Wartung.
+        Playbooks sind ein fester Bestandteil jeder Lösung, und beschreiben detaillierte Verfahren für Szenarien wie die Wiederherstellung von Umgebungen oder die Rotation von credentials in Notfällen. Sie enthalten auch Informationen für den allgemeinen Betrieb und die Wartung.
     {{</feature>}}
 
     {{<feature title="Übungen" iconClasses="fa-fire-extinguisher solidblocks-orange">}}

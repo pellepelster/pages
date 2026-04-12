@@ -3,7 +3,7 @@ title: "Contact"
 date: 2024-02-20T22:00:00+01:00
 draft: false
 ---
-If you are looking for support with our infrastructure and software deployments, drop me an e-mail or give me call. For reference, see also the project history on my [personal page](https://pelle.io/pages/about/).
+If you are looking for support with our infrastructure and software deployments, drop me an e-mail or give me a call. For reference, see also the project history on my [personal page](https://pelle.io/pages/about/).
 
 <div class="container pt-5 pb-5">
     <div class="row g-3 justify-content-center">

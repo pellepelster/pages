@@ -48,7 +48,7 @@ Solidblocks is a collection of components, patterns and best practices to delive
   {{<feature-row>}}
 
     {{<feature title="Open Source" iconClasses="fa-brands fa-linux solidblocks-green">}}
-      Host open source solutions like Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault, and many more. Based on common and proven deployment patterns, custom open-source hosting on top of Solidblocks combines a stable hosting solution with the option to taylor the solution to your specific needs.    
+      Host open source solutions like Keycloak, PostgreSQL, GitLab, Grafana, HashiCorp Vault, and many more. Based on common and proven deployment patterns, custom open-source hosting on top of Solidblocks combines a stable hosting solution with the option to tailor the solution to your specific needs.    
     {{</feature>}}
     
     {{<feature title="Custom Applications" iconClasses="fa-industry solidblocks-orange">}}
@@ -56,7 +56,7 @@ Solidblocks is a collection of components, patterns and best practices to delive
     {{</feature>}}
 
     {{<feature title="Maintenance & Overhaul" iconClasses="fa-screwdriver-wrench solidblocks-yellow">}}
-        Depending on the underlying ecosystem or framework of your application, Solidblocks components, such as Keycloak or Woreguard, can be retrofitted to strengthen the security of your application. This will secure your application, thereby extending its lifetime.
+        Depending on the underlying ecosystem or framework of your application, Solidblocks components, such as Keycloak or WireGuard, can be retrofitted to strengthen the security of your application. This will secure your application, thereby extending its lifetime.
     {{</feature>}}
 
   {{</feature-row>}}
@@ -74,7 +74,7 @@ Solidblocks is a collection of components, patterns and best practices to delive
       For managed solutions, all resources can be hosted in your own cloud accounts, ensuring you always have access to all VMs and data. This applies to all services used to build your solution, such as AWS, Hetzner Cloud, Elastic.co, and more. Since you own the accounts, you can take over control at any time.
     {{</feature>}}
 
-    {{<feature title="Virtual Maschines & Servers" iconClasses="fa-server solidblocks-green">}}
+    {{<feature title="Virtual Machines & Servers" iconClasses="fa-server solidblocks-green">}}
       Although a full-fledged container orchestration like Kubernetes has its benefits, sometimes a simpler solution based on Virtual Machines (VMs) or even bare metal can be more cost-effective, and easier to handle, maintain, and operate. If available, deploying to on-premise hardware is also an option, to better utilize already existing gear.
     {{</feature>}}
 
@@ -108,7 +108,7 @@ Solidblocks is a collection of components, patterns and best practices to delive
     {{</feature>}}
     
     {{< feature title="Secret Rotation" iconClasses="fa-key solidblocks-yellow">}}
-      All secrets and user credentials can be rotated at anytime to mitigate the risk of long-lived credentials that may leak over time. This also allows for a quick deprecation of existing secrets and credentials in case of a leak. 
+      All secrets and user credentials can be rotated at any time to mitigate the risk of long-lived credentials that may leak over time. This also allows for a quick deprecation of existing secrets and credentials in case of a leak. 
     {{</feature>}}
     
   {{</feature-row>}}
@@ -156,7 +156,7 @@ Solidblocks is a collection of components, patterns and best practices to delive
   {{<feature-row>}}
 
     {{<feature title="Logs" iconClasses="fa-server solidblocks-green">}}
-      Logging platforms like Elastic.co can be used to ingest all application and VM logs and help to detect and resolve errors early on. Also haveing central logs can help to and debug bugs.
+      Logging platforms like Elastic.co can be used to ingest all application and VM logs and help to detect and resolve errors early on. Having central logs also makes it easier to debug issues.
     {{</feature>}}
 
     {{<feature title="Metrics" iconClasses="fa-chart-line solidblocks-orange">}}
