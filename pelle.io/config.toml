@@ -1,7 +1,7 @@
 baseURL = "https://pelle.io/"
 languageCode = "en-us"
 title = "pelle.io"
-theme = "pelle.io"
+theme = "github.com/pellepelster/pelle.io-theme"
 
 [Params]
 logo = "img/portrait.jpg"
@@ -29,3 +29,12 @@ weight = 3
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[[module.imports]]
+path = "cj.rs/gohugo-asciinema"
+
+[params.asciinema.defaults]
+theme = "solarized-light"
+loop = false
+autoPlay = false
+speed = 4.0
