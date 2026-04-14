@@ -68,3 +68,15 @@ gh secret set SOLIDBLOCKS_DE_ACCESS_KEY --body "$(pass pelle/default/public/soli
 gh secret set SOLIDBLOCKS_DE_SECRET_KEY --body "$(pass pelle/default/public/solidblocks.de/admin/secret_key)" --repo pellepelster/pages
 gh secret set S3_HOST --body "$(pass pelle/default/public/endpoints/s3_host)" --repo pellepelster/pages
 """
+
+[tasks.generate-feature-gifs]
+run = """
+#!/bin/env bash
+
+for cast in ${HOME}/git/solidblocks/doc/content/cloud/casts/*.cast; do
+  echo "converting '$(basename ${cast})'"
+  docker run -ti  -v ${HOME}/git/solidblocks/doc/content/cloud/casts/:/casts -v $(pwd)/solidblocks.de/static/features/:/output  ghcr.io/asciinema/agg:1.7.0 --speed 5 --theme solarized-light /casts/$(basename ${cast}) /output/$(basename ${cast}).gif
+  gifsicle --colors 256 --scale 0.7 $(pwd)/solidblocks.de/static/features/$(basename ${cast}).gif > $(pwd)/solidblocks.de/static/features/$(basename ${cast})_scaled.gif
+done
+
+"""

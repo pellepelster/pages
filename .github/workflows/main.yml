@@ -9,24 +9,25 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Mise setup
+        uses: jdx/mise-action@v3
 
-    - uses: actions/checkout@master
-      with:
-        submodules: true
+      - uses: actions/checkout@master
+        with:
+          submodules: true
 
-    - name: install s3cmd
-      run: sudo apt-get install -y s3cmd
+      - name: install s3cmd
+        run: sudo apt-get install -y s3cmd
 
-    - name: build
-      run: mise build
+      - name: build
+        run: mise build
 
-    - name: deploy
-      env:
-        S3_HOST: ${{ secrets.S3_HOST }}
-        PELLE_IO_ACCESS_KEY: ${{ secrets.PELLE_IO_ACCESS_KEY }}
-        PELLE_IO_SECRET_KEY: ${{ secrets.PELLE_IO_SECRET_KEY }}
-        SOLIDBLOCKS_DE_ACCESS_KEY: ${{ secrets.SOLIDBLOCKS_DE_ACCESS_KEY }}
-        SOLIDBLOCKS_DE_SECRET_KEY: ${{ secrets.SOLIDBLOCKS_DE_SECRET_KEY }}
-      run: mise deploy
+      - name: deploy
+        env:
+          S3_HOST: ${{ secrets.S3_HOST }}
+          PELLE_IO_ACCESS_KEY: ${{ secrets.PELLE_IO_ACCESS_KEY }}
+          PELLE_IO_SECRET_KEY: ${{ secrets.PELLE_IO_SECRET_KEY }}
+          SOLIDBLOCKS_DE_ACCESS_KEY: ${{ secrets.SOLIDBLOCKS_DE_ACCESS_KEY }}
+          SOLIDBLOCKS_DE_SECRET_KEY: ${{ secrets.SOLIDBLOCKS_DE_SECRET_KEY }}
+        run: mise deploy

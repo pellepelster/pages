@@ -1,7 +1,7 @@
 {{- $carouselId := "carousel1" -}}
 {{- $images := .Params.carousel -}}
 {{ if $images }}
-<div id="{{ $carouselId }}" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div id="{{ $carouselId }}" class="carousel carousel-dark slide" data-bs-ride="false">
     <div class="carousel-indicators">
         {{ range $index, $item := $images }}
         <button type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide-to="{{ $index }}"
@@ -16,7 +16,7 @@
             {{ if $item.url }}
             <a href="{{ urls.RelLangURL $item.url }}">
             {{ end }}
-                <img src="{{ $item.src }}" class="d-block" height="307" alt="{{ $item.alt }}">
+                <img src="{{ $item.src }}" class="d-block" height="507" alt="{{ $item.alt }}">
                 <div class="carousel-caption d-none d-md-block">
                     <p>{{ $item.caption }}</p>
                 </div>
