@@ -40,3 +40,35 @@
     text-align: center;
 }
 
+.gif-play-wrapper {
+    display: grid;
+    justify-content: center;
+}
+
+.gif-play-wrapper > * {
+    grid-area: 1 / 1;
+}
+
+.gif-play-btn {
+    align-self: center;
+    justify-self: center;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.55);
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    color: white;
+    font-size: 1.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 6px; /* optical centering of play icon */
+    transition: background 0.15s;
+}
+
+.gif-play-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+

@@ -1,0 +1,80 @@
+{{- $carouselId := "carousel1" -}}
+{{- $images := .Params.carousel -}}
+{{- $placeholder := "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" -}}
+{{ if $images }}
+<div id="{{ $carouselId }}" class="carousel carousel-dark slide" data-bs-ride="false">
+    <div class="carousel-indicators">
+        {{ range $index, $item := $images }}
+        <button type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide-to="{{ $index }}"
+                class="{{ if eq $index 0 }}active{{ end }}"
+                {{ if eq $index 0 }}aria-current="true"{{ end }}
+                aria-label="Slide {{ add $index 1 }}"></button>
+        {{ end }}
+    </div>
+    <div class="carousel-inner">
+        {{ range $index, $item := $images }}
+        <div class="carousel-item {{ if eq $index 0 }}active{{ end }}">
+            <div class="gif-play-wrapper">
+                {{ if $item.url }}
+                <a href="{{ urls.RelLangURL $item.url }}">
+                {{ end }}
+                    <img src="{{ $placeholder }}" data-gif="{{ $item.src }}" class="d-block" height="507" alt="{{ $item.alt }}">
+                {{ if $item.url }}
+                </a>
+                {{ end }}
+                <button class="gif-play-btn" aria-label="Play">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+                <p>{{ $item.caption }}</p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ $carouselId }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<script>
+(function () {
+    var placeholder = '{{ $placeholder }}';
+
+    function resetItem(item) {
+        var img = item.querySelector('img[data-gif]');
+        if (img) img.src = placeholder;
+        var btn = item.querySelector('.gif-play-btn');
+        if (btn) btn.style.display = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var carouselEl = document.getElementById('{{ $carouselId }}');
+        if (!carouselEl) return;
+
+        carouselEl.addEventListener('slide.bs.carousel', function () {
+            carouselEl.querySelectorAll('.carousel-item').forEach(resetItem);
+        });
+
+        carouselEl.querySelectorAll('.gif-play-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var item = btn.closest('.carousel-item');
+                var img = item.querySelector('img[data-gif]');
+                if (img) {
+                    img.src = placeholder;
+                    requestAnimationFrame(function () {
+                        img.src = img.dataset.gif;
+                    });
+                }
+                btn.style.display = 'none';
+            });
+        });
+    });
+}());
+</script>
+{{ end }}
