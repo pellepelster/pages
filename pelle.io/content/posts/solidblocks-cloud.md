@@ -11,7 +11,7 @@ The loss of convenience when leaving the managed services from the big Hyperscal
 For those scenarios where you just need to run a handful of services with a plain database backend, I reworked the different components I have already published in a new tool called Solidblocks Cloud. A standalone CLI that offers managed services on plain VMs, with automatic backup, SSL certificates and secret handling.
 
 **see it in action**
-{{< asciicast src="/img/blcks_quickstart.cast" >}}
+{{< asciicast src="/img/blcks_quickstart.cast" speed=4.0 >}}
 
 Look here for more information and [demos](https://pellepelster.github.io/solidblocks/cloud/index.html) or [here](https://pellepelster.github.io/solidblocks/cloud/design/index.html) for internal details. Some future ideas are on this rough [roadmap](https://pellepelster.github.io/solidblocks/cloud/roadmap/index.html). If you are interested in using it, I am happy to hear from you.
 
