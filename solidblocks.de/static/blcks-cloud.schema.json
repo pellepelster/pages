@@ -1,0 +1,612 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Configuration",
+    "description": "A Solidblocks instance is defined using a YAML based configuration file with the following format",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "name"
+    ],
+    "properties": {
+        "name": {
+            "description": "Unique name for the cloud deployment. Must conform with [RFC 1123](https://datatracker.ietf.org/doc/html/rfc1123) to ensure it can be used as part of a domain name. If you plan to deploy multiple Solidblocks cloud configurations to a single provider account make sure the names are unique across all configuration files.",
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 63,
+            "pattern": "[a-z0-9]+(-[a-z0-9]+)*"
+        },
+        "root_domain": {
+            "description": "Root domain to use for addresses of created services, e.g. `<service_name>.<root_domain>`. If set the domain must be manageable by one of the configured providers.",
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 253,
+            "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)(\\.([a-z0-9]+(-[a-z0-9]+)*))*$"
+        },
+        "providers": {
+            "description": "Provider list, if two providers of the same type are configured, unique names must be provided. For a minimal configuration at least a SSH, secret and cloud provider is needed.",
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/Hetzner"
+                    },
+                    {
+                        "$ref": "#/definitions/Pass"
+                    },
+                    {
+                        "$ref": "#/definitions/LocalSSH"
+                    },
+                    {
+                        "$ref": "#/definitions/BackupS3"
+                    },
+                    {
+                        "$ref": "#/definitions/BackupLocal"
+                    }
+                ]
+            }
+        },
+        "services": {
+            "description": "Services to create, service names must be unique across all services",
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/S3"
+                    },
+                    {
+                        "$ref": "#/definitions/PostgreSQL"
+                    },
+                    {
+                        "$ref": "#/definitions/Docker"
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Hetzner": {
+            "type": "object",
+            "title": "Hetzner",
+            "description": "Provides Hetzner Cloud based infrastructure resources. An API key with read/write access must be provided via the environment variable `HCLOUD_TOKEN`.",
+            "additionalProperties": false,
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "hcloud"
+                },
+                "name": {
+                    "description": "Name for the provider, can be omitted if only one provider of this specific type is configured",
+                    "type": "string",
+                    "default": "default"
+                },
+                "default_location": {
+                    "description": "Default location for created infrastructure resources",
+                    "type": "string",
+                    "enum": [
+                        "fsn1",
+                        "nbg1",
+                        "hel1",
+                        "ash",
+                        "hil",
+                        "sin"
+                    ],
+                    "default": "fsn1"
+                },
+                "default-instance-type": {
+                    "description": "Default instance size for virtual machines",
+                    "type": "string",
+                    "enum": [
+                        "cx23",
+                        "cx33",
+                        "cx43",
+                        "cx53",
+                        "cpx21",
+                        "cpx31",
+                        "cpx41",
+                        "cpx51",
+                        "cax11",
+                        "cax21",
+                        "cax31",
+                        "cax41",
+                        "ccx13",
+                        "ccx23",
+                        "ccx33",
+                        "ccx43",
+                        "ccx53",
+                        "ccx63",
+                        "cpx12",
+                        "cpx22",
+                        "cpx32",
+                        "cpx42",
+                        "cpx52",
+                        "cpx62"
+                    ],
+                    "default": "cx23"
+                }
+            }
+        },
+        "Pass": {
+            "type": "object",
+            "title": "Pass",
+            "description": "Stores secrets in the [pass](https://www.passwordstore.org/) secret manager. To ensure that the store is setup correctly a temporary secret will be created and deleted during the configuration validation phase. The validation can be skipped by setting the environment variable 'BLCKS_PASS_PROVIDER_SKIP_VALIDATION'",
+            "additionalProperties": false,
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "pass"
+                },
+                "name": {
+                    "description": "Name for the provider, can be omitted if only one provider of this specific type is configured",
+                    "type": "string",
+                    "default": "default"
+                },
+                "password_store_dir": {
+                    "description": "Storage path for the password store, if not set the default or the setting from the `PASSWORD_STORE_DIR` environment variable will be used.",
+                    "type": "string"
+                }
+            }
+        },
+        "LocalSSH": {
+            "type": "object",
+            "title": "Local SSH",
+            "description": "A provider that loads local file based SSH keys. It supports passwordless PEM as well as OpenSSH encoded private keys.",
+            "additionalProperties": false,
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ssh_key"
+                },
+                "private_key": {
+                    "description": "Path to the private key, if not set, the default SSH key paths will be tried ('~/.ssh/id_rsa', '~/.ssh/id_ecdsa', '~/.ssh/id_ecdsa_sk', '~/.ssh/id_ed25519', '~/.ssh/id_ed25519_sk')",
+                    "type": "string"
+                }
+            }
+        },
+        "BackupS3": {
+            "type": "object",
+            "title": "Backup S3",
+            "description": "Provides backup of cloud data to AWS S3 buckets. During plan/apply the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` must be set with credentials that have the permission to create new S3 Buckets, as well as IAM users and access keys. For each service a dedicated backup bucket and separate IAM credentials will be created.",
+            "additionalProperties": false,
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "backup_aws_s3"
+                },
+                "name": {
+                    "description": "Name for the provider, can be omitted if only one provider of this specific type is configured",
+                    "type": "string",
+                    "default": "default"
+                },
+                "region": {
+                    "description": "Region where the backup bucket should be created",
+                    "type": "string",
+                    "default": "eu-central-1"
+                }
+            }
+        },
+        "BackupLocal": {
+            "type": "object",
+            "title": "Backup Local",
+            "description": "Provides backup of cloud data to locally attached disk. This provider is always automatically added",
+            "additionalProperties": false,
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "backup_local"
+                },
+                "name": {
+                    "description": "Name for the provider, can be omitted if only one provider of this specific type is configured",
+                    "type": "string",
+                    "default": "default"
+                }
+            }
+        },
+        "S3": {
+            "type": "object",
+            "title": "S3",
+            "description": "S3 compatible object storage service based on [GarageFS](https://garagehq.deuxfleurs.fr/). Currently only single region deployment are supported.",
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "name"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "s3"
+                },
+                "name": {
+                    "description": "Unique name for the service. Must conform with [RFC 1123](https://datatracker.ietf.org/doc/html/rfc1123) to ensure it can be used as part of a domain name.",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 63,
+                    "pattern": "[a-z0-9]+(-[a-z0-9]+)*"
+                },
+                "buckets": {
+                    "description": "List of S3 buckets to create. Buckets that are removed from this list will not be deleted automatically.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "name"
+                        ],
+                        "properties": {
+                            "name": {
+                                "description": "Unique name for the bucket. Must conform with [RFC 1123](https://datatracker.ietf.org/doc/html/rfc1123) to ensure it can be used as part of a domain name.",
+                                "type": "string",
+                                "minLength": 4,
+                                "maxLength": 253,
+                                "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)(\\.([a-z0-9]+(-[a-z0-9]+)*))*$"
+                            },
+                            "public_access": {
+                                "description": "If enabled the bucket content will be publicly available via 'https' without any authentication",
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "access_keys": {
+                                "description": "Access keys to generate for bucket access",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                        "name"
+                                    ],
+                                    "properties": {
+                                        "name": {
+                                            "description": "Unique name for the access key",
+                                            "type": "string"
+                                        },
+                                        "owner": {
+                                            "description": "Grant owner permission to the access key",
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "read": {
+                                            "description": "Grant read permission to the access key",
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "write": {
+                                            "description": "Grant write permission to the access key",
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            },
+                            "public_access_domains": {
+                                "description": "If 'public_access' is enabled the bucket will also listen on these Domains. Requires A/AAAA entries to point to the server hosting the buckets. If any provider supports those domains the entries will automatically be created.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "backup_size": {
+                    "description": "Size in GB for the local backup volume. If not set the size will be derived from the data volume size and the amount of full backup retention days.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024
+                },
+                "backup_full_retention_days": {
+                    "description": "amount of days to keep full backups",
+                    "type": "integer",
+                    "default": 7
+                },
+                "data_size": {
+                    "description": "Size in GB for the data volume keeping all data needed for this service.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024,
+                    "default": 16
+                },
+                "hetzner_location": {
+                    "description": "Hetzner location for created infrastructure resources, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "fsn1",
+                        "nbg1",
+                        "hel1",
+                        "ash",
+                        "hil",
+                        "sin"
+                    ],
+                    "default": "fsn1"
+                },
+                "hetzner_instance_type": {
+                    "description": "Hetzner instance size for virtual machines, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "cx23",
+                        "cx33",
+                        "cx43",
+                        "cx53",
+                        "cpx21",
+                        "cpx31",
+                        "cpx41",
+                        "cpx51",
+                        "cax11",
+                        "cax21",
+                        "cax31",
+                        "cax41",
+                        "ccx13",
+                        "ccx23",
+                        "ccx33",
+                        "ccx43",
+                        "ccx53",
+                        "ccx63",
+                        "cpx12",
+                        "cpx22",
+                        "cpx32",
+                        "cpx42",
+                        "cpx52",
+                        "cpx62"
+                    ],
+                    "default": "cx23"
+                }
+            }
+        },
+        "PostgreSQL": {
+            "type": "object",
+            "title": "PostgreSQL",
+            "description": "Single node PostgreSQL database instance with pgBackRest powered backup.",
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "name"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "postgresql"
+                },
+                "name": {
+                    "description": "Unique name for the service. Must conform with [RFC 1123](https://datatracker.ietf.org/doc/html/rfc1123) to ensure it can be used as part of a domain name.",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 63,
+                    "pattern": "[a-z0-9]+(-[a-z0-9]+)*"
+                },
+                "databases": {
+                    "description": "List of databases to create. Databases that are removed from this list will not be deleted automatically.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "name"
+                        ],
+                        "properties": {
+                            "name": {
+                                "description": "Unique name for the database",
+                                "type": "string",
+                                "minLength": 4,
+                                "maxLength": 253,
+                                "pattern": "^([a-z0-9]+(-[a-z0-9]+)*)(\\.([a-z0-9]+(-[a-z0-9]+)*))*$"
+                            },
+                            "users": {
+                                "description": "Users to create for database access",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                        "name"
+                                    ],
+                                    "properties": {
+                                        "name": {
+                                            "description": "Unique name for the access key",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "backup_size": {
+                    "description": "Size in GB for the local backup volume. If not set the size will be derived from the data volume size and the amount of full backup retention days.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024
+                },
+                "backup_full_retention_days": {
+                    "description": "amount of days to keep full backups",
+                    "type": "integer",
+                    "default": 7
+                },
+                "data_size": {
+                    "description": "Size in GB for the data volume keeping all data needed for this service.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024,
+                    "default": 16
+                },
+                "hetzner_location": {
+                    "description": "Hetzner location for created infrastructure resources, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "fsn1",
+                        "nbg1",
+                        "hel1",
+                        "ash",
+                        "hil",
+                        "sin"
+                    ],
+                    "default": "fsn1"
+                },
+                "hetzner_instance_type": {
+                    "description": "Hetzner instance size for virtual machines, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "cx23",
+                        "cx33",
+                        "cx43",
+                        "cx53",
+                        "cpx21",
+                        "cpx31",
+                        "cpx41",
+                        "cpx51",
+                        "cax11",
+                        "cax21",
+                        "cax31",
+                        "cax41",
+                        "ccx13",
+                        "ccx23",
+                        "ccx33",
+                        "ccx43",
+                        "ccx53",
+                        "ccx63",
+                        "cpx12",
+                        "cpx22",
+                        "cpx32",
+                        "cpx42",
+                        "cpx52",
+                        "cpx62"
+                    ],
+                    "default": "cx23"
+                }
+            }
+        },
+        "Docker": {
+            "type": "object",
+            "title": "Docker",
+            "description": "Deploys a docker service image containers and exposes its endpoints",
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "name",
+                "image"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "docker"
+                },
+                "name": {
+                    "description": "Unique name for the service. Must conform with [RFC 1123](https://datatracker.ietf.org/doc/html/rfc1123) to ensure it can be used as part of a domain name.",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 63,
+                    "pattern": "[a-z0-9]+(-[a-z0-9]+)*"
+                },
+                "endpoints": {
+                    "description": "Service endpoints to publicly expose",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "container_port": {
+                                "description": "Service port on the docker container",
+                                "type": "integer",
+                                "minimum": 23,
+                                "maximum": 65536
+                            },
+                            "type": {
+                                "description": "Type of the service endpoints. Endpoints with the type `http` are automatically terminated with TLS if a `root_domain` is set.",
+                                "type": "string",
+                                "enum": [
+                                    "http"
+                                ],
+                                "default": "http"
+                            }
+                        }
+                    }
+                },
+                "image": {
+                    "description": "Docker image to deploy",
+                    "type": "string"
+                },
+                "links": {
+                    "description": "Linked services will automatically expose environment variables to the linked service, e.g. database credentials. To see which variables are available run the `info` command.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "backup_size": {
+                    "description": "Size in GB for the local backup volume. If not set the size will be derived from the data volume size and the amount of full backup retention days.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024
+                },
+                "backup_full_retention_days": {
+                    "description": "amount of days to keep full backups",
+                    "type": "integer",
+                    "default": 7
+                },
+                "data_size": {
+                    "description": "Size in GB for the data volume keeping all data needed for this service.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024,
+                    "default": 16
+                },
+                "hetzner_location": {
+                    "description": "Hetzner location for created infrastructure resources, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "fsn1",
+                        "nbg1",
+                        "hel1",
+                        "ash",
+                        "hil",
+                        "sin"
+                    ],
+                    "default": "fsn1"
+                },
+                "hetzner_instance_type": {
+                    "description": "Hetzner instance size for virtual machines, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "cx23",
+                        "cx33",
+                        "cx43",
+                        "cx53",
+                        "cpx21",
+                        "cpx31",
+                        "cpx41",
+                        "cpx51",
+                        "cax11",
+                        "cax21",
+                        "cax31",
+                        "cax41",
+                        "ccx13",
+                        "ccx23",
+                        "ccx33",
+                        "ccx43",
+                        "ccx53",
+                        "ccx63",
+                        "cpx12",
+                        "cpx22",
+                        "cpx32",
+                        "cpx42",
+                        "cpx52",
+                        "cpx62"
+                    ],
+                    "default": "cx23"
+                }
+            }
+        }
+    }
+}
