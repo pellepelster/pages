@@ -34,7 +34,7 @@ unsafe = true
 path = "cj.rs/gohugo-asciinema"
 
 [params.asciinema.defaults]
-theme = "solarized-light"
+theme = "solarized-dark"
 loop = false
 autoPlay = false
-speed = 4.0
+speed = 8.0
