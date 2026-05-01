@@ -41,6 +41,9 @@
                     },
                     {
                         "$ref": "#/definitions/BackupLocal"
+                    },
+                    {
+                        "$ref": "#/definitions/GitHub"
                     }
                 ]
             }
@@ -58,6 +61,9 @@
                     },
                     {
                         "$ref": "#/definitions/Docker"
+                    },
+                    {
+                        "$ref": "#/definitions/GitHubRunner"
                     }
                 ]
             }
@@ -131,7 +137,7 @@
         "Pass": {
             "type": "object",
             "title": "Pass",
-            "description": "Stores secrets in the [pass](https://www.passwordstore.org/) secret manager. To ensure that the store is setup correctly a temporary secret will be created and deleted during the configuration validation phase. The validation can be skipped by setting the environment variable 'BLCKS_PASS_PROVIDER_SKIP_VALIDATION'",
+            "description": "Stores secrets in the [pass](https://www.passwordstore.org/) password manager. To ensure that the store is setup correctly a temporary secret will be created and deleted during the configuration validation phase. The validation can be skipped by setting the environment variable 'BLCKS_PASS_PROVIDER_SKIP_VALIDATION'",
             "additionalProperties": false,
             "required": [
                 "type"
@@ -174,7 +180,7 @@
         "BackupS3": {
             "type": "object",
             "title": "Backup S3",
-            "description": "Provides backup of cloud data to AWS S3 buckets. During plan/apply the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` must be set with credentials that have the permission to create new S3 Buckets, as well as IAM users and access keys. For each service a dedicated backup bucket and separate IAM credentials will be created.",
+            "description": "Uses AWS S3 buckets for service backups. During plan/apply the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` must be set with credentials that have the permission to create new S3 Buckets, as well as IAM users and access keys. For each service a dedicated backup bucket and separate IAM credentials will be created.",
             "additionalProperties": false,
             "required": [
                 "type"
@@ -199,7 +205,7 @@
         "BackupLocal": {
             "type": "object",
             "title": "Backup Local",
-            "description": "Provides backup of cloud data to locally attached disk. This provider is always automatically added",
+            "description": "Enables use of locally attached disks for service backups.",
             "additionalProperties": false,
             "required": [
                 "type"
@@ -213,6 +219,31 @@
                     "description": "Name for the provider, can be omitted if only one provider of this specific type is configured",
                     "type": "string",
                     "default": "default"
+                }
+            }
+        },
+        "GitHub": {
+            "type": "object",
+            "title": "GitHub",
+            "description": "Provides integration of GitHub resources. A personal access token with appropriate permissions must be supplied via the environment variable `GITHUB_TOKEN`.",
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "github_url"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "github"
+                },
+                "name": {
+                    "description": "Name for the provider, can be omitted if only one provider of this specific type is configured",
+                    "type": "string",
+                    "default": "default"
+                },
+                "github_url": {
+                    "description": "GitHub URL, either an organisation (https://github.com/<org>) or a repository (https://github.com/<user>/<repo>)",
+                    "type": "string"
                 }
             }
         },
@@ -490,7 +521,7 @@
         "Docker": {
             "type": "object",
             "title": "Docker",
-            "description": "Deploys a docker service image containers and exposes its endpoints",
+            "description": "Deploys a dockerized service exposes its endpoints.",
             "additionalProperties": false,
             "required": [
                 "type",
@@ -554,6 +585,106 @@
                     "description": "amount of days to keep full backups",
                     "type": "integer",
                     "default": 7
+                },
+                "data_size": {
+                    "description": "Size in GB for the data volume keeping all data needed for this service.",
+                    "type": "integer",
+                    "minimum": 16,
+                    "maximum": 1024,
+                    "default": 16
+                },
+                "hetzner_location": {
+                    "description": "Hetzner location for created infrastructure resources, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "fsn1",
+                        "nbg1",
+                        "hel1",
+                        "ash",
+                        "hil",
+                        "sin"
+                    ],
+                    "default": "fsn1"
+                },
+                "hetzner_instance_type": {
+                    "description": "Hetzner instance size for virtual machines, if not set the default from the Hetzner provider configuration is used.",
+                    "type": "string",
+                    "enum": [
+                        "cx23",
+                        "cx33",
+                        "cx43",
+                        "cx53",
+                        "cpx21",
+                        "cpx31",
+                        "cpx41",
+                        "cpx51",
+                        "cax11",
+                        "cax21",
+                        "cax31",
+                        "cax41",
+                        "ccx13",
+                        "ccx23",
+                        "ccx33",
+                        "ccx43",
+                        "ccx53",
+                        "ccx63",
+                        "cpx12",
+                        "cpx22",
+                        "cpx32",
+                        "cpx42",
+                        "cpx52",
+                        "cpx62"
+                    ],
+                    "default": "cx23"
+                }
+            }
+        },
+        "GitHubRunner": {
+            "type": "object",
+            "title": "GitHub Runner",
+            "description": "Provisions a self-hosted runner based on the configured cloud provider. Requires a `github` provider to be configured with the target organisation or repository URL and a personal access token supplied via the `GITHUB_TOKEN` environment variable.",
+            "additionalProperties": false,
+            "required": [
+                "type",
+                "name"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "github_runner"
+                },
+                "name": {
+                    "description": "Unique name for the service. Must conform with [RFC 1123](https://datatracker.ietf.org/doc/html/rfc1123) to ensure it can be used as part of a domain name.",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 63,
+                    "pattern": "[a-z0-9]+(-[a-z0-9]+)*"
+                },
+                "labels": {
+                    "description": "list of runner labels used to route workflow jobs to this runner",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "scale": {
+                    "description": "Number if runner instances to create",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 10,
+                    "default": 1
+                },
+                "packages": {
+                    "description": "extra Ubuntu packages to install during machine provisioning",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "allow_sudo": {
+                    "description": "allow password-less sudo commands for the GitHub runner user",
+                    "type": "boolean",
+                    "default": false
                 },
                 "data_size": {
                     "description": "Size in GB for the data volume keeping all data needed for this service.",

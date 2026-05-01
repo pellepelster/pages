@@ -8,7 +8,7 @@ Most of the projects I work on nowadays are hosted on GitHub. And since many of 
 
 When using the second-smallest runner SKU `actions_linux` (4 CPU/16 GB) that clocks in at 0.0513 €/hour, which for the larger projects where at least one runner is crunching away at jobs all the time comes in at around ~222 €/month.
 
-A comparable Hetzner cloud instance like the `CCX23` (4 CPU/16 GB) comes at a price of 32.00 €/month, making it a nice option to save some cloud spending.
+A comparable Hetzner cloud instance like the `CCX23` (4 CPU/16 GB) comes at a price of 32 €/month, making it a nice option to save some cloud spending.
 
 To make the usage of those cheaper self-hosted runner options as easy as possible, I added GitHub as a new provider and service type to my [Solidblocks Cloud CLI](https://pellepelster.github.io/solidblocks/cloud/index.html), making the setup of runners as easy as running `blcks cloud apply github.yaml`:
 
