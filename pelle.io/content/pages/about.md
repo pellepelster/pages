@@ -4,6 +4,7 @@ date: 2021-02-20T22:00:00+01:00
 draft: false
 hideAboutMe: true
 hideSocial: true
+tawk: true
 ---
 
 I am a Freelance **Software** Developer and **Infrastructure** specialist with a strong background in system administration and software development. Having experienced the shift from operating infrastructure in on‑site data centers towards cloud based offerings, helps me to pick the
