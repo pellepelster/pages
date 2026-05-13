@@ -1,62 +1,25 @@
 ---
-title: "Solidblocks Cloud S3"
-date: 2026-05-11T19:00:00+01:00
+title: "Solidblocks Security Update (Fragnesia)"
+date: 2026-05-13T17:00:00+01:00
 draft: false
 ---
 
-Although AWS S3 buckets are as stable and easy as it gets, sometimes you might not want to have an AWS dependency at all, or you expect a lot of egress traffic, making it a potentially costly choice.
+A central aspect of the infrastructure deployed by Solidblocks cloud is the reduction of moving parts to minimize the potential attack surface. Instead of using a complex runtime involving control-planes and container schedulers, the deployed services rely on simple Debian-based VMs running plain services managed by systemd.
 
-Luckily, a lot of alternative implementations exist, one of them is [Garage](https://garagehq.deuxfleurs.fr/), offering a performant open-source option for self-hosting.
+Despite the simplicity, security issues in the Linux kernel are sadly still an occasional thing, especially since AI-based scanners are able to reveal hard-to-find exploits faster than ever. 
 
-Garage also offers public buckets, making it a nice option to host a static website that can be deployed with any S3-compatible software and is now also an available service in [Solidblocks Cloud](https://pellepelster.github.io/solidblocks/cloud/index.html).
+The VMs created by Solidblocks cloud are ephemeral by design, all state is safely kept on dedicated storage volumes and/or external backups, so updating the VMs with the latest security patches is as easy as throwing the old VMs away and recreating them with the latest updates applied.
 
-In the good tradition of dogfooding your own software, in fact, this blog is hosted on a Garage S3 service with a publicly exposed bucket deployed via Solidblocks Cloud, the source looks like this:
+To make this process easy and fast, the Solidblocks Cloud CLI now also supports fetching automatic updates. To mitigate, for example, the current CVE-of-the-day [Linux Fragnesia](https://github.com/v12-security/pocs/tree/main/fragnesia) run the updater and apply the current config to your cloud.
 
-**pelle.yaml**
-```yaml
-# yaml-language-server: $schema=https://solidblocks.de/blcks-cloud.schema.json
----
-name: pelle
-root_domain: pelle.io
-
-providers:
-  - type: pass
-  - type: ssh_key
-    private_key: ~/.ssh/pelle.io.ed25519.key
-  - type: hcloud
-  - type: backup_local
-
-services:
-  - type: s3
-    name: public
-    buckets:
-      - name: pelle.io
-        public_access: true
-        public_access_domains:
-            - pelle.io
-        access_keys:
-          - name: "admin"
-            owner: true
-            read: true
-            write: true
-      - name: solidblocks.de
-        public_access: true
-        public_access_domains:
-            - solidblocks.de
-        access_keys:
-          - name: "admin"
-            owner: true
-            read: true
-            write: true
-```
-
-that when rolled out via 
+For example the infrastructure that this blog is hosted on is defined [here](https://github.com/pellepelster/infrastructure/blob/main/pelle.yaml) and the Fragnesia mitigations were applied with
 
 ```shell
+blcks update
 blcks cloud apply pelle.yaml
 ```
 
-{{< asciicast src="/img/pelle_s3.cast" theme="solarized-light" speed=4.0 >}}
+{{< asciicast src="/img/blcks_update_apply.cast" theme="solarized-light" speed=4.0 >}}
 
 
-rolls out the S3 service, and also creates two publicly available S3 buckets, as well as the appropriate DNS entries and provides you with some quickstart commands to start using your freshly deployed S3 service. See the [documentation](https://pellepelster.github.io/solidblocks/cloud/configuration/index.html#s3) for more information.
+For available updates, regulary check the [changelog](https://github.com/pellepelster/solidblocks/releases/)
