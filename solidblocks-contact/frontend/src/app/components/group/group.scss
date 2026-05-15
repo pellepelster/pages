@@ -1,0 +1,50 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #d0d5dd;
+  padding: 16px 10px 10px;
+  background: #f5f7fa;
+
+  &.unknown > app-cloud-component {
+    flex: 1;
+  }
+
+  &.vertical {
+    padding: 10px 10px 10px 16px;
+
+    > .group-label {
+      top: 50%;
+      left: -1px;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      white-space: nowrap;
+    }
+  }
+}
+
+.group-label {
+  position: absolute;
+  top: -1px;
+  left: 10px;
+  transform: translateY(-50%);
+  background: #f5f7fa;
+  padding: 0 8px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #444;
+  white-space: nowrap;
+}
+
+.group-body {
+  display: flex;
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  &:has(> app-cloud-component) {
+    gap: 5px;
+  }
+}

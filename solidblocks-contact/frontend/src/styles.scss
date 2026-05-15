@@ -1,0 +1,30 @@
+:root {
+  --blcks-green: #2ebc6f;
+  --blcks-green-light: #d5f2e2;
+  --blcks-orange: #df964f;
+  --blcks-orange-light: #f9eadc;
+  --blcks-yellow: #ebd129;
+  --blcks-yellow-light: #fbf6d4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: monospace;
+  background: #fff;
+  color: #222;
+}
+
+.groups-stack > app-group + app-group,
+.group-body.vertical > app-group + app-group {
+  display: block;
+  border-top: none;
+}
+
+.group-body:not(.vertical) > app-group + app-group {
+  border-left: none;
+}

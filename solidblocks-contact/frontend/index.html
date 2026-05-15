@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Configurator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    async function init() {
+      const res = await fetch('config.yaml');
+      const text = await res.text();
+      const config = jsyaml.load(text);
+      render(config);
+    }
+
+    function render(config) {
+      const app = document.getElementById('app');
+      const sliderSetups = [];
+
+      config.layers.forEach(layer => {
+        app.appendChild(buildLayer(layer));
+        if (layer.type === 'slider') {
+          const { container, setup } = buildSlider(layer);
+          app.appendChild(container);
+          sliderSetups.push(setup);
+        }
+      });
+
+      // Measure group positions and align ticks after layout
+      requestAnimationFrame(() => sliderSetups.forEach(fn => fn()));
+    }
+
+    function buildLayer(layer) {
+      const el = el_('div', 'layer');
+
+      const label = el_('div', 'layer-label');
+      label.textContent = layer.name;
+      el.appendChild(label);
+
+      const body = el_('div', 'layer-body');
+      layer.groups.forEach((group, gi) => {
+        body.appendChild(buildGroup(layer.name, group, gi));
+      });
+      el.appendChild(body);
+
+      return el;
+    }
+
+    function buildGroup(layerName, group, index) {
+      const el = el_('div', 'group');
+      el.dataset.layer = layerName;
+      el.dataset.index = index;
+
+      const label = el_('div', 'group-label');
+      label.textContent = group.name;
+      el.appendChild(label);
+
+      const body = el_('div', 'group-body');
+      group.components.forEach(comp => {
+        const c = el_('div', 'component');
+        const title = el_('span', 'component-title');
+        title.textContent = comp.name;
+        c.appendChild(title);
+        if (comp.logo) {
+          const img = document.createElement('img');
+          img.src = comp.logo;
+          img.alt = comp.name;
+          img.className = 'component-logo';
+          c.appendChild(img);
+        }
+        body.appendChild(c);
+      });
+      el.appendChild(body);
+
+      return el;
+    }
+
+    function buildSlider(layer) {
+      const container = el_('div', 'slider-container');
+      const wrapper = el_('div', 'slider-wrapper');
+
+      const input = document.createElement('input');
+      input.type = 'range';
+      input.min = 0;
+      input.max = layer.groups.length - 1;
+      input.step = 1;
+      input.value = 0;
+      wrapper.appendChild(input);
+
+      const ticksEl = el_('div', 'slider-ticks');
+      const tickEls = layer.groups.map((group, gi) => {
+        const tick = el_('span', 'tick');
+        tick.textContent = group.name;
+        if (gi === 0) tick.classList.add('active');
+        ticksEl.appendChild(tick);
+        return tick;
+      });
+      wrapper.appendChild(ticksEl);
+      container.appendChild(wrapper);
+
+      setHighlight(layer.name, 0);
+
+      input.addEventListener('input', () => {
+        const val = parseInt(input.value);
+        setHighlight(layer.name, val);
+        tickEls.forEach((t, i) => t.classList.toggle('active', i === val));
+      });
+
+      function setup() {
+        const groups = document.querySelectorAll(`.group[data-layer="${layer.name}"]`);
+        const containerRect = container.getBoundingClientRect();
+        const firstRect = groups[0].getBoundingClientRect();
+        const lastRect = groups[groups.length - 1].getBoundingClientRect();
+        const firstCenter = firstRect.left + firstRect.width / 2 - containerRect.left;
+        const lastCenter = lastRect.left + lastRect.width / 2 - containerRect.left;
+        wrapper.style.marginLeft = firstCenter + 'px';
+        wrapper.style.marginRight = (containerRect.width - lastCenter) + 'px';
+      }
+
+      return { container, setup };
+    }
+
+    function setHighlight(layerName, groupIndex) {
+      document.querySelectorAll(`.group[data-layer="${layerName}"]`).forEach(el => {
+        el.classList.toggle('highlighted', parseInt(el.dataset.index) === groupIndex);
+      });
+    }
+
+    function el_(tag, cls) {
+      const el = document.createElement(tag);
+      if (cls) el.className = cls;
+      return el;
+    }
+
+    init();
+  </script>
+</body>
+</html>

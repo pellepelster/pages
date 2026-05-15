@@ -1,0 +1,10 @@
+@if (component().type !== 'unknown') {
+  <span class="component-title">{{ component().name }}</span>
+}
+@if (component().logo) {
+  <img class="component-logo" [src]="component().logo" [alt]="component().name" />
+}
+@if (effectiveInfo()) {
+  <div class="tooltip">{{ effectiveInfo() }}</div>
+}
+<span class="turned-indicator">?</span>

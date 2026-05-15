@@ -1,0 +1,18 @@
+[tools]
+node = "22"
+
+[tasks."frontend:dev:run"]
+description = "Start Angular dev server"
+run = "cd frontend && npx ng serve"
+
+[tasks."backend:dev:run"]
+description = "Start Ktor backend"
+run = "cd backend && ./gradlew run"
+
+[tasks."docker:build"]
+description = "Build Docker image with frontend and backend"
+run = "docker build -t contact ."
+
+[tasks."docker:run"]
+description = "Run the Docker image locally on port 8080"
+run = "docker run --rm -p 8080:8080 contact"

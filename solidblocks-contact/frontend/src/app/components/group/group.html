@@ -1,0 +1,29 @@
+@if (group().type === 'unknown') {
+  <app-cloud-component
+    [component]="syntheticUnknownComponent"
+    [group]="group()"
+    [siblingGroups]="siblingGroups()"
+    [parentGroup]="parentGroup()"
+  />
+} @else {
+  @if (group().name) {
+    <div class="group-label">{{ group().name }}</div>
+  }
+  <div class="group-body" [class.vertical]="group().direction === 'vertical'">
+    @for (child of group().groups ?? []; track $index) {
+      <app-group
+        [group]="child"
+        [parentGroup]="group()"
+        [siblingGroups]="group().groups ?? []"
+        [turningAll]="child.type !== 'unknown' && (anyUnknownChildSelected() || turningAll())"
+      />
+    }
+    @for (component of group().components ?? []; track component.name) {
+      <app-cloud-component
+        [component]="component"
+        [group]="group()"
+        [externallyTurned]="turningAll()"
+      />
+    }
+  </div>
+}

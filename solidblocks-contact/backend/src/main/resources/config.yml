@@ -1,0 +1,268 @@
+---
+sliders:
+  - name: sovereignty
+    ticks:
+      - name: managed
+        text: managed
+      - name: something_in_between
+        text: something in between
+      - name: foo-bar
+        text: foo bar
+      - name: self_hosted
+        text: self hosted
+
+groups:
+  - name: root
+    direction: horizontal
+    groups:
+      - name: Operations, Deployment & Lifecycle
+        direction: vertical
+        components:
+          - name: Playbooks
+            logo: logos/list-ol.svg
+            info: |
+              Playbooks are a crucial part of every solution and provide detailed procedures for
+              scenarios like disaster recovery or secret rotation during emergencies. They also
+              provide information for general operation and maintenance.
+            selected: How I can prepare my on-call team with appropriate playbooks for operational challenges
+          - name: Fire Drills
+            logo: logos/fire-extinguisher.svg
+            info: |
+              Regular exercises ensure that crucial steps that are seldom used still work as
+              intended, and that developers are comfortable with executing them.
+            selected: |
+              How to use simulated outages and service degradations to train my on-call team and spread operational confidence
+          - name: Support
+            logo: logos/phone.svg
+            info: |
+              In the event of critical errors, such as system crashes or data loss, German and
+              English emergency support is available via email, phone, or chat.
+            selected: |
+              How to get live-assistance when problems appear or services are interrupted.
+          - name: Environments
+            logo: logos/layer-group.svg
+            info: |
+              Multi-environment support is a first-class citizen. It can be used to support
+              your application lifecycle and to provide different test environments.
+            selected: |
+              How to implement multiple environments to support different development stages.
+          - name: Bootstrapping
+            logo: logos/terminal.svg
+            info: |
+              Deletion and bootstrapping of environments is systematically tested to ensure
+              there are no hidden cyclic dependencies in the infrastructure setup. This method
+              also confirms that the code which is only executed during the initial setup
+              continues to function correctly.
+            selected: |
+              How to ensure the my infrastructure is always black-start ready so I can deal with provider outages.
+          - name: OS Updates
+            logo: logos/arrows-rotate.svg
+            info: |
+              Regular OS and software updates are automated via Renovate integration,
+              ensuring all dependencies stay current and vulnerabilities are patched promptly.
+            selected: |
+              How to keep my infrastructure and software stack always up-to-date.
+
+          - name: Disaster Recovery
+            logo: logos/fire.svg
+            info: |
+              Restoring environments from backups is tested regularly and is included in both
+              the playbooks and developer briefings. All components are designed in a way, that
+              the entire environment can be destroyed at any time, and then fully rebuilt from
+              the backups.
+            selected: |
+              How to build and test environments that survive outages and attacks and can be restored from external backups.
+
+      - direction: vertical
+        groups:
+          - name: Logging & Monitoring
+            direction: vertical
+            components:
+              - name: Grafana
+                logo: logos/grafana.svg
+                info: |
+                  Grafana dashboards provide real-time visibility into application and
+                  infrastructure metrics, with pre-built panels for common Solidblocks
+                  components and support for custom datasources.
+              - name: Elastic.co
+                logo: logos/elastic.svg
+                info: |
+                  Elastic.co also serves as a metrics backend, unifying logs and
+                  metrics in a single platform for correlated observability across
+                  the entire stack.
+              - name: Datadog
+                logo: logos/elastic.svg
+          - name: Security & Data Safety
+            direction: vertical
+            components:
+              - name: Encryption
+                logo: logos/lock.svg
+                info: |
+                  All off-cloud backups are encrypted by default. Data at rest and in transit
+                  is protected using industry-standard encryption practices.
+              - name: Secret Rotation
+                logo: logos/key.svg
+                info: |
+                  Credentials and secrets are auto-generated with strong entropy and stored in
+                  dedicated secret providers. Rotation procedures are documented in playbooks
+                  and regularly exercised in fire drills.
+              - name: CVE Scanning
+                logo: logos/shield-halved.svg
+                info: |
+                  Automated CVE scanning is performed using Software Bill of Materials (SBOM)
+                  analysis, providing continuous visibility into known vulnerabilities across
+                  all components in the stack.
+              - name: IAM / IDP
+                logo: logos/user-shield.svg
+                info: |
+                  Identity and access management is provided via Keycloak and HashiCorp Vault
+                  integration, enabling fine-grained access control and centralised
+                  authentication across all services.
+
+      - direction: vertical
+        groups:
+
+          - name: Hosting
+            direction: horizontal
+            components:
+              - name: Keycloak
+                logo: logos/keycloak.svg
+                info: |
+                  Keycloak is available as a fully managed hosted service, providing
+                  single sign-on, identity brokering, and user federation out of the box.
+              - name: HashiCorp Vault
+                logo: logos/vault.svg
+                info: |
+                  HashiCorp Vault is available as a self-hosted secret management service,
+                  providing dynamic secrets, PKI, and encryption-as-a-service for
+                  applications running in the environment.
+              - name: PostgreSQL
+                logo: logos/postgresql.svg
+                selected: Nam libero tempore cum soluta nobis eligendi optio cumque.
+
+
+          - name: Hosting
+            direction: horizontal
+            groups:
+              - name: Hyperscaler
+                direction: horizontal
+                info: |
+                  The big three Hyperscaler offer an unmatched range of services and scalability, which can come with a higher price and higher complexity.
+                selected: |
+                  How to cost-effective use
+                components:
+                  - name: AWS
+                    logo: logos/aws.svg
+                  - name: Azure
+                    logo: logos/azure.svg
+                  - name: GCP
+                    logo: logos/gcp.svg
+              - name: EU Clouds
+                direction: horizontal
+                info: |
+                  For smaller environments, one of the European alternatives can be a cost-effective solution with giving
+                  up too much operational comfort when compared to the hyoerscalers.
+                selected: |
+                  How to deploy applications to
+                components:
+                  - name: Hetzner
+                    logo: logos/hetzner.svg
+                    selected: Neque porro quisquam est qui dolorem ipsum quia dolor sit.
+                  - name: Scaleway
+                    logo: logos/scaleway.svg
+                    selected: Quis autem vel eum iure reprehenderit qui in ea voluptate.
+              - name: Bare-metal
+                direction: horizontal
+                info: |
+                  Bare-Metal solutions need more attention and management, but can be super cost-effective especially
+                  for I/O intensive database workloads, or when raw compute and storage is needed.
+                selected: |
+                  How to implement bare-metal hosting solutions on
+                components:
+                  - name: OVH
+                    logo: logos/ovh.svg
+                    selected: Neque porro quisquam est qui dolorem ipsum quia dolor sit.
+                  - name: Contabo
+                    logo: logos/contabo.svg
+                    selected: Quis autem vel eum iure reprehenderit qui in ea voluptate.
+              - name: unknown_hosting
+                type: unknown
+                selected: |
+                  How to choose the right hosting solution for my needs
+
+          - name: Infrastructure as Code
+            direction: horizontal
+            info: |
+              Having built infrastructures in a broad selection of different IaC tools, I can guide you through the
+              jungle and select the best solution for your environment.
+            selected: |
+              How to implement robust and reproducible infrastructures using
+            components:
+              - name: Terraform
+                logo: logos/terraform.svg
+              - name: OpenTofu
+                logo: logos/opentofu.svg
+              - name: Ansible
+                logo: logos/ansible.svg
+              - name: AWS CDK
+                logo: logos/aws-cdk.png
+              - name: Pulumi
+                logo: logos/pulumi.svg
+              - name: unknown_iac
+                type: unknown
+                logo: logos/person-circle-question.svg
+                selected: |
+                  How to figure out which IaC tools is right for me
+
+          - name: CI/CD
+            direction: horizontal
+            info: |
+              I have worked with all major CI/CD Platforms and helped to implement robust build, test and deployment
+              pipelines, enabling end-to-end visibility for deployed artifacts and infrastructure
+            selected: |
+              How to implement robust CI/CD pipelines with
+            components:
+              - name: GitHub
+                logo: logos/github.svg
+              - name: GitLab
+                logo: logos/gitlab.svg
+              - name: Jenkins
+                logo: logos/jenkins.svg
+              - name: ArgoCD
+                logo: logos/argo.svg
+              - name: CircleCI
+                logo: logos/circleci.svg
+              - name: TeamCity
+                logo: logos/teamcity.svg
+              - name: Forgejo
+                logo: logos/forgejo.svg
+              - name: unknown1
+                type: unknown
+                logo: logos/person-circle-question.svg
+                selected: |
+                  How to choose the right tool for my needs
+                info: |
+                  If you are unsure which solution is the right one for you I can guide you through the selection process based on your requirements
+
+          - name: Networking
+            direction: horizontal
+            selected: |
+              How to secure cross service and/or cross cloud communication with
+            components:
+              - name: WireGuard
+                logo: logos/wireguard.svg
+                info: |
+                  WireGuard provides fast, modern VPN connectivity between environments
+                  and for developer access, with automatic key management and peer
+                  configuration integrated into the bootstrapping process.
+
+              - name: OpenVPN
+                logo: logos/openvpn.svg
+                info: |
+                  Lorem Ipsum
+
+              - name: mTLS
+                logo: logos/certificate.svg
+                info: |
+                  Lorem Ipsum
+

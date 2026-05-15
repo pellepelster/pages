@@ -2,6 +2,7 @@
 hugo = "0.123.8"
 github-cli = "2.89.0"
 go="1.26.0"
+node = "22"
 
 [env]
 SITES="pelle.io solidblocks.de"
@@ -81,3 +82,36 @@ for cast in ${HOME}/git/solidblocks/doc/content/cloud/casts/*.cast; do
 done
 
 """
+
+[tasks."contact:frontend:run"]
+description = "Start Angular dev server"
+run = "cd solidlocks-contact/frontend && npx ng serve"
+
+[tasks."contact:backend:run"]
+description = "Start Ktor backend"
+run = "cd solidlocks-contact/backend && ./gradlew run"
+
+[tasks."contact:docker:build"]
+description = "Build Docker image with frontend and backend"
+run = "cd solidlocks-contact && docker build -t solidlocks-contact ."
+
+[tasks."contact:docker:run"]
+description = "Run the Docker image locally on port 8080"
+run = "cd solidlocks-contact && docker run --rm -p 8080:8080 contact"
+
+[tasks."contact:format"]
+description = "Format and lint-fix all contact frontend and backend code"
+depends = ["contact:frontend:format", "contact:backend:format"]
+
+[tasks."contact:frontend:format"]
+description = "Format frontend TypeScript, HTML and SCSS with Prettier; fix ESLint and Stylelint issues"
+run = """
+cd solidlocks-contact/frontend
+npx prettier --write "src/**/*.{ts,html,scss}"
+npx eslint src --fix
+npx stylelint "src/**/*.scss" --fix
+"""
+
+[tasks."contact:backend:format"]
+description = "Format Kotlin sources with Spotless (ktfmt)"
+run = "cd solidlocks-contact/backend && ./gradlew spotlessApply"
