@@ -42,6 +42,15 @@
 
   &.vertical {
     flex-direction: column;
+
+    > app-group + app-group {
+      display: block;
+      border-top: none;
+    }
+  }
+
+  &:not(.vertical) > app-group + app-group {
+    border-left: none;
   }
 
   &:has(> app-cloud-component) {

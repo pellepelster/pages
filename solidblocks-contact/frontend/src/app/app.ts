@@ -1,7 +1,8 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, Input, OnInit, signal } from '@angular/core';
 import { ConfigService } from './services/config.service';
 import { ContactService } from './services/contact.service';
 import { SelectionService } from './services/selection.service';
+import { StaticBaseService } from './services/static-base.service';
 import { Config, Group } from './models/config.model';
 import { GroupComponent } from './components/group/group';
 
@@ -10,11 +11,16 @@ import { GroupComponent } from './components/group/group';
   imports: [GroupComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  providers: [StaticBaseService],
 })
-export class App {
+export class App implements OnInit {
+  @Input() baseUrl = '';
+  @Input() configUrl = '/api/home/config.yml';
+
   private configService = inject(ConfigService);
   private contactService = inject(ContactService);
   protected selectionService = inject(SelectionService);
+  private staticBase = inject(StaticBaseService);
 
   config = signal<Config | null>(null);
   error = signal<string | null>(null);
@@ -63,8 +69,9 @@ export class App {
     return result;
   });
 
-  constructor() {
-    this.configService.getConfig().subscribe({
+  ngOnInit(): void {
+    this.staticBase.url.set(this.baseUrl ? `${this.baseUrl}/static` : '');
+    this.configService.getConfig(`${this.baseUrl}${this.configUrl}`).subscribe({
       next: (cfg) => this.config.set(cfg),
       error: (err) => this.error.set(String(err)),
     });
@@ -75,7 +82,7 @@ export class App {
     const selected = this.selectionService.selected();
     const components = selected.length > 0 ? selected.map((e) => e.component.name) : ['anything'];
     this.submitStatus.set('sending');
-    this.contactService.submit(email, components).subscribe({
+    this.contactService.submit(this.baseUrl, email, components).subscribe({
       next: () => this.submitStatus.set('sent'),
       error: () => this.submitStatus.set('error'),
     });

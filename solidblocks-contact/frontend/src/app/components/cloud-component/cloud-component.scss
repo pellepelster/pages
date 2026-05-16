@@ -159,12 +159,8 @@
 }
 
 .tooltip {
-  display: none;
-  position: absolute;
-  left: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
+  position: fixed;
+  z-index: 1000;
   background: #fff;
   border: 2px solid #444;
   padding: 10px 14px;
@@ -175,10 +171,6 @@
   min-width: 220px;
   max-width: 320px;
   pointer-events: none;
-
-  :host:hover & {
-    display: block;
-  }
 }
 
 .component-logo {

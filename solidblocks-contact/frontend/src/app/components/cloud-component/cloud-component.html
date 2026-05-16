@@ -2,9 +2,9 @@
   <span class="component-title">{{ component().name }}</span>
 }
 @if (component().logo) {
-  <img class="component-logo" [src]="component().logo" [alt]="component().name" />
+  <img class="component-logo" [src]="logoUrl()" [alt]="component().name" />
 }
-@if (effectiveInfo()) {
-  <div class="tooltip">{{ effectiveInfo() }}</div>
+@if (effectiveInfo() && tooltipVisible()) {
+  <div class="tooltip" [style]="tooltipStyle()">{{ effectiveInfo() }}</div>
 }
 <span class="turned-indicator">?</span>

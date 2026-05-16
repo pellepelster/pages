@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class ContactService {
   private http = inject(HttpClient);
 
-  submit(email: string, components: string[]): Observable<unknown> {
-    return this.http.post('/api/home/contact', { email, components });
+  submit(baseUrl: string, email: string, components: string[]): Observable<unknown> {
+    return this.http.post(`${baseUrl}/api/home/contact`, { email, components });
   }
 }

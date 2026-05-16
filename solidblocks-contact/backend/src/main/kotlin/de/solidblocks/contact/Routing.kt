@@ -13,6 +13,7 @@ import kotlinx.serialization.Serializable
 
 fun Application.configureRouting() {
   val validComponentNames = loadValidComponentNames()
+  val smtpConfig = smtpConfigFromEnv()
 
   routing {
     val staticDir = System.getenv("STATIC_DIR") ?: "static"
@@ -44,6 +45,7 @@ fun Application.configureRouting() {
         call.application.log.info(
           "Contact: email=${request.email}, components=${request.components}"
         )
+        smtpConfig.sendContactEmail(request.email, request.components)
         call.respond(HttpStatusCode.OK, mapOf("status" to "ok"))
       }
     }

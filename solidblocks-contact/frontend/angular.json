@@ -35,6 +35,15 @@
             ]
           },
           "configurations": {
+            "element": {
+              "browser": "src/main.element.ts",
+              "index": false,
+              "outputPath": "dist/contact-element",
+              "outputHashing": "none",
+              "optimization": true,
+              "extractLicenses": true,
+              "styles": []
+            },
             "production": {
               "budgets": [
                 {
@@ -53,7 +62,18 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public"
+                },
+                {
+                  "glob": "config.yml",
+                  "input": "../backend/src/main/resources",
+                  "output": "api/home"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

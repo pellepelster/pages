@@ -85,19 +85,38 @@ done
 
 [tasks."contact:frontend:run"]
 description = "Start Angular dev server"
-run = "cd solidlocks-contact/frontend && npx ng serve"
+run = "cd solidblocks-contact/frontend && npx ng serve"
+
+[tasks."contact:frontend:build"]
+description = "Build frontend (production) and web component element"
+run = """
+#!/bin/env bash
+set -e
+cd solidblocks-contact/frontend
+npx ng build --configuration production
+npx ng build --configuration element
+printf '(function(){' | cat - dist/contact-element/browser/main.js > dist/contact/browser/solidblocks-contact.js
+echo '})();' >> dist/contact/browser/solidblocks-contact.js
+"""
 
 [tasks."contact:backend:run"]
-description = "Start Ktor backend"
-run = "cd solidlocks-contact/backend && ./gradlew run"
+description = "Start Ktor backend serving built frontend static files"
+run = "cd solidblocks-contact/backend && STATIC_DIR={{config_root}}/solidblocks-contact/frontend/dist/contact/browser ./gradlew run"
+
+[tasks."contact:backend:build"]
+run = "cd solidblocks-contact/backend && ./gradlew assemble installDist"
 
 [tasks."contact:docker:build"]
 description = "Build Docker image with frontend and backend"
-run = "cd solidlocks-contact && docker build -t solidlocks-contact ."
+run = "cd solidblocks-contact && docker build -t solidblocks-contact -t ghcr.io/pellepelster/solidblocks-contact:latest ."
+depends = ["contact:frontend:build", "contact:backend:build"]
+
+[tasks."contact:docker:push"]
+run = "docker push ghcr.io/pellepelster/solidblocks-contact:latest"
 
 [tasks."contact:docker:run"]
 description = "Run the Docker image locally on port 8080"
-run = "cd solidlocks-contact && docker run --rm -p 8080:8080 contact"
+run = "cd solidblocks-contact && docker run --rm -p 8080:8080 solidblocks-contact"
 
 [tasks."contact:format"]
 description = "Format and lint-fix all contact frontend and backend code"
@@ -106,7 +125,7 @@ depends = ["contact:frontend:format", "contact:backend:format"]
 [tasks."contact:frontend:format"]
 description = "Format frontend TypeScript, HTML and SCSS with Prettier; fix ESLint and Stylelint issues"
 run = """
-cd solidlocks-contact/frontend
+cd solidblocks-contact/frontend
 npx prettier --write "src/**/*.{ts,html,scss}"
 npx eslint src --fix
 npx stylelint "src/**/*.scss" --fix
@@ -114,4 +133,4 @@ npx stylelint "src/**/*.scss" --fix
 
 [tasks."contact:backend:format"]
 description = "Format Kotlin sources with Spotless (ktfmt)"
-run = "cd solidlocks-contact/backend && ./gradlew spotlessApply"
+run = "cd solidblocks-contact/backend && ./gradlew spotlessApply"

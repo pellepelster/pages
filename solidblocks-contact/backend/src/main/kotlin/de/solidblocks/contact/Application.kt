@@ -17,6 +17,9 @@ fun main() {
 
 fun Application.module() {
   install(CORS) {
+    allowHost("solidblocks.de", schemes = listOf("https"))
+    allowHost("pelle.io", schemes = listOf("https"))
+    allowHost("localhost:1313")
     allowHost("localhost:4200")
     allowHeader(HttpHeaders.ContentType)
     allowMethod(HttpMethod.Options)

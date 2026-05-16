@@ -1,6 +1,16 @@
-import { Component, computed, effect, ElementRef, inject, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  HostListener,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { CloudComponent as CloudComponentModel, Group } from '../../models/config.model';
 import { SelectionService } from '../../services/selection.service';
+import { StaticBaseService } from '../../services/static-base.service';
 
 function collectComponentNames(group: Group, names: Set<string>): void {
   for (const c of group.components ?? []) names.add(c.name);
@@ -30,8 +40,19 @@ export class CloudComponentComponent {
   parentGroup = input<Group | null>(null);
 
   private selectionService = inject(SelectionService);
+  private staticBase = inject(StaticBaseService);
   private el = inject(ElementRef<HTMLElement>);
   private wasTurned = false;
+
+  tooltipVisible = signal(false);
+  tooltipStyle = signal<Record<string, string>>({});
+
+  logoUrl = computed(() => {
+    const logo = this.component().logo;
+    if (!logo) return '';
+    const base = this.staticBase.url();
+    return base ? `${base}/${logo}` : logo;
+  });
 
   isSelected = computed(() =>
     this.group().type === 'unknown'
@@ -45,7 +66,14 @@ export class CloudComponentComponent {
       : this.selectionService.getColorIndex(this.component().name)(),
   );
 
-  effectiveInfo = computed(() => this.component().info ?? this.group().info ?? null);
+  effectiveInfo = computed(() => {
+    const raw = this.component().info ?? this.group().info ?? null;
+    if (!raw) return null;
+    return raw
+      .split(/\n{2,}/)
+      .map((para) => para.replace(/\n/g, ' ').trim())
+      .join('\n');
+  });
 
   isTurned = computed(() => {
     if (this.component().type === 'unknown') return false;
@@ -70,6 +98,43 @@ export class CloudComponentComponent {
       }
       this.wasTurned = turned;
     });
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    if (!this.effectiveInfo()) return;
+    this.tooltipStyle.set({ left: '-9999px', top: '-9999px' });
+    this.tooltipVisible.set(true);
+    setTimeout(() => this.repositionTooltip(), 0);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.tooltipVisible.set(false);
+  }
+
+  private repositionTooltip(): void {
+    if (!this.tooltipVisible()) return;
+    const host = this.el.nativeElement as HTMLElement;
+    const tooltip = host.querySelector<HTMLElement>('.tooltip');
+    if (!tooltip) return;
+
+    const hostRect = host.getBoundingClientRect();
+    const tw = tooltip.offsetWidth;
+    const th = tooltip.offsetHeight;
+    const gap = 10;
+    const margin = 8;
+
+    let left = hostRect.right + gap;
+    if (left + tw > window.innerWidth - margin) {
+      left = hostRect.left - tw - gap;
+    }
+    left = Math.max(margin, left);
+
+    let top = hostRect.top + hostRect.height / 2 - th / 2;
+    top = Math.max(margin, Math.min(top, window.innerHeight - th - margin));
+
+    this.tooltipStyle.set({ left: `${left}px`, top: `${top}px` });
   }
 
   toggle(): void {

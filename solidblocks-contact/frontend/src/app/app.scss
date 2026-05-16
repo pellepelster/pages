@@ -2,6 +2,18 @@
   display: block;
   width: fit-content;
   padding: 32px;
+
+  --blcks-green: #2ebc6f;
+  --blcks-green-light: #d5f2e2;
+  --blcks-orange: #df964f;
+  --blcks-orange-light: #f9eadc;
+  --blcks-yellow: #ebd129;
+  --blcks-yellow-light: #fbf6d4;
+}
+
+.groups-stack > app-group + app-group {
+  display: block;
+  border-top: none;
 }
 
 .status {
@@ -10,8 +22,6 @@
 }
 
 .selection-list {
-  border: 2px solid #2a9d2a;
-  border-top: none;
   padding: 16px;
   display: flex;
   flex-direction: column;

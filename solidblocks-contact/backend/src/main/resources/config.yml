@@ -1,19 +1,6 @@
 ---
-sliders:
-  - name: sovereignty
-    ticks:
-      - name: managed
-        text: managed
-      - name: something_in_between
-        text: something in between
-      - name: foo-bar
-        text: foo bar
-      - name: self_hosted
-        text: self hosted
-
 groups:
-  - name: root
-    direction: horizontal
+  - direction: horizontal
     groups:
       - name: Operations, Deployment & Lifecycle
         direction: vertical
@@ -21,9 +8,9 @@ groups:
           - name: Playbooks
             logo: logos/list-ol.svg
             info: |
-              Playbooks are a crucial part of every solution and provide detailed procedures for
+              Playbooks are a crucial part of every deployment and provide detailed procedures for
               scenarios like disaster recovery or secret rotation during emergencies. They also
-              provide information for general operation and maintenance.
+              provide information for general operation and maintenance to the operations team.
             selected: How I can prepare my on-call team with appropriate playbooks for operational challenges
           - name: Fire Drills
             logo: logos/fire-extinguisher.svg
@@ -47,7 +34,7 @@ groups:
             selected: |
               How to implement multiple environments to support different development stages.
           - name: Bootstrapping
-            logo: logos/terminal.svg
+            logo: logos/rocket.svg
             info: |
               Deletion and bootstrapping of environments is systematically tested to ensure
               there are no hidden cyclic dependencies in the infrastructure setup. This method
@@ -55,10 +42,18 @@ groups:
               continues to function correctly.
             selected: |
               How to ensure the my infrastructure is always black-start ready so I can deal with provider outages.
-          - name: OS Updates
+          - name: DX
+            logo: logos/terminal.svg
+            info: |
+              A strong focus on the Developer Experience helps to tame amount and diversity and tooling needed
+              to deploy applications and infrastructure. A good consistent CLI can make crucial tasks safer to
+              execute and helps to ease day-to-day platform operations.
+            selected: |
+              How to ensure the my infrastructure is always black-start ready so I can deal with provider outages.
+          - name: Updates
             logo: logos/arrows-rotate.svg
             info: |
-              Regular OS and software updates are automated via Renovate integration,
+              Regular operating system and software updates are essential to ensure the latest security fixes automated via Renovate integration,
               ensuring all dependencies stay current and vulnerabilities are patched promptly.
             selected: |
               How to keep my infrastructure and software stack always up-to-date.

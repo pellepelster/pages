@@ -9,9 +9,9 @@ import { Config } from '../models/config.model';
 export class ConfigService {
   private http = inject(HttpClient);
 
-  getConfig(): Observable<Config> {
+  getConfig(url: string): Observable<Config> {
     return this.http
-      .get('/api/home/config.yml', { responseType: 'text' })
+      .get(url, { responseType: 'text' })
       .pipe(map((text) => jsyaml.load(text) as Config));
   }
 }
