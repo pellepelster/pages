@@ -134,3 +134,9 @@ npx stylelint "src/**/*.scss" --fix
 [tasks."contact:backend:format"]
 description = "Format Kotlin sources with Spotless (ktfmt)"
 run = "cd solidblocks-contact/backend && ./gradlew spotlessApply"
+
+[tasks."test:canary"]
+run = "cd solidblocks-contact/backend && ./gradlew clean canaryTest"
+
+[tasks."test"]
+run = "cd solidblocks-contact/backend && ./gradlew clean test"

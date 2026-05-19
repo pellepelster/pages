@@ -21,6 +21,7 @@ data class SmtpConfig(
   val password: String,
   val contactRecipient: String,
   val contactFrom: String,
+  val ssl: Boolean = true,
 )
 
 fun smtpConfigFromEnv(): SmtpConfig {
@@ -40,10 +41,12 @@ suspend fun SmtpConfig.sendContactEmail(email: String, components: List<String>)
     val props =
       Properties().apply {
         put("mail.smtp.auth", "true")
-        put("mail.smtp.ssl.enable", "true")
-        put("mail.smtp.ssl.protocols", "TLSv1.2 TLSv1.3")
         put("mail.smtp.host", host)
         put("mail.smtp.port", port.toString())
+        if (ssl) {
+          put("mail.smtp.ssl.enable", "true")
+          put("mail.smtp.ssl.protocols", "TLSv1.2 TLSv1.3")
+        }
       }
     val session =
       Session.getInstance(

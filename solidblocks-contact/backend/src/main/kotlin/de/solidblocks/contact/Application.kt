@@ -18,7 +18,7 @@ fun main() {
     .start(wait = true)
 }
 
-fun Application.module() {
+fun Application.module(smtpConfig: SmtpConfig = smtpConfigFromEnv()) {
   install(CORS) {
     allowHost("solidblocks.de", schemes = listOf("https"))
     allowHost("pelle.io", schemes = listOf("https"))
@@ -40,5 +40,5 @@ fun Application.module() {
       }
     }
   }
-  configureRouting()
+  configureRouting(smtpConfig)
 }
