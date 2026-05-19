@@ -34,6 +34,8 @@ dependencies {
   implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
   implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
   implementation("io.ktor:ktor-server-cors:$ktorVersion")
+  implementation("io.ktor:ktor-server-rate-limit:$ktorVersion")
+  implementation("io.ktor:ktor-server-forwarded-header:$ktorVersion")
   implementation("org.eclipse.angus:angus-mail:2.0.3")
   implementation("org.yaml:snakeyaml:2.2")
   implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")

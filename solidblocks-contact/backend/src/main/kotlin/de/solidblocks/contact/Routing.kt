@@ -3,6 +3,7 @@ package de.solidblocks.contact
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
+import io.ktor.server.plugins.ratelimit.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -30,23 +31,25 @@ fun Application.configureRouting() {
             ?.readText() ?: return@get call.respond(HttpStatusCode.NotFound)
         call.respondText(yaml, ContentType.parse("text/yaml"))
       }
-      post("/home/contact") {
-        val request = call.receive<ContactRequest>()
-        if (request.components != listOf("anything")) {
-          val invalid = request.components.filter { it !in validComponentNames }
-          if (invalid.isNotEmpty()) {
-            call.respond(
-              HttpStatusCode.BadRequest,
-              mapOf("error" to "Invalid components: $invalid"),
-            )
-            return@post
+      rateLimit(RateLimitName("contact")) {
+        post("/home/contact") {
+          val request = call.receive<ContactRequest>()
+          if (request.components != listOf("anything")) {
+            val invalid = request.components.filter { it !in validComponentNames }
+            if (invalid.isNotEmpty()) {
+              call.respond(
+                HttpStatusCode.BadRequest,
+                mapOf("error" to "Invalid components: $invalid"),
+              )
+              return@post
+            }
           }
+          call.application.log.info(
+            "Contact: email=${request.email}, components=${request.components}"
+          )
+          smtpConfig.sendContactEmail(request.email, request.components)
+          call.respond(HttpStatusCode.OK, mapOf("status" to "ok"))
         }
-        call.application.log.info(
-          "Contact: email=${request.email}, components=${request.components}"
-        )
-        smtpConfig.sendContactEmail(request.email, request.components)
-        call.respond(HttpStatusCode.OK, mapOf("status" to "ok"))
       }
     }
   }
