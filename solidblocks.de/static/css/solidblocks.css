@@ -1,3 +1,26 @@
+.index-welcome {
+    overflow: hidden;
+}
+
+.index-welcome-img-border {
+    float: left;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 1.5rem 1rem 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.index-welcome-img {
+    width: 150px !important;
+    height: 150px !important;
+    max-width: none !important;
+    margin: 0 !important;
+    object-fit: cover;
+    display: block;
+}
+
 .navbar-custom .avatar-container .avatar-img-border {
     border-radius: 0%;
     box-shadow: none;

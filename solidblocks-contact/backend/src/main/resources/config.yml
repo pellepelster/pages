@@ -10,53 +10,54 @@ groups:
             info: |
               Playbooks are a crucial part of every deployment and provide detailed procedures for
               scenarios like disaster recovery or secret rotation during emergencies. They also
-              provide information for general operation and maintenance to the operations team.
+              provide information for general operations and maintenance tasks to the operations team
             selected: How I can prepare my on-call team with appropriate playbooks for operational challenges
           - name: Fire Drills
             logo: logos/fire-extinguisher.svg
             info: |
               Regular exercises ensure that crucial steps that are seldom used still work as
-              intended, and that developers are comfortable with executing them.
+              intended, and that developers are comfortable with executing them
             selected: |
-              How to use simulated outages and service degradations to train my on-call team and spread operational confidence
+              How to use simulated outages and service degradations to train my on-call team and spread
+              operational confidence
           - name: Support
             logo: logos/phone.svg
             info: |
-              In the event of critical errors, such as system crashes or data loss, German and
-              English emergency support is available via email, phone, or chat.
+              In the event of critical errors, such as larger outages, crashing services or data loss,
+              German and English emergency support is available via email, phone, or chat
             selected: |
-              How to get live-assistance when problems appear or services are interrupted.
+              How to get live-assistance when services are interrupted.
           - name: Environments
             logo: logos/layer-group.svg
             info: |
               Multi-environment support is a first-class citizen. It can be used to support
-              your application lifecycle and to provide different test environments.
+              your application lifecycle and to provide different test environments
             selected: |
-              How to implement multiple environments to support different development stages.
+              How to implement multiple environments to support different development stages
           - name: Bootstrapping
             logo: logos/rocket.svg
             info: |
               Deletion and bootstrapping of environments is systematically tested to ensure
               there are no hidden cyclic dependencies in the infrastructure setup. This method
               also confirms that the code which is only executed during the initial setup
-              continues to function correctly.
+              continues to function correctly
             selected: |
-              How to ensure the my infrastructure is always black-start ready so I can deal with provider outages.
+              How to ensure the my infrastructure is always black-start ready so I can deal with provider outages
           - name: DX
             logo: logos/terminal.svg
             info: |
-              A strong focus on the Developer Experience helps to tame amount and diversity and tooling needed
+              A strong focus on the developer experience helps to tame the amount and diversity and tooling needed
               to deploy applications and infrastructure. A good consistent CLI can make crucial tasks safer to
-              execute and helps to ease day-to-day platform operations.
+              execute and helps to ease day-to-day platform operations
             selected: |
-              How to ensure the my infrastructure is always black-start ready so I can deal with provider outages.
+              How to improve day-to-day operations and make critical tasks safe to execute
           - name: Updates
             logo: logos/arrows-rotate.svg
             info: |
-              Regular operating system and software updates are essential to ensure the latest security fixes automated via Renovate integration,
-              ensuring all dependencies stay current and vulnerabilities are patched promptly.
+              Regular operating system and software updates are essential to ensure the latest security fixes
+              are always applied, and current vulnerabilities are patched promptly
             selected: |
-              How to keep my infrastructure and software stack always up-to-date.
+              How to keep my infrastructure and software stack always up-to-date
 
           - name: Disaster Recovery
             logo: logos/fire.svg
@@ -66,27 +67,31 @@ groups:
               the entire environment can be destroyed at any time, and then fully rebuilt from
               the backups.
             selected: |
-              How to build and test environments that survive outages and attacks and can be restored from external backups.
+              How to build and test environments that survive outages or attacks and can be
+              restored from external backups
 
       - direction: vertical
         groups:
           - name: Logging & Monitoring
             direction: vertical
+            info: |
+              A solid log and metrics collection and visualization strategy is irreplaceable to
+              ensure safe and efficient operations and enable efficient debugging of problems
+            selected: |
+              How to implement solid monitoring with
             components:
               - name: Grafana
                 logo: logos/grafana.svg
-                info: |
-                  Grafana dashboards provide real-time visibility into application and
-                  infrastructure metrics, with pre-built panels for common Solidblocks
-                  components and support for custom datasources.
               - name: Elastic.co
                 logo: logos/elastic.svg
-                info: |
-                  Elastic.co also serves as a metrics backend, unifying logs and
-                  metrics in a single platform for correlated observability across
-                  the entire stack.
               - name: Datadog
                 logo: logos/elastic.svg
+              - name: unknown_logging
+                type: unknown
+                logo: logos/person-circle-question.svg
+                selected: |
+                  How to choose the right monitoring solution for my system landscape
+
           - name: Security & Data Safety
             direction: vertical
             components:
@@ -94,46 +99,53 @@ groups:
                 logo: logos/lock.svg
                 info: |
                   All off-cloud backups are encrypted by default. Data at rest and in transit
-                  is protected using industry-standard encryption practices.
+                  is protected using industry-standard encryption practices
+                selected: |
+                  How to protect your data using industry-standard encryption practices
               - name: Secret Rotation
                 logo: logos/key.svg
                 info: |
                   Credentials and secrets are auto-generated with strong entropy and stored in
                   dedicated secret providers. Rotation procedures are documented in playbooks
-                  and regularly exercised in fire drills.
+                  and regularly exercised in fire drills
+                selected: |
+                  How to implement safe and regular secret rotation
               - name: CVE Scanning
                 logo: logos/shield-halved.svg
                 info: |
                   Automated CVE scanning is performed using Software Bill of Materials (SBOM)
                   analysis, providing continuous visibility into known vulnerabilities across
-                  all components in the stack.
+                  all components in the stack
+                selected: |
+                  How to safeguard my environments against supply chain attacks
               - name: IAM / IDP
                 logo: logos/user-shield.svg
                 info: |
-                  Identity and access management is provided via Keycloak and HashiCorp Vault
-                  integration, enabling fine-grained access control and centralised
-                  authentication across all services.
+                  A central identity and access management solution enables enabling fine-grained
+                  access control and centralised authentication across all services
+                selected: |
+                  How to implement centralized identity and access management to protect my services
 
       - direction: vertical
         groups:
-
           - name: Hosting
             direction: horizontal
+            info: |
+              I have a experience of hosting a wide range of standard open and non-open source software
+            selected: |
+              I need help to host
             components:
               - name: Keycloak
                 logo: logos/keycloak.svg
-                info: |
-                  Keycloak is available as a fully managed hosted service, providing
-                  single sign-on, identity brokering, and user federation out of the box.
               - name: HashiCorp Vault
                 logo: logos/vault.svg
-                info: |
-                  HashiCorp Vault is available as a self-hosted secret management service,
-                  providing dynamic secrets, PKI, and encryption-as-a-service for
-                  applications running in the environment.
               - name: PostgreSQL
                 logo: logos/postgresql.svg
-                selected: Nam libero tempore cum soluta nobis eligendi optio cumque.
+              - name: unknown_hosting
+                type: unknown
+                logo: logos/person-circle-question.svg
+                selected: |
+                  I need support hosting applications
 
 
           - name: Hosting
@@ -142,7 +154,8 @@ groups:
               - name: Hyperscaler
                 direction: horizontal
                 info: |
-                  The big three Hyperscaler offer an unmatched range of services and scalability, which can come with a higher price and higher complexity.
+                  The big three Hyperscaler offer an unmatched range of services and scalability, which
+                  can come with a higher price and higher complexity.
                 selected: |
                   How to cost-effective use
                 components:
@@ -207,7 +220,7 @@ groups:
                 type: unknown
                 logo: logos/person-circle-question.svg
                 selected: |
-                  How to figure out which IaC tools is right for me
+                  How to figure out which IaC tools are right for me
 
           - name: CI/CD
             direction: horizontal
@@ -231,11 +244,11 @@ groups:
                 logo: logos/teamcity.svg
               - name: Forgejo
                 logo: logos/forgejo.svg
-              - name: unknown1
+              - name: unknown_cicd
                 type: unknown
                 logo: logos/person-circle-question.svg
                 selected: |
-                  How to choose the right tool for my needs
+                  How to choose the right CI/CD solution for my needs
                 info: |
                   If you are unsure which solution is the right one for you I can guide you through the selection process based on your requirements
 
@@ -246,18 +259,14 @@ groups:
             components:
               - name: WireGuard
                 logo: logos/wireguard.svg
-                info: |
-                  WireGuard provides fast, modern VPN connectivity between environments
-                  and for developer access, with automatic key management and peer
-                  configuration integrated into the bootstrapping process.
-
               - name: OpenVPN
                 logo: logos/openvpn.svg
-                info: |
-                  Lorem Ipsum
-
               - name: mTLS
                 logo: logos/certificate.svg
+              - name: unknown_networking
+                type: unknown
+                logo: logos/person-circle-question.svg
+                selected: |
+                  How to choose the right networking for my multi-cloud deployment
                 info: |
-                  Lorem Ipsum
-
+                  If you are unsure which solution is the right one for you I can guide you through the selection process based on your requirements

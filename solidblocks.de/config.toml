@@ -7,7 +7,6 @@ defaultContentLanguageInSubdir = true
 [Params]
 selfHosted = true
 logo = "img/logo.png"
-homeTitle = "solidblocks"
 customCss = "solidblocks.css"
 
 [Params.author]
@@ -26,6 +25,12 @@ unsafe = true
 languageName = "English"
 weight = 1
 
+[languages.en.params]
+homeTitle = "Hello, I am Pelle"
+
 [languages.de]
 languageName = "Deutsch"
 weight = 2
+
+[languages.de.params]
+homeTitle = "Hallo, ich bin Pelle"

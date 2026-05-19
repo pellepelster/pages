@@ -1,0 +1,6 @@
+<div class="index-welcome">
+  <div class="index-welcome-img-border">
+    <img src="{{ .Get "image" }}" alt="" class="index-welcome-img">
+  </div>
+  {{ .Get "text" | markdownify }}
+</div>
