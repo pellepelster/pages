@@ -14,16 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: mise setup
-        uses: jdx/mise-action@v3
+        uses: jdx/mise-action@v4.0.1
 
       - name: login to GitHub container registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.1.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v6.0.2
         with:
           submodules: true
 
