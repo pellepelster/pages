@@ -4,6 +4,9 @@ github-cli = "2.89.0"
 go = "1.26.0"
 node = "22"
 
+[settings]
+env_shell_expand = true
+
 [env]
 SITES = "pelle.io solidblocks.de"
 
@@ -41,11 +44,11 @@ run = """
 #!/bin/env bash
 export S3_HOST="${S3_HOST:-$(pass pelle/default/public/endpoints/s3_host)}"
 
-export PELLE_IO_ACCESS_KEY="${PELLE_IO_ACCESS_KEY:-$(pass pelle/default/public/pelle.io/admin/access_key)}"
-export PELLE_IO_SECRET_KEY="${PELLE_IO_SECRET_KEY:-$(pass pelle/default/public/pelle.io/admin/secret_key)}"
+export PELLE_IO_ACCESS_KEY="${PELLE_IO_ACCESS_KEY:-$(pass pelle/default/public/buckets/pelle.io/admin/access_key)}"
+export PELLE_IO_SECRET_KEY="${PELLE_IO_SECRET_KEY:-$(pass pelle/default/public/buckets/pelle.io/admin/secret_key)}"
 
-export SOLIDBLOCKS_DE_ACCESS_KEY="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass pelle/default/public/solidblocks.de/admin/access_key)}"
-export SOLIDBLOCKS_DE_SECRET_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass pelle/default/public/solidblocks.de/admin/secret_key)}"
+export SOLIDBLOCKS_DE_ACCESS_KEY="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass pelle/default/public/buckets/solidblocks.de/admin/access_key)}"
+export SOLIDBLOCKS_DE_SECRET_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass pelle/default/public/buckets/solidblocks.de/admin/secret_key)}"
 
 s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
   --access_key ${PELLE_IO_ACCESS_KEY} \
@@ -58,17 +61,20 @@ s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
   sync --no-mime-magic --guess-mime-type output/solidblocks.de/* "s3://solidblocks.de"
 """
 
+[tasks."sites:test:canary"]
+run = "cd solidblocks-contact/backend && ./gradlew clean canaryTest"
+
 [tasks."github:update:secrets"]
 run = """
 #!/bin/env bash
 
 export GITHUB_TOKEN="${GITHUB_TOKEN:-$(pass github/pellepelster/pat/admin)}"
 
-gh secret set PELLE_IO_ACCESS_KEY --body "$(pass pelle/default/public/pelle.io/admin/access_key)" --repo pellepelster/pages
-gh secret set PELLE_IO_SECRET_KEY --body "$(pass pelle/default/public/pelle.io/admin/secret_key)" --repo pellepelster/pages
-gh secret set SOLIDBLOCKS_DE_ACCESS_KEY --body "$(pass pelle/default/public/solidblocks.de/admin/access_key)" --repo pellepelster/pages
-gh secret set SOLIDBLOCKS_DE_SECRET_KEY --body "$(pass pelle/default/public/solidblocks.de/admin/secret_key)" --repo pellepelster/pages
 gh secret set S3_HOST --body "$(pass pelle/default/public/endpoints/s3_host)" --repo pellepelster/pages
+gh secret set PELLE_IO_ACCESS_KEY --body "$(pass pelle/default/public/buckets/pelle.io/admin/access_key)" --repo pellepelster/pages
+gh secret set PELLE_IO_SECRET_KEY --body "$(pass pelle/default/public/buckets/pelle.io/admin/secret_key)" --repo pellepelster/pages
+gh secret set SOLIDBLOCKS_DE_ACCESS_KEY --body "$(pass pelle/default/public/buckets/solidblocks.de/admin/access_key)" --repo pellepelster/pages
+gh secret set SOLIDBLOCKS_DE_SECRET_KEY --body "$(pass pelle/default/public/buckets/solidblocks.de/admin/secret_key)" --repo pellepelster/pages
 """
 
 [tasks.generate-feature-gifs]
@@ -94,6 +100,7 @@ run = """
 #!/bin/env bash
 set -e
 cd solidblocks-contact/frontend
+npm install
 npx ng build --configuration production
 npx ng build --configuration element
 printf '(function(){' | cat - dist/contact-element/browser/main.js > dist/contact/browser/solidblocks-contact.js
@@ -109,11 +116,18 @@ run = "cd solidblocks-contact/backend && ./gradlew assemble installDist"
 
 [tasks."contact:docker:build"]
 description = "Build Docker image with frontend and backend"
-run = "cd solidblocks-contact && docker build -t solidblocks-contact -t ghcr.io/pellepelster/solidblocks-contact:latest ."
+dir = "solidblocks-contact"
+run = """
+#!/bin/env bash
+docker build -t solidblocks-contact -t "ghcr.io/pellepelster/solidblocks-contact:${GITHUB_SHA:-latest}" .
+"""
 depends = ["contact:frontend:build", "contact:backend:build"]
 
 [tasks."contact:docker:push"]
-run = "docker push ghcr.io/pellepelster/solidblocks-contact:latest"
+run = """
+#!/bin/env bash
+docker push "ghcr.io/pellepelster/solidblocks-contact:${GITHUB_SHA:-latest}"
+"""
 
 [tasks."contact:docker:run"]
 description = "Run the Docker image locally on port 8080"
@@ -138,7 +152,4 @@ run = "cd solidblocks-contact/backend && ./gradlew spotlessApply"
 
 [tasks."contact:backend:test"]
 run = "cd solidblocks-contact/backend && ./gradlew clean test"
-
-[tasks."sites:test:canary"]
-run = "cd solidblocks-contact/backend && ./gradlew clean canaryTest"
 

@@ -1,5 +1,8 @@
 name: pelle.io
 
+permissions:
+  packages: write
+
 on:
   push:
     branches: [ master ]
@@ -10,8 +13,15 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Mise setup
+      - name: mise setup
         uses: jdx/mise-action@v3
+
+      - name: login to GitHub container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@master
         with:
@@ -20,14 +30,20 @@ jobs:
       - name: install s3cmd
         run: sudo apt-get install -y s3cmd
 
-      - name: build
-        run: mise build
+      - name: build sites
+        run: mise sites:build
 
-      - name: deploy
+      - name: build contact docker image
+        run: mise contact:docker:build
+
+      - name: push contact docker image
+        run: mise contact:docker:push
+
+      - name: deploy sites
         env:
           S3_HOST: ${{ secrets.S3_HOST }}
           PELLE_IO_ACCESS_KEY: ${{ secrets.PELLE_IO_ACCESS_KEY }}
           PELLE_IO_SECRET_KEY: ${{ secrets.PELLE_IO_SECRET_KEY }}
           SOLIDBLOCKS_DE_ACCESS_KEY: ${{ secrets.SOLIDBLOCKS_DE_ACCESS_KEY }}
           SOLIDBLOCKS_DE_SECRET_KEY: ${{ secrets.SOLIDBLOCKS_DE_SECRET_KEY }}
-        run: mise deploy
+        run: mise sites:deploy
