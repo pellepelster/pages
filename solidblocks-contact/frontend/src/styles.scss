@@ -28,3 +28,10 @@ body {
 .group-body:not(.vertical) > app-group + app-group {
   border-left: none;
 }
+
+@media (max-width: 600px) {
+  .group-body:not(.vertical) > app-group + app-group {
+    border-left: 2px solid #d0d5dd;
+    border-top: none;
+  }
+}

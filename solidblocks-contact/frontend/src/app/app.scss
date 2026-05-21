@@ -1,6 +1,7 @@
 :host {
   display: block;
   width: fit-content;
+  max-width: 100%;
   padding: 32px;
 
   --blcks-green: #2ebc6f;
@@ -111,4 +112,20 @@
 
 .contact-error {
   color: #c0392b;
+}
+
+@media (max-width: 600px) {
+  :host {
+    padding: 16px;
+  }
+
+  .contact-row {
+    flex-direction: column;
+
+    input[type='email'],
+    button {
+      width: 100%;
+      font-size: 16px;
+    }
+  }
 }

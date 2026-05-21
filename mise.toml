@@ -1,13 +1,13 @@
 [tools]
 hugo = "0.123.8"
 github-cli = "2.89.0"
-go="1.26.0"
+go = "1.26.0"
 node = "22"
 
 [env]
-SITES="pelle.io solidblocks.de"
+SITES = "pelle.io solidblocks.de"
 
-[tasks.build]
+[tasks."sites:build"]
 description = "Build all sites"
 run = """
 #!/bin/env bash
@@ -20,7 +20,7 @@ for site in ${SITES}; do
 done
 """
 
-[tasks.serve]
+[tasks."sites:serve"]
 description = "Serve a site locally"
 usage = """
 arg "<site>"
@@ -35,7 +35,7 @@ site="${usage_site}"
 )
 """
 
-[tasks.deploy]
+[tasks."sites:deploy"]
 description = "Deploy all sites to S3"
 run = """
 #!/bin/env bash
@@ -58,7 +58,7 @@ s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
   sync --no-mime-magic --guess-mime-type output/solidblocks.de/* "s3://solidblocks.de"
 """
 
-[tasks.github-update-secrets]
+[tasks."github:update:secrets"]
 run = """
 #!/bin/env bash
 
@@ -72,6 +72,7 @@ gh secret set S3_HOST --body "$(pass pelle/default/public/endpoints/s3_host)" --
 """
 
 [tasks.generate-feature-gifs]
+hide = true
 run = """
 #!/bin/env bash
 
@@ -135,8 +136,9 @@ npx stylelint "src/**/*.scss" --fix
 description = "Format Kotlin sources with Spotless (ktfmt)"
 run = "cd solidblocks-contact/backend && ./gradlew spotlessApply"
 
-[tasks."test:canary"]
+[tasks."contact:backend:test"]
+run = "cd solidblocks-contact/backend && ./gradlew clean test"
+
+[tasks."sites:test:canary"]
 run = "cd solidblocks-contact/backend && ./gradlew clean canaryTest"
 
-[tasks."test"]
-run = "cd solidblocks-contact/backend && ./gradlew clean test"

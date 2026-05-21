@@ -5,7 +5,23 @@ import com.microsoft.playwright.Playwright
 import com.microsoft.playwright.options.WaitForSelectorState
 import org.junit.jupiter.api.Test
 
-class ContactCanaryTest {
+class CanaryTest {
+
+  @Test
+  fun `pelle io is online and shows a list of posts`() {
+    Playwright.create().use { playwright ->
+      val browser = playwright.chromium().launch()
+      val context = browser.newContext()
+      val page = context.newPage()
+
+      page.navigate("https://pelle.io")
+
+      val posts = page.locator("article")
+      posts.first().waitFor()
+
+      check(posts.count() > 0) { "expected at least one post on pelle.io but found none" }
+    }
+  }
 
   @Test
   fun `select terraform component and send contact request`() {

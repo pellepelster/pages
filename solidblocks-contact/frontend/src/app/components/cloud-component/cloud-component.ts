@@ -6,6 +6,7 @@ import {
   HostListener,
   inject,
   input,
+  OnDestroy,
   signal,
 } from '@angular/core';
 import { CloudComponent as CloudComponentModel, Group } from '../../models/config.model';
@@ -32,7 +33,7 @@ function collectComponentNames(group: Group, names: Set<string>): void {
     '[class.unknown]': "component().type === 'unknown'",
   },
 })
-export class CloudComponentComponent {
+export class CloudComponentComponent implements OnDestroy {
   component = input.required<CloudComponentModel>();
   group = input.required<Group>();
   externallyTurned = input(false);
@@ -46,6 +47,7 @@ export class CloudComponentComponent {
 
   tooltipVisible = signal(false);
   tooltipStyle = signal<Record<string, string>>({});
+  private tooltipTimer: ReturnType<typeof setTimeout> | null = null;
 
   logoUrl = computed(() => {
     const logo = this.component().logo;
@@ -111,6 +113,20 @@ export class CloudComponentComponent {
   @HostListener('mouseleave')
   onMouseLeave(): void {
     this.tooltipVisible.set(false);
+  }
+
+  @HostListener('touchstart')
+  onTouchStart(): void {
+    if (!this.effectiveInfo()) return;
+    if (this.tooltipTimer) clearTimeout(this.tooltipTimer);
+    this.tooltipStyle.set({ left: '-9999px', top: '-9999px' });
+    this.tooltipVisible.set(true);
+    setTimeout(() => this.repositionTooltip(), 0);
+    this.tooltipTimer = setTimeout(() => this.tooltipVisible.set(false), 2500);
+  }
+
+  ngOnDestroy(): void {
+    if (this.tooltipTimer) clearTimeout(this.tooltipTimer);
   }
 
   private repositionTooltip(): void {

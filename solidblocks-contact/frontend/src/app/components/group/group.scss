@@ -57,3 +57,18 @@
     gap: 5px;
   }
 }
+
+@media (max-width: 600px) {
+  .group-body:not(.vertical) {
+    flex-direction: column;
+
+    > app-group + app-group {
+      border-left: 2px solid #d0d5dd;
+      border-top: none;
+    }
+  }
+
+  .group-body:has(> app-cloud-component) {
+    flex-wrap: wrap;
+  }
+}

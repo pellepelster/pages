@@ -1,3 +1,7 @@
+# Project Scope
+
+Static hugo website for pelle.io and solidblocks.de. solidblocks-contact is a separately deployed application for creating and sending contact request from the static sites 
+
 # Project Tools
 
 ## Development

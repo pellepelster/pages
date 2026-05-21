@@ -1,4 +1,4 @@
-# Kotlin Project — Claude Code Guide
+# Kotlin Project
 
 ## Build System
 
@@ -20,21 +20,6 @@
 - Follow the [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html).
 - 4-space indentation, no trailing whitespace, newline at EOF.
 - Max line length: 120 characters.
-
-## Project Structure
-
-```
-src/
-  main/kotlin/com/example/
-    domain/          # pure business logic, no framework deps
-    application/     # use cases / services
-    infrastructure/  # DB, HTTP, external systems
-    api/             # entry points (REST controllers, CLI, etc.)
-  test/kotlin/com/example/
-    unit/            # fast, isolated unit tests
-    integration/     # tests requiring real infrastructure
-  testFixtures/kotlin/ # shared test helpers and builders
-```
 
 ## Kotlin Idioms
 
