@@ -17,5 +17,5 @@ date: 2024-02-20T22:00:00+01:00
 
 <div class="feature-divider"></div>
 
-{{< solidblocks-contact title="This is my stack" text="Over the years I worked with a wide range of programming languages, frameworks and infrastructure components. Although the technologies change over time, the core principles of sound software architecture and predictable infrastructure operations tend to stick a little longer. <br /><br /> **If you see something I can help you with, select it and leave your e-mail address and I will get back to you.**" base-url="https://pelle-default-solidblocks-contact-0.pelle.io" >}}
+{{< solidblocks-contact title="This is my stack" text="Over the years I worked with a wide range of programming languages, frameworks and infrastructure components. Although the technologies change over time, the core principles of sound software architecture and predictable infrastructure operations tend to stick a little longer. <br /><br /> **If you see something I can help you with, select it and leave your e-mail address and I will get back to you.**" base-url="https://contact.solidblocks.de" >}}
 
