@@ -38,3 +38,8 @@ theme = "solarized-dark"
 loop = false
 autoPlay = false
 speed = 8.0
+
+[deployment]
+[[deployment.targets]]
+name = "blcks"
+URL = "s3://pelle-public?endpoint=http://s3.blcks.de&region=blcks&use_path_style=true"

@@ -1,8 +1,8 @@
 [tools]
-hugo = "0.123.8"
 github-cli = "2.89.0"
 go = "1.26.0"
 node = "22"
+"ubi:gohugoio/hugo" = { version = "0.164.0", matching = "extended_withdeploy" }
 
 [settings]
 env_shell_expand = true
@@ -10,21 +10,15 @@ env_shell_expand = true
 [env]
 SITES = "pelle.io solidblocks.de"
 
-[tasks."sites:build"]
-description = "Build all sites"
-run = """
-#!/bin/env bash
+[tasks."sites:build:solidblocks.de"]
+dir="solidblocks.de"
+run = "hugo --themesDir {{config_root}}/themes"
 
-for site in ${SITES}; do
-  (
-    cd "${site}"
-    hugo --themesDir "{{config_root}}/themes" --destination "{{config_root}}/output/${site}"
-  )
-done
-"""
+[tasks."sites:build:pelle.io"]
+dir="pelle.io"
+run = "hugo --themesDir {{config_root}}/themes"
 
 [tasks."sites:serve"]
-description = "Serve a site locally"
 usage = """
 arg "<site>"
 """
@@ -32,49 +26,31 @@ run = """
 #!/bin/env bash
 
 site="${usage_site}"
-(
-    cd "${site}"
-    hugo --themesDir "{{config_root}}/themes" --destination "{{config_root}}/output/${site}" serve --buildDrafts --verbose --disableFastRender
-)
+cd "${site}"
+hugo --themesDir "{{config_root}}/themes" serve --buildDrafts --disableFastRender
 """
 
-[tasks."sites:deploy"]
-description = "Deploy all sites to S3"
+[tasks."sites:deploy:solidblocks.de"]
+dir="solidblocks.de"
 run = """
-#!/bin/env bash
-export S3_HOST="${S3_HOST:-$(pass pelle/default/public/endpoints/s3_host)}"
-
-export PELLE_IO_ACCESS_KEY="${PELLE_IO_ACCESS_KEY:-$(pass pelle/default/public/buckets/pelle.io/admin/access_key)}"
-export PELLE_IO_SECRET_KEY="${PELLE_IO_SECRET_KEY:-$(pass pelle/default/public/buckets/pelle.io/admin/secret_key)}"
-
-export SOLIDBLOCKS_DE_ACCESS_KEY="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass pelle/default/public/buckets/solidblocks.de/admin/access_key)}"
-export SOLIDBLOCKS_DE_SECRET_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass pelle/default/public/buckets/solidblocks.de/admin/secret_key)}"
-
-s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
-  --access_key ${PELLE_IO_ACCESS_KEY} \
-  --secret_key ${PELLE_IO_SECRET_KEY} \
-  sync --no-mime-magic --guess-mime-type output/pelle.io/* "s3://pelle.io"
-
-s3cmd --host-bucket ${S3_HOST} --host ${S3_HOST} \
-  --access_key ${SOLIDBLOCKS_DE_ACCESS_KEY} \
-  --secret_key ${SOLIDBLOCKS_DE_SECRET_KEY} \
-  sync --no-mime-magic --guess-mime-type output/solidblocks.de/* "s3://solidblocks.de"
+export AWS_ACCESS_KEY_ID="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass blcks/pelle/solidblocks-de/access_key_id)}"
+export AWS_SECRET_ACCESS_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass blcks/pelle/solidblocks-de/secret_key)}"
+hugo deploy --themesDir {{config_root}}/themes --target blcks
 """
 
-[tasks."sites:test:canary"]
-run = "cd solidblocks-contact/backend && ./gradlew clean canaryTest"
-
-[tasks."github:update:secrets"]
+[tasks."sites:deploy:pelle.io"]
+dir="pelle.io"
 run = """
-#!/bin/env bash
+export AWS_ACCESS_KEY_ID="${PELLE_IO_ACCESS_KEY:-$(pass blcks/pelle/public/access_key_id)}"
+export AWS_SECRET_ACCESS_KEY="${PELLE_IO_SECRET_KEY:-$(pass blcks/pelle/public/secret_key)}"
+hugo deploy --themesDir {{config_root}}/themes --target blcks
+"""
 
-export GITHUB_TOKEN="${GITHUB_TOKEN:-$(pass github/pellepelster/pat/admin)}"
-
-gh secret set S3_HOST --body "$(pass pelle/default/public/endpoints/s3_host)" --repo pellepelster/pages
-gh secret set PELLE_IO_ACCESS_KEY --body "$(pass pelle/default/public/buckets/pelle.io/admin/access_key)" --repo pellepelster/pages
-gh secret set PELLE_IO_SECRET_KEY --body "$(pass pelle/default/public/buckets/pelle.io/admin/secret_key)" --repo pellepelster/pages
-gh secret set SOLIDBLOCKS_DE_ACCESS_KEY --body "$(pass pelle/default/public/buckets/solidblocks.de/admin/access_key)" --repo pellepelster/pages
-gh secret set SOLIDBLOCKS_DE_SECRET_KEY --body "$(pass pelle/default/public/buckets/solidblocks.de/admin/secret_key)" --repo pellepelster/pages
+[tasks."sites:build-and-deploy"]
+dir="pelle.io"
+run = """
+mise sites:build:*
+mise sites:deploy:*
 """
 
 [tasks.generate-feature-gifs]
@@ -89,67 +65,4 @@ for cast in ${HOME}/git/solidblocks/doc/content/cloud/casts/*.cast; do
 done
 
 """
-
-[tasks."contact:frontend:run"]
-description = "Start Angular dev server"
-run = "cd solidblocks-contact/frontend && npx ng serve"
-
-[tasks."contact:frontend:build"]
-description = "Build frontend (production) and web component element"
-run = """
-#!/bin/env bash
-set -e
-cd solidblocks-contact/frontend
-npm install
-npx ng build --configuration production
-npx ng build --configuration element
-printf '(function(){' | cat - dist/contact-element/browser/main.js > dist/contact/browser/solidblocks-contact.js
-echo '})();' >> dist/contact/browser/solidblocks-contact.js
-"""
-
-[tasks."contact:backend:run"]
-description = "Start Ktor backend serving built frontend static files"
-run = "cd solidblocks-contact/backend && STATIC_DIR={{config_root}}/solidblocks-contact/frontend/dist/contact/browser ./gradlew run"
-
-[tasks."contact:backend:build"]
-run = "cd solidblocks-contact/backend && ./gradlew assemble installDist"
-
-[tasks."contact:docker:build"]
-description = "Build Docker image with frontend and backend"
-dir = "solidblocks-contact"
-run = """
-#!/bin/env bash
-docker build -t solidblocks-contact -t "ghcr.io/pellepelster/solidblocks-contact:${GITHUB_SHA:-latest}" .
-"""
-depends = ["contact:frontend:build", "contact:backend:build"]
-
-[tasks."contact:docker:push"]
-run = """
-#!/bin/env bash
-docker push "ghcr.io/pellepelster/solidblocks-contact:${GITHUB_SHA:-latest}"
-"""
-
-[tasks."contact:docker:run"]
-description = "Run the Docker image locally on port 8080"
-run = "cd solidblocks-contact && docker run --rm -p 8080:8080 solidblocks-contact"
-
-[tasks."contact:format"]
-description = "Format and lint-fix all contact frontend and backend code"
-depends = ["contact:frontend:format", "contact:backend:format"]
-
-[tasks."contact:frontend:format"]
-description = "Format frontend TypeScript, HTML and SCSS with Prettier; fix ESLint and Stylelint issues"
-run = """
-cd solidblocks-contact/frontend
-npx prettier --write "src/**/*.{ts,html,scss}"
-npx eslint src --fix
-npx stylelint "src/**/*.scss" --fix
-"""
-
-[tasks."contact:backend:format"]
-description = "Format Kotlin sources with Spotless (ktfmt)"
-run = "cd solidblocks-contact/backend && ./gradlew spotlessApply"
-
-[tasks."contact:backend:test"]
-run = "cd solidblocks-contact/backend && ./gradlew clean test"
 

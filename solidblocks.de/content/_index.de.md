@@ -21,5 +21,4 @@ draft: false
 
 <div class="feature-divider"></div>
 
-{{< solidblocks-contact title="Das ist mein Stack" text="Im Laufe der Jahre habe ich mit einer Vielzahl von Programmiersprachen, Frameworks und Infrastrukturkomponenten gearbeitet. Obwohl sich die Technologien im Laufe der Zeit ändern, haben die grundlegenden Prinzipien einer soliden Software-Architektur und eines stabilen Infrastrukturbetrieb länger bestand. <br /><br /> **Wenn Sie etwas sehen, wobei ich Ihnen helfen kann, wählen Sie es aus und hinterlassen Sie Ihre E-Mail-Adresse – ich melde mich bei Ihnen.**" base-url="https://contact.solidblocks.de" >}}
 

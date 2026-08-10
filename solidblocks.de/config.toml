@@ -34,3 +34,8 @@ weight = 2
 
 [languages.de.params]
 homeTitle = "Hallo, ich bin Pelle"
+
+[deployment]
+[[deployment.targets]]
+name = "blcks"
+URL = "s3://pelle-solidblocks-de?endpoint=http://s3.blcks.de&region=blcks&use_path_style=true"
