@@ -28,22 +28,22 @@
 
             {{ if hugo.IsMultilingual }}
 
-              {{ if ge (len .Site.Languages) 3 }}
+              {{ if ge (len hugo.Sites) 3 }}
                 <li class="navlinks-container">
                   <a class="navlinks-parent">{{ i18n "languageSwitcherLabel" }}</a>
                   <div class="navlinks-children">
-                    {{ range .Site.Languages }}
-                      {{ if not (eq .Lang $.Site.Language.Lang) }}
-                      <a href="/{{ .Lang }}" lang="{{ .Lang }}"><img alt="{{ default .Lang .LanguageName }}" width="24" height="24" src="/img/{{ .Lang }}.svg"></a>
+                    {{ range hugo.Sites }}
+                      {{ if not (eq .Language.Lang $.Site.Language.Lang) }}
+                      <a href="/{{ .Language.Lang }}" lang="{{ .Language.Lang }}"><img alt="{{ default .Language.Lang .Language.Label }}" width="24" height="24" src="/img/{{ .Language.Lang }}.svg"></a>
                       {{ end }}
                     {{ end }}
                   </div>
                 </li>
               {{ else }}
                 <li>
-                  {{ range .Site.Languages }}
-                    {{ if not (eq .Lang $.Site.Language.Lang) }}
-                    <a href="/{{ .Lang }}" lang="{{ .Lang }}"><img alt="{{ default .Lang .LanguageName }}" width="24" height="24" src="/img/{{ .Lang }}.svg"></a>
+                  {{ range hugo.Sites }}
+                    {{ if not (eq .Language.Lang $.Site.Language.Lang) }}
+                    <a href="/{{ .Language.Lang }}" lang="{{ .Language.Lang }}"><img alt="{{ default .Language.Lang .Language.Label }}" width="24" height="24" src="/img/{{ .Language.Lang }}.svg"></a>
                     {{ end }}
                   {{ end }}
                 </li>

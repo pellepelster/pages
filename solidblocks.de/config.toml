@@ -1,5 +1,5 @@
 baseURL = "https://solidblocks.de/"
-languageCode = "en"
+locale = "en"
 title = "solidblocks.de"
 theme = "pelle.io"
 defaultContentLanguageInSubdir = true
@@ -22,14 +22,14 @@ unsafe = true
 [languages]
 
 [languages.en]
-languageName = "English"
+label = "English"
 weight = 1
 
 [languages.en.params]
 homeTitle = "Hello, I am Pelle"
 
 [languages.de]
-languageName = "Deutsch"
+label = "Deutsch"
 weight = 2
 
 [languages.de.params]
