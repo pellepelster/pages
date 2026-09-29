@@ -1,4 +1,4 @@
-<div class="feature col">
+<div class="feature col d-flex flex-column">
 
     <h3 class="fs-2 text-body-emphasis align-middle">
         <i class="fas {{ .Get "iconClasses" }}"></i>
@@ -7,4 +7,7 @@
     <p>
         {{ .Inner }}
     </p>
+    {{- with .Get "screenshot" }}
+    {{- partial "feature-screenshot.html" (dict "file" . "title" ($.Get "title") "page" $.Page) }}
+    {{- end }}
 </div>

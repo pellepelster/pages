@@ -1,0 +1,49 @@
+{{- /*
+  Screenshot for a feature box, loaded from assets/screenshots/<file>.
+  Alt text and title are taken from assets/screenshots/metadata.json if present.
+  Opens the full size image in a shared lightbox modal on click.
+*/ -}}
+{{- $lang := site.Language.Lang -}}
+{{- $image := resources.Get (printf "screenshots/%s" .file) -}}
+{{- if not $image -}}
+  {{- errorf "feature-screenshot: assets/screenshots/%s not found in %s" .file .page.File.Path -}}
+{{- end -}}
+{{- $alt := .title -}}
+{{- $caption := .title -}}
+{{- with resources.Get "screenshots/metadata.json" -}}
+  {{- range (transform.Unmarshal .).images -}}
+    {{- if eq .file $.file -}}
+      {{- $alt = index .alt $lang | default .alt.en -}}
+      {{- $caption = index .title $lang | default .title.en -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $thumb := $image.Resize "800x webp" -}}
+{{- $full := $image.Resize (printf "%dx webp" $image.Width) -}}
+<a href="{{ $full.RelPermalink }}" class="feature-screenshot mt-auto"
+   data-bs-toggle="modal" data-bs-target="#feature-screenshot-modal" data-title="{{ $caption }}">
+  <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+       class="w-100 h-auto" alt="{{ $alt }}" loading="lazy">
+</a>
+{{- if not (.page.Store.Get "feature-screenshot-modal") }}
+{{- .page.Store.Set "feature-screenshot-modal" true }}
+<div class="modal fade" id="feature-screenshot-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <img src="" alt="" class="w-100 h-auto" data-bs-dismiss="modal">
+      <div class="feature-screenshot-modal-title"></div>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById('feature-screenshot-modal').addEventListener('show.bs.modal', function (event) {
+    var link = event.relatedTarget;
+    var image = this.querySelector('img');
+    var thumb = link.querySelector('img');
+    image.src = link.getAttribute('href');
+    image.alt = thumb.alt;
+    this.querySelector('.feature-screenshot-modal-title').textContent = link.dataset.title;
+  });
+</script>
+{{- end }}

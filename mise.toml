@@ -35,15 +35,15 @@ dir="solidblocks.de"
 run = """
 export AWS_ACCESS_KEY_ID="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass blcks/pelle/solidblocks-de/access_key_id)}"
 export AWS_SECRET_ACCESS_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass blcks/pelle/solidblocks-de/secret_key)}"
-hugo deploy --themesDir {{config_root}}/themes --target blcks
+hugo deploy --themesDir {{config_root}}/themes --target pelle-default-solidblocks-de
 """
 
 [tasks."sites:deploy:pelle.io"]
 dir="pelle.io"
 run = """
-export AWS_ACCESS_KEY_ID="${PELLE_IO_ACCESS_KEY:-$(pass blcks/pelle/public/access_key_id)}"
-export AWS_SECRET_ACCESS_KEY="${PELLE_IO_SECRET_KEY:-$(pass blcks/pelle/public/secret_key)}"
-hugo deploy --themesDir {{config_root}}/themes --target blcks
+export AWS_ACCESS_KEY_ID="${PELLE_IO_ACCESS_KEY:-$(pass blcks/pelle/pelle-io/access_key_id)}"
+export AWS_SECRET_ACCESS_KEY="${PELLE_IO_SECRET_KEY:-$(pass blcks/pelle/pelle-io/secret_key)}"
+hugo deploy --themesDir {{config_root}}/themes --target pelle-default-pelle-io
 """
 
 [tasks."sites:build-and-deploy"]

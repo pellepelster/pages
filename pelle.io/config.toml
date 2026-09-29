@@ -11,7 +11,7 @@ rss = true
 
 [Params.author]
 name = "Christian 'Pelle' Pelster"
-email = "contact@solidblocks.de"
+email = "pelle@pelle.io"
 github = "pellepelster"
 linkedin = "christian-pelster-017907133"
 phone = "+49 176 238 170 01"
@@ -41,5 +41,5 @@ speed = 8.0
 
 [deployment]
 [[deployment.targets]]
-name = "blcks"
-URL = "s3://pelle-public?endpoint=http://s3.blcks.de&region=blcks&use_path_style=true"
+name = "pelle-default-pelle-io"
+URL = "s3://pelle-default-pelle-io?endpoint=https://s3.blcks.de&region=blcks&use_path_style=true"
