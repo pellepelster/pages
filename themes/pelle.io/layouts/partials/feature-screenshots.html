@@ -1,0 +1,142 @@
+{{- /*
+  Screenshots for a feature box, loaded from assets/screenshots/<file>.
+  A single screenshot is shown as image, multiple screenshots as carousel.
+  Alt texts and titles are taken from assets/screenshots/metadata.json if present.
+  Opens the full size image in a shared lightbox modal on click, which allows
+  navigating through all screenshots of the same feature.
+*/ -}}
+{{- $count := add (.page.Store.Get "feature-screenshots-count" | default 0) 1 -}}
+{{- .page.Store.Set "feature-screenshots-count" $count -}}
+{{- $id := printf "feature-screenshots-%d" $count -}}
+{{- $slides := slice -}}
+{{- range .files -}}
+  {{- $image := resources.Get (printf "screenshots/%s" .) -}}
+  {{- if not $image -}}
+    {{- errorf "feature-screenshots: assets/screenshots/%s not found in %s" . $.page.File.Path -}}
+  {{- end -}}
+  {{- $meta := partial "screenshot-metadata.html" (dict "file" . "title" $.title) -}}
+  {{- $slides = $slides | append (dict
+        "thumb" ($image.Resize "800x webp")
+        "full" ($image.Resize (printf "%dx webp" $image.Width))
+        "alt" $meta.alt
+        "title" $meta.title) -}}
+{{- end -}}
+{{- define "partials/feature-screenshot-link.html" -}}
+<a href="{{ .slide.full.RelPermalink }}" class="feature-screenshot"
+   data-bs-toggle="modal" data-bs-target="#feature-screenshot-modal"
+   data-title="{{ .slide.title }}" data-gallery="{{ .gallery }}">
+  <img src="{{ .slide.thumb.RelPermalink }}" width="{{ .slide.thumb.Width }}" height="{{ .slide.thumb.Height }}"
+       class="d-block w-100 h-auto" alt="{{ .slide.alt }}" loading="lazy">
+</a>
+{{- end -}}
+{{- if eq (len $slides) 1 }}
+<div class="feature-screenshots mt-auto">
+  {{ partial "feature-screenshot-link.html" (dict "slide" (index $slides 0) "gallery" $id) }}
+</div>
+{{- else }}
+<div id="{{ $id }}" class="feature-screenshots carousel slide mt-auto" data-bs-ride="false" data-bs-touch="true">
+  <div class="carousel-inner">
+    {{- range $index, $slide := $slides }}
+    <div class="carousel-item{{ if eq $index 0 }} active{{ end }}">
+      {{ partial "feature-screenshot-link.html" (dict "slide" $slide "gallery" $id) }}
+    </div>
+    {{- end }}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#{{ $id }}" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#{{ $id }}" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  <div class="carousel-indicators">
+    {{- range $index, $slide := $slides }}
+    <button type="button" data-bs-target="#{{ $id }}" data-bs-slide-to="{{ $index }}"
+            {{ if eq $index 0 }}class="active" aria-current="true"{{ end }}
+            aria-label="{{ $slide.title }}"></button>
+    {{- end }}
+  </div>
+</div>
+{{- end }}
+{{- if not (.page.Store.Get "feature-screenshot-modal") }}
+{{- .page.Store.Set "feature-screenshot-modal" true }}
+<div class="modal fade" id="feature-screenshot-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="feature-screenshot-modal-image">
+        <img src="" alt="" class="w-100 h-auto" data-bs-dismiss="modal">
+        <button type="button" class="carousel-control-prev" data-gallery-step="-1">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button type="button" class="carousel-control-next" data-gallery-step="1">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="feature-screenshot-modal-title"></div>
+      <div class="feature-screenshot-modal-counter"></div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var modal = document.getElementById('feature-screenshot-modal');
+    var image = modal.querySelector('img');
+    var title = modal.querySelector('.feature-screenshot-modal-title');
+    var counter = modal.querySelector('.feature-screenshot-modal-counter');
+    var steps = modal.querySelectorAll('[data-gallery-step]');
+    var links = [];
+    var current = 0;
+
+    function show(index) {
+      current = (index + links.length) % links.length;
+      var link = links[current];
+      image.src = link.getAttribute('href');
+      image.alt = link.querySelector('img').alt;
+      title.textContent = link.dataset.title;
+      counter.textContent = links.length > 1 ? (current + 1) + ' / ' + links.length : '';
+    }
+
+    function step(delta) {
+      if (links.length > 1) {
+        show(current + delta);
+      }
+    }
+
+    modal.addEventListener('show.bs.modal', function (event) {
+      var link = event.relatedTarget;
+      links = Array.prototype.slice.call(
+        document.querySelectorAll('.feature-screenshot[data-gallery="' + link.dataset.gallery + '"]'));
+      steps.forEach(function (button) {
+        button.hidden = links.length < 2;
+      });
+      show(links.indexOf(link));
+    });
+
+    // sync the feature carousel with the last image shown in the modal
+    modal.addEventListener('hidden.bs.modal', function () {
+      var carousel = links[current] && links[current].closest('.carousel');
+      if (carousel) {
+        bootstrap.Carousel.getOrCreateInstance(carousel).to(current);
+      }
+    });
+
+    steps.forEach(function (button) {
+      button.addEventListener('click', function () {
+        step(parseInt(this.dataset.galleryStep, 10));
+      });
+    });
+
+    modal.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        step(-1);
+      } else if (event.key === 'ArrowRight') {
+        step(1);
+      }
+    });
+  })();
+</script>
+{{- end }}

@@ -1,0 +1,17 @@
+{{- /*
+  Returns alt text and title for a screenshot from assets/screenshots/metadata.json,
+  falling back to the given default title.
+
+  Usage: {{ $meta := partial "screenshot-metadata.html" (dict "file" "logs.png" "title" "Logs") }}
+*/ -}}
+{{- $lang := site.Language.Lang -}}
+{{- $result := dict "alt" .title "title" .title -}}
+{{- $file := .file -}}
+{{- with resources.Get "screenshots/metadata.json" -}}
+  {{- range (transform.Unmarshal .).images -}}
+    {{- if eq .file $file -}}
+      {{- $result = dict "alt" (index .alt $lang | default .alt.en) "title" (index .title $lang | default .title.en) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

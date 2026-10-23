@@ -1,0 +1,259 @@
+{
+  "images": [
+    {
+      "file": "deployments-list.png",
+      "title": {
+        "en": "Everything that runs, on one page",
+        "de": "Alles, was läuft, auf einen Blick"
+      },
+      "teaser": {
+        "en": "One list shows each deployment with its version, status and health.",
+        "de": "Eine Liste zeigt jedes Deployment mit Version, Status und Verfügbarkeit."
+      },
+      "alt": {
+        "en": "The Solidblocks console shows the list of deployments: a healthy Java Spring service, a healthy PostgreSQL service and two static websites.",
+        "de": "Die Solidblocks Console zeigt die Liste der Deployments: einen verfügbaren Java-Spring-Service, einen verfügbaren PostgreSQL-Service und zwei statische Websites."
+      }
+    },
+    {
+      "file": "postgresql-configuration.png",
+      "title": {
+        "en": "Managed PostgreSQL",
+        "de": "Verwaltetes PostgreSQL"
+      },
+      "teaser": {
+        "en": "Start a PostgreSQL database in minutes. You select the version and the databases. Solidblocks does the backups.",
+        "de": "Starten Sie eine PostgreSQL-Datenbank in wenigen Minuten. Sie wählen Version und Datenbanken, Solidblocks erledigt die Backups."
+      },
+      "alt": {
+        "en": "The configuration of a PostgreSQL service in the Solidblocks console, with version, databases and backup recovery window.",
+        "de": "Die Konfiguration eines PostgreSQL-Services in der Solidblocks Console, mit Version, Datenbanken und Aufbewahrungszeit der Backups."
+      }
+    },
+    {
+      "file": "postgresql-endpoints.png",
+      "title": {
+        "en": "All connection data in one place",
+        "de": "Alle Zugangsdaten an einem Ort"
+      },
+      "teaser": {
+        "en": "Find host, port, user and JDBC URL on one page. Copy the password with one click.",
+        "de": "Host, Port, Benutzer und JDBC-URL auf einen Blick. Das Passwort kopieren Sie mit einem Klick."
+      },
+      "alt": {
+        "en": "The endpoints of a PostgreSQL service with host, port, database, user, hidden password and JDBC URL.",
+        "de": "Die Endpunkte eines PostgreSQL-Services mit Host, Port, Datenbank, Benutzer, verdecktem Passwort und JDBC-URL."
+      }
+    },
+    {
+      "file": "postgresql-connect.png",
+      "title": {
+        "en": "Private access from your machine",
+        "de": "Privater Zugang von Ihrem Rechner"
+      },
+      "teaser": {
+        "en": "One command connects you to your service. Your database stays private and is not open to the internet.",
+        "de": "Ein Befehl genügt: Ihre Datenbank bleibt privat und ist nicht aus dem Internet erreichbar."
+      },
+      "alt": {
+        "en": "The connect page of a PostgreSQL service with the command blcks-cli connect database1 and the exported port 5432.",
+        "de": "Die Connect-Seite eines PostgreSQL-Services mit dem Befehl blcks-cli connect database1 und dem freigegebenen Port 5432."
+      }
+    },
+    {
+      "file": "java-spring-configuration.png",
+      "title": {
+        "en": "Bring your own Java application",
+        "de": "Ihre eigene Java-Anwendung"
+      },
+      "teaser": {
+        "en": "Upload your Spring Boot application as an archive. Solidblocks deploys it and makes it available on its port.",
+        "de": "Laden Sie Ihre Spring-Boot-Anwendung als Archiv hoch. Solidblocks rollt sie aus und macht sie erreichbar."
+      },
+      "alt": {
+        "en": "The configuration of a Java Spring service with the application archive, its SHA-256 checksum and port 8080.",
+        "de": "Die Konfiguration eines Java-Spring-Services mit Anwendungsarchiv, SHA-256-Prüfsumme und Port 8080."
+      }
+    },
+    {
+      "file": "java-spring-endpoints.png",
+      "title": {
+        "en": "Online in minutes",
+        "de": "In Minuten online"
+      },
+      "teaser": {
+        "en": "After the deployment, the console shows the address of your application. Open it and start.",
+        "de": "Nach dem Deployment zeigt die Console die Adresse Ihrer Anwendung. Einfach öffnen und loslegen."
+      },
+      "alt": {
+        "en": "The endpoints of a Java Spring service with the address at which the application is available.",
+        "de": "Die Endpunkte eines Java-Spring-Services mit der Adresse, unter der die Anwendung erreichbar ist."
+      }
+    },
+    {
+      "file": "postgresql-metrics.png",
+      "title": {
+        "en": "Monitoring included",
+        "de": "Monitoring inklusive"
+      },
+      "teaser": {
+        "en": "See the CPU, memory, disk and network use of each service. You do not set up a monitoring stack.",
+        "de": "CPU, Arbeitsspeicher, Festplatte und Netzwerk jedes Services im Blick - ohne eigenen Monitoring-Stack."
+      },
+      "alt": {
+        "en": "Metrics of a PostgreSQL service with charts for CPU, memory, disk and network use over 15 minutes.",
+        "de": "Metriken eines PostgreSQL-Services mit Diagrammen zu CPU, Arbeitsspeicher, Festplatte und Netzwerk über 15 Minuten."
+      }
+    },
+    {
+      "file": "postgresql-logs.png",
+      "title": {
+        "en": "Logs included",
+        "de": "Logs inklusive"
+      },
+      "teaser": {
+        "en": "Read the logs of your database in the console. Search the messages or follow them live.",
+        "de": "Lesen Sie die Logs Ihrer Datenbank direkt in der Console. Durchsuchen Sie die Meldungen oder verfolgen Sie sie live."
+      },
+      "alt": {
+        "en": "The logs of a PostgreSQL service with search field, live switch and the log messages of the database.",
+        "de": "Die Logs eines PostgreSQL-Services mit Suchfeld, Live-Schalter und den Meldungen der Datenbank."
+      }
+    },
+    {
+      "file": "java-spring-logs.png",
+      "title": {
+        "en": "Application logs in the browser",
+        "de": "Anwendungs-Logs im Browser"
+      },
+      "teaser": {
+        "en": "Read the log of your Spring Boot application in the browser. You do not need SSH access to the server.",
+        "de": "Lesen Sie die Logs Ihrer Spring-Boot-Anwendung im Browser - ganz ohne SSH-Zugang zum Server."
+      },
+      "alt": {
+        "en": "The logs of a Java Spring service with the startup messages of Tomcat and the Spring application.",
+        "de": "Die Logs eines Java-Spring-Services mit den Startmeldungen von Tomcat und der Spring-Anwendung."
+      }
+    },
+    {
+      "file": "postgresql-backups.png",
+      "title": {
+        "en": "Automatic backups",
+        "de": "Automatische Backups"
+      },
+      "teaser": {
+        "en": "blcks backs up your database every hour to encrypted object storage. You see each backup with its time and size.",
+        "de": "blcks sichert Ihre Datenbank stündlich in verschlüsselten Object Storage. Jedes Backup sehen Sie mit Zeitpunkt und Größe."
+      },
+      "alt": {
+        "en": "The backups of a PostgreSQL service with a list of hourly incremental backups, their start and end times, and their sizes.",
+        "de": "Die Backups eines PostgreSQL-Services mit einer Liste stündlicher inkrementeller Backups, ihren Start- und Endzeitpunkten und ihren Größen."
+      }
+    },
+    {
+      "file": "postgresql-exports.png",
+      "title": {
+        "en": "Your data stays yours",
+        "de": "Ihre Daten gehören Ihnen"
+      },
+      "teaser": {
+        "en": "Get all your data as a zip archive at any time. Take it with you when you go.",
+        "de": "Nehmen Sie Ihre Daten jederzeit als ZIP-Archiv mit, wann immer Sie wollen."
+      },
+      "alt": {
+        "en": "The takeouts of a PostgreSQL service with a finished takeout, its size, expiry date and download button.",
+        "de": "Die Takeouts eines PostgreSQL-Services mit einem fertigen Takeout, seiner Größe, seinem Ablaufdatum und der Schaltfläche zum Herunterladen."
+      }
+    },
+    {
+      "file": "environments-list.png",
+      "title": {
+        "en": "One environment for each stage",
+        "de": "Eine Umgebung für jede Stufe"
+      },
+      "teaser": {
+        "en": "Keep development, test and production apart. Each environment has its own servers, backups, secrets and logs.",
+        "de": "Trennen Sie Entwicklung, Test und Produktion. Jede Umgebung hat eigene Server, Backups, Secrets und Logs."
+      },
+      "alt": {
+        "en": "The list of environments in the Solidblocks console with the environment default, status ok and healthy.",
+        "de": "Die Liste der Umgebungen in der Solidblocks Console mit der Umgebung default, Status ok und verfügbar."
+      }
+    },
+    {
+      "file": "servers-list.png",
+      "title": {
+        "en": "Servers included",
+        "de": "Server inklusive"
+      },
+      "teaser": {
+        "en": "blcks creates the server for each deployment. You see its size, what runs on it and its health.",
+        "de": "blcks legt den Server für jedes Deployment selbst an. Sie sehen Größe, Deployment und Verfügbarkeit."
+      },
+      "alt": {
+        "en": "The list of servers with CPU, memory, disk, the deployment that runs on each server, and its health.",
+        "de": "Die Liste der Server mit CPU, Arbeitsspeicher, Festplatte, dem Deployment auf jedem Server und seiner Verfügbarkeit."
+      }
+    },
+    {
+      "file": "server-sbom.png",
+      "title": {
+        "en": "Know what runs on your servers",
+        "de": "Wissen, was auf Ihren Servern läuft"
+      },
+      "teaser": {
+        "en": "Each server is scanned for its installed software. Search the list to see if a package or version is affected by a security issue.",
+        "de": "Jeder Server wird auf seine installierte Software gescannt. Durchsuchen Sie die Liste und sehen Sie sofort, ob ein Paket oder eine Version von einer Sicherheitslücke betroffen ist."
+      },
+      "alt": {
+        "en": "The SBOM of a server, filtered for kernel, with the package linux-kernel and its version.",
+        "de": "Die SBOM eines Servers, gefiltert nach kernel, mit dem Paket linux-kernel und seiner Version."
+      }
+    },
+    {
+      "file": "postgresql-activity-log.png",
+      "title": {
+        "en": "Each change on record",
+        "de": "Jede Änderung dokumentiert"
+      },
+      "teaser": {
+        "en": "The activity log shows each change to your service, from the first deployment to the last export.",
+        "de": "Das Protokoll zeigt jede Änderung an Ihrem Service - vom ersten Deployment bis zum letzten Export."
+      },
+      "alt": {
+        "en": "The activity log of a PostgreSQL service, from its creation to the deployment and an export.",
+        "de": "Das Protokoll eines PostgreSQL-Services, von seiner Erstellung über das Deployment bis zu einem Export."
+      }
+    },
+    {
+      "file": "account-activity-log.png",
+      "title": {
+        "en": "Know what happened",
+        "de": "Wissen, was passiert ist"
+      },
+      "teaser": {
+        "en": "The activity log records each step in your account. When a problem occurs, you find the cause fast.",
+        "de": "Das Protokoll zeichnet jeden Schritt in Ihrem Konto auf. Geht etwas schief, finden Sie die Ursache schnell."
+      },
+      "alt": {
+        "en": "The activity log of the account with the steps of a deployment, from the server creation to the healthy service.",
+        "de": "Das Protokoll des Kontos mit den Schritten eines Deployments, von der Erstellung des Servers bis zum verfügbaren Service."
+      }
+    },
+    {
+      "file": "cli-download.png",
+      "title": {
+        "en": "The CLI for your terminal",
+        "de": "Die CLI für Ihr Terminal"
+      },
+      "teaser": {
+        "en": "Get the Solidblocks CLI for Linux, macOS or Windows. Three commands install it.",
+        "de": "Die Solidblocks CLI für Linux, macOS und Windows - installiert mit drei Befehlen."
+      },
+      "alt": {
+        "en": "The CLI page of the Solidblocks console with download and install commands for Linux on amd64.",
+        "de": "Die CLI-Seite der Solidblocks Console mit Download- und Installationsbefehlen für Linux auf amd64."
+      }
+    }
+  ]
+}

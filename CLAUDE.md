@@ -1,6 +1,6 @@
 # Project Scope
 
-Static hugo website for pelle.io and solidblocks.de. 
+Static hugo website for pelle.io. 
 
 # Project Tools
 

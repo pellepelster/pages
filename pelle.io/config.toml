@@ -22,11 +22,6 @@ name = "Blog"
 url = "/posts/"
 weight = 1
 
-[[menu.main]]
-name = "About Me"
-url = "/pages/about/"
-weight = 3
-
 [markup.goldmark.renderer]
 unsafe = true
 
@@ -42,4 +37,4 @@ speed = 8.0
 [deployment]
 [[deployment.targets]]
 name = "pelle-default-pelle-io"
-URL = "s3://pelle-default-pelle-io?endpoint=https://s3.blcks.de&region=blcks&use_path_style=true"
+URL = "s3://pelle.io?endpoint=https://s3.pelle.io&region=blcks&use_path_style=true"

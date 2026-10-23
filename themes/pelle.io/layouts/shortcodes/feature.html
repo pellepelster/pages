@@ -7,7 +7,12 @@
     <p>
         {{ .Inner }}
     </p>
-    {{- with .Get "screenshot" }}
-    {{- partial "feature-screenshot.html" (dict "file" . "title" ($.Get "title") "page" $.Page) }}
+    {{- $files := slice }}
+    {{- with .Get "screenshot" }}{{ $files = $files | append . }}{{ end }}
+    {{- with .Get "screenshots" }}
+    {{- range split . "," }}{{ $files = $files | append (strings.TrimSpace .) }}{{ end }}
+    {{- end }}
+    {{- with $files }}
+    {{- partial "feature-screenshots.html" (dict "files" . "title" ($.Get "title") "page" $.Page) }}
     {{- end }}
 </div>

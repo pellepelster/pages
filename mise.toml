@@ -8,11 +8,7 @@ node = "22"
 env_shell_expand = true
 
 [env]
-SITES = "pelle.io solidblocks.de"
-
-[tasks."sites:build:solidblocks.de"]
-dir="solidblocks.de"
-run = "hugo --themesDir {{config_root}}/themes"
+SITES = "pelle.io"
 
 [tasks."sites:build:pelle.io"]
 dir="pelle.io"
@@ -30,14 +26,6 @@ cd "${site}"
 hugo --themesDir "{{config_root}}/themes" serve --buildDrafts --disableFastRender
 """
 
-[tasks."sites:deploy:solidblocks.de"]
-dir="solidblocks.de"
-run = """
-export AWS_ACCESS_KEY_ID="${SOLIDBLOCKS_DE_ACCESS_KEY:-$(pass blcks/pelle/solidblocks-de/access_key_id)}"
-export AWS_SECRET_ACCESS_KEY="${SOLIDBLOCKS_DE_SECRET_KEY:-$(pass blcks/pelle/solidblocks-de/secret_key)}"
-hugo deploy --themesDir {{config_root}}/themes --target pelle-default-solidblocks-de
-"""
-
 [tasks."sites:deploy:pelle.io"]
 dir="pelle.io"
 run = """
@@ -52,17 +40,3 @@ run = """
 mise sites:build:*
 mise sites:deploy:*
 """
-
-[tasks.generate-feature-gifs]
-hide = true
-run = """
-#!/bin/env bash
-
-for cast in ${HOME}/git/solidblocks/doc/content/cloud/casts/*.cast; do
-  echo "converting '$(basename ${cast})'"
-  docker run -ti  -v ${HOME}/git/solidblocks/doc/content/cloud/casts/:/casts -v $(pwd)/solidblocks.de/static/features/:/output  ghcr.io/asciinema/agg:1.7.0 --speed 5 --theme solarized-light /casts/$(basename ${cast}) /output/$(basename ${cast}).gif
-  gifsicle --colors 256 --scale 0.7 $(pwd)/solidblocks.de/static/features/$(basename ${cast}).gif > $(pwd)/solidblocks.de/static/features/$(basename ${cast})_scaled.gif
-done
-
-"""
-

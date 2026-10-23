@@ -1,0 +1,54 @@
+{{- /*
+  Bootstrap carousel for screenshots stored as page resources.
+  Reads order, titles, teasers and alt texts from <dir>/metadata.json.
+
+  Usage: {{< screenshot-carousel dir="screenshots" >}}
+*/ -}}
+{{- $dir := .Get "dir" | default "screenshots" -}}
+{{- $id := printf "screenshot-carousel-%d" .Ordinal -}}
+{{- $lang := site.Language.Lang -}}
+{{- $metadata := .Page.Resources.Get (printf "%s/metadata.json" $dir) -}}
+{{- if not $metadata -}}
+  {{- errorf "screenshot-carousel: %s/metadata.json not found in %s" $dir .Page.File.Path -}}
+{{- end -}}
+{{- $images := (transform.Unmarshal $metadata).images -}}
+{{- $first := $.Page.Resources.Get (printf "%s/%s" $dir (index $images 0).file) -}}
+<div id="{{ $id }}" class="carousel carousel-dark slide screenshot-carousel" data-bs-ride="false"
+     style="--screenshot-ratio: {{ div (float $first.Height) $first.Width }}">
+  <div class="carousel-indicators">
+    {{- range $index, $item := $images }}
+    <button type="button" data-bs-target="#{{ $id }}" data-bs-slide-to="{{ $index }}"
+            {{ if eq $index 0 }}class="active" aria-current="true"{{ end }}
+            aria-label="{{ index $item.title $lang | default $item.title.en }}"></button>
+    {{- end }}
+  </div>
+  <div class="carousel-inner">
+    {{- range $index, $item := $images }}
+    {{- $image := $.Page.Resources.Get (printf "%s/%s" $dir $item.file) -}}
+    {{- if not $image -}}
+      {{- errorf "screenshot-carousel: %s/%s not found in %s" $dir $item.file $.Page.File.Path -}}
+    {{- end -}}
+    {{- $slide := $image.Resize "1200x webp" -}}
+    {{- $full := $image.Resize (printf "%dx webp" $image.Width) -}}
+    <div class="carousel-item{{ if eq $index 0 }} active{{ end }}">
+      <a href="{{ $full.RelPermalink }}" target="_blank" rel="noopener">
+        <img src="{{ $slide.RelPermalink }}" width="{{ $slide.Width }}" height="{{ $slide.Height }}"
+             class="d-block w-100 h-auto" alt="{{ index $item.alt $lang | default $item.alt.en }}"
+             {{ if gt $index 0 }}loading="lazy"{{ end }}>
+      </a>
+      <div class="screenshot-carousel-caption">
+        <strong>{{ index $item.title $lang | default $item.title.en }}</strong>
+        <p>{{ index $item.teaser $lang | default $item.teaser.en }}</p>
+      </div>
+    </div>
+    {{- end }}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#{{ $id }}" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#{{ $id }}" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
