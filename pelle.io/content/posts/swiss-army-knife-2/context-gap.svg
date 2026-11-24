@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 350" width="456" height="210" font-family="ui-sans-serif, system-ui, sans-serif">
+<title>The model is in my head, not in the AI</title>
+<desc>A stylized human head containing a small flow diagram next to a robot head containing only a question mark.</desc>
+<g transform="translate(0,0)">
+<path d="M 95 330 L 95 280 C 60 255 45 210 50 165 C 58 95 115 55 180 58 C 245 62 290 110 292 170 L 293 190 L 312 222 C 315 228 311 232 305 232 L 295 232 L 296 252 C 297 262 290 268 280 268 L 260 268 L 258 300 L 258 330 Z" fill="#f3e1cf" stroke="#d9824a" stroke-width="4" stroke-linejoin="round"/>
+<line x1="112" y1="135" x2="180" y2="108" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="180" y1="108" x2="246" y2="158" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="112" y1="135" x2="124" y2="212" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="180" y1="108" x2="200" y2="208" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="124" y1="212" x2="200" y2="208" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="246" y1="158" x2="200" y2="208" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="200" y1="208" x2="168" y2="262" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="124" y1="212" x2="168" y2="262" stroke="#9a5a2e" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="84.0" y="115.0" width="56" height="40" rx="6" fill="#e08a4f" stroke="#9a5a2e" stroke-width="2.5"/>
+<rect x="152.0" y="88.0" width="56" height="40" rx="6" fill="#e08a4f" stroke="#9a5a2e" stroke-width="2.5"/>
+<rect x="218.0" y="138.0" width="56" height="40" rx="6" fill="#e08a4f" stroke="#9a5a2e" stroke-width="2.5"/>
+<rect x="96.0" y="192.0" width="56" height="40" rx="6" fill="#e08a4f" stroke="#9a5a2e" stroke-width="2.5"/>
+<rect x="172.0" y="188.0" width="56" height="40" rx="6" fill="#e08a4f" stroke="#9a5a2e" stroke-width="2.5"/>
+<rect x="140.0" y="242.0" width="56" height="40" rx="6" fill="#e08a4f" stroke="#9a5a2e" stroke-width="2.5"/>
+</g>
+<g stroke="#8a8478" stroke-width="3" fill="none" stroke-linecap="round"><line x1="340" y1="190" x2="450" y2="190" stroke-dasharray="8 10"/><polyline points="438,178 452,190 438,202"/></g>
+<line x1="580" y1="90" x2="580" y2="58" stroke="#8a8478" stroke-width="4"/>
+<circle cx="580" cy="52" r="9" fill="#e08a4f" stroke="#8a8478" stroke-width="3"/>
+<rect x="470" y="90" width="220" height="200" rx="32" fill="#ecebe6" stroke="#8a8478" stroke-width="4"/>
+<rect x="458" y="160" width="12" height="44" rx="4" fill="#8a8478"/>
+<rect x="690" y="160" width="12" height="44" rx="4" fill="#8a8478"/>
+<rect x="545" y="290" width="70" height="40" fill="#ecebe6" stroke="#8a8478" stroke-width="4"/>
+<text x="580" y="240" text-anchor="middle" font-size="140" font-weight="700" fill="#e08a4f">?</text>
+</svg>

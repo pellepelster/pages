@@ -31,7 +31,7 @@ dir="pelle.io"
 run = """
 export AWS_ACCESS_KEY_ID="${PELLE_IO_ACCESS_KEY:-$(pass blcks/pelle/pelle-io/access_key_id)}"
 export AWS_SECRET_ACCESS_KEY="${PELLE_IO_SECRET_KEY:-$(pass blcks/pelle/pelle-io/secret_key)}"
-hugo deploy --themesDir {{config_root}}/themes --target pelle-default-pelle-io
+hugo deploy --themesDir {{config_root}}/themes --target pelle-io
 """
 
 [tasks."sites:build-and-deploy"]

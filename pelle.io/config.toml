@@ -36,5 +36,5 @@ speed = 8.0
 
 [deployment]
 [[deployment.targets]]
-name = "pelle-default-pelle-io"
-URL = "s3://pelle.io?endpoint=https://s3.pelle.io&region=blcks&use_path_style=true"
+name = "pelle-io"
+URL = "s3://pelle-io?endpoint=https://api.pelle.io&region=sak&use_path_style=true"
